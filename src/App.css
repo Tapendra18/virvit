@@ -1,0 +1,18 @@
+.active{
+ background-color: #0b2cec;
+  color: #fff;
+  padding: 7px 30px;
+  border-radius: 10px;
+ border: 1px solid #0b2cec;
+
+}
+.active:hover{
+    color: #fff;
+}
+
+Carousel slide.active{
+    background-color: none;
+    border: none;
+}
+
+

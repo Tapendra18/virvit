@@ -1,0 +1,254 @@
+li a.btn-1 {
+    border: 1px solid #0b2cec;
+    padding: 5px 50px;
+    border-radius: 10px;
+}
+
+
+
+li.ListRemove {
+    list-style: none;
+    margin-top: 16px;
+}
+
+li a {
+    transition: none;
+}
+
+
+
+input:hover{
+  border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+select:hover{
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+div button.btn1 {
+    background-color: #fff;
+    color: #0b2cec;
+    border: 1px solid #0b2cec;
+    padding: 7px 40px;
+    border-radius: 10px;
+    font-weight: 400;
+    outline: none;
+}
+
+hr.Line {
+    border-top: 2px solid #0b2cec;
+}
+
+div.Line1 {
+    border-top: 2px solid #0b2cec;
+}
+
+div img.right-image {
+    width: 100%;
+    margin-top: 80px;
+}
+
+
+div span a {
+    color: #0b2cec;
+}
+
+div span a:hover {
+    color: #0b2cec;
+}
+
+div.footer {
+   position: fixed;
+    border-top: 1px solid  #0b2cec;
+    width: 100%;
+    bottom: 0px;
+    background-color: #ffffff;
+}
+
+div.Header {
+    position: fixed;
+    border-bottom: 1px solid #0b2cec;
+    width: 100%;
+    top: 0px;
+    background-color: #fff;
+    /* z-index: 999; */
+}
+
+nav.Nav-top{
+    margin-top:120px;
+}
+
+div.Div-top{
+    margin-top:120px;
+}
+
+div a img.social-image {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+div a.footer-a {
+    color: #0b2cec;
+}
+
+span.icon-Posi{
+right: 10px;
+top: 10px;
+}
+
+span.icon-Posi-1{
+    left: 175px;
+    top: 35px;
+}
+
+span.icon-Posi-2{
+    bottom: 0;
+    right: 120px;
+}
+
+span.icon-Posi-3{
+    top: 0;
+    right: 120px;
+}
+
+div a.footer-a:active{
+    color: #020b3b;
+}
+
+div form.br-cr {
+    border: 1px solid #0b2cec;
+}
+
+div label.Rem-me {
+    color: #0b2cec;
+}
+
+div form.Bord-Col {
+    color: #0b2cec;
+}
+
+div.CandiLog {
+    background-color: #0b2cec;
+}
+
+div select.HomeLog {
+    outline: none;
+    border: none;
+    color: #ffffff;
+    background-color: #0b2cec;
+    padding: 5px none;
+    height: 30px;
+}
+
+select option.HomePro {
+    color: #0b2cec;
+    background-color: #ffffff;
+    font-size: 15px;
+
+}
+
+div button.CandiView {
+    /* padding:20px 40px ; */
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    color: #0b2cec;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+div button.btn-3 {
+    padding: 10px 60px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    color: #0b2cec;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    border-radius: 10px;
+}
+
+div div.grad {
+    background-image: linear-gradient(to right, rgb(207, 210, 250), rgb(57, 60, 241));
+}
+
+div.grid-2 {
+    background-image: linear-gradient(to left, rgb(207, 210, 250), rgb(57, 60, 241));
+    height: 170px;
+    width: 100%;
+}
+
+div div form.Bor-1 {
+    border: 1px solid #0b2cec;
+}
+
+div.bor-2 {
+    margin: 50px;
+}
+
+div.edit {
+    margin-left: 90px;
+    margin-top: 30px;
+}
+
+div.Edit-pho {
+    margin-left: 180px;
+    margin-top: 30px;
+}
+
+div img.Edit-img {
+    height: 140px;
+    width: 140px;
+}
+
+div.Edit-AboutMe {
+    margin-left: 270px;
+}
+
+div.Edit-Box {
+    margin-left: 250px;
+    margin-top: 50px;
+}
+
+div.Edit-Skill {
+    margin-left: 250px;
+    margin-top: 20px;
+}
+
+div.Edit-Resume {
+    margin-left: 250px;
+    margin-top: 20px;
+
+}
+
+div button.btn-4 {
+    padding: 60px 150px;
+    border-radius: 20px;
+
+}
+
+div button.btn-5 {
+    padding: 47px 150px;
+    border-radius: 20px;
+
+}
+
+div.Edit-Need {
+    margin-left: 215px;
+}
+
+div.Slider-div{
+    height: 50%;
+    width: 70%;
+}
+
+form.Form-slider:hover{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+
+Carousel slide.active{
+    background-color: none;
+    border: none;
+}
