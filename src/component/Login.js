@@ -16,9 +16,8 @@ const Login = () => {
     const [CandidateData, setCandidateData] = useState({});
     const [show, setshow] = useState(true)
     const [isVisible, setVisible] = useState(false);
-    // const [post, setPost] = React.useState(null);
     const [error , setError] = useState(false);
-    const [passworderror , setpasswordError] = useState(false);
+    // const [passworderror , setpasswordError] = useState(false);
 
     const toggle = () => {
         setVisible(!isVisible);
@@ -36,14 +35,14 @@ const Login = () => {
         setCandiData('email', e.target.value)
     }
 
-    function passwordValidator(value){
-        return  value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
-    }
+    // function passwordValidator(value){
+    //     return  value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
+    // }
     const handlePaswword = (e) =>{
-        if(!passwordValidator(e.target.value)){
-            setpasswordError("password is not strong")
-        }
-        else setpasswordError(false)
+        // if(!passwordValidator(e.target.value)){
+        //     setpasswordError("password is not strong")
+        // }
+        // else setpasswordError(false)
 
         setData('password', e.target.value)
         setCandiData('password', e.target.value)
@@ -51,6 +50,11 @@ const Login = () => {
 
     const onFormSubmit = (event) => {
         event.preventDefault();
+        if(error.length !==0){
+            console.log("not empty")
+        }else {
+            console.log('input value is empty');
+          }
         console.log('Form Data', formData)
         formData['device_id'] = 1;
         axios
@@ -117,7 +121,7 @@ const Login = () => {
                                         {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
                                     <div className='position-relative'>
                                         <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
-                                        {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
+                                        {/* {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>} */}
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>
                                 </div>
@@ -161,7 +165,7 @@ const Login = () => {
 
                                         <div className="form mx-5 row position-relative">
                                             <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={handlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
-                                        {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
+                                        {/* {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>} */}
 
                                             <span className='position-absolute icon-Posi-1' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         </div>

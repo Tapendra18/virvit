@@ -15,6 +15,7 @@ const Navbar = () => {
     const [EmpsignupName, setEmpSignupName] = useState({});   
     const [isVisible, setVisible] = useState(false);
     const [ConfirmVisible, setconVisible] =useState(false);
+    const [error , seterror] = useState(false)
 
     const toggle = ()=>{
         setVisible(!isVisible);
@@ -27,6 +28,7 @@ const Navbar = () => {
     const onSignupSubmit = (event) => {
         event.preventDefault();
         console.log('SignUpData', signupName)
+       
         onSignupSubmit['device_1'] = 1;
         axios
         .post(baseURL,signupName)
@@ -48,7 +50,11 @@ const Navbar = () => {
     const onEmpSignUpSubmit = (event) => {
         event.preventDefault();
         console.log('EmpSignUpData', EmpsignupName)
-        // Submit here
+        onSignupSubmit['device_1'] = 1;
+        axios
+        .post(baseURL,signupName)
+        .then(data => console.log(data.data))
+        .catch(error => console.log(error))       
     };
 
     const getEmpSignUpData = (key) => {
@@ -59,12 +65,20 @@ const Navbar = () => {
         return setEmpSignupName({ ...EmpsignupName, [key]: value });
     };
 
-  
-
-    const handleEmail=(e)=>{
-        setSignUpData('First_name', e.target.value)
+    function isValidEmail (email){
+        return /\S+@\S+\.\S+/.test(email)
     }
- 
+  
+    const handleEmail=(e)=>{
+        if(!isValidEmail(e.target.value)){
+            seterror("invalid email id");
+
+        }else seterror(false)
+        setSignUpData('email', e.target.value)
+
+        // setSignUpData('First_name', e.target.value)
+    }
+
     return (
         <>
             <HeaderLanding />
@@ -84,12 +98,13 @@ const Navbar = () => {
                 show ? <div className="container">
                     <div className="row">
                         <div className="col-6">
-                            <form onSubmit={onSignupSubmit}>
+                            <form onSubmit={onSignupSubmit} >
                                 <div className='mx-5'>
                                    
-                                    <input type="text" value={getSignUpData('First_name')} onChange={handleEmail } placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required ></input>
-                                    <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
-                                    <input type="Email" value={getSignUpData('email')} onChange={(e) => setSignUpData('email', e.target.value)} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' ></input>
+                                    <input  type="text" value={getSignUpData('First_name')} onChange={handleEmail} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4'></input>
+                                    <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75'></input>
+                                    <input type="Email" value={getSignUpData('email')} onChange={handleEmail} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' />
+                                    {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
 
                                     <div className='row mt-1'>
                                         <div className='col-5'>
@@ -150,8 +165,6 @@ const Navbar = () => {
 
                             </form>
 
-                        
-
                         </div>
                         {/* Right Image >>>>>>> */}
                         <div className="col-6 mt-5">
@@ -159,7 +172,6 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-
 
                     : <div className='container-fluid'>
                         <div className='row text-center'>
