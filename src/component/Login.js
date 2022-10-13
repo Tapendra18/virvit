@@ -18,6 +18,8 @@ const Login = () => {
     const [isVisible, setVisible] = useState(false);
     // const [post, setPost] = React.useState(null);
     const [error , setError] = useState(false);
+    const [passworderror , setpasswordError] = useState(false);
+
     const toggle = () => {
         setVisible(!isVisible);
     };
@@ -25,18 +27,31 @@ const Login = () => {
     function isValidEmail(email){
         return /\S+@\S+\.\S+/.test(email)
     }
- 
     const handleEmail =(e)=>{
         if(!isValidEmail(e.target.value)){
-            setError("email is invalid ")
-        }else setError(false);
+            setError("email is invalid")
+        } else setError(false);
 
         setData('username', e.target.value)
+        setCandiData('email', e.target.value)
+    }
+
+    function passwordValidator(value){
+        return  value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
+    }
+    const handlePaswword = (e) =>{
+        if(!passwordValidator(e.target.value)){
+            setpasswordError("password is not strong")
+        }
+        else setpasswordError(false)
+
+        setData('password', e.target.value)
+        setCandiData('password', e.target.value)
     }
 
     const onFormSubmit = (event) => {
         event.preventDefault();
-        console.log('EmployeData', formData)
+        console.log('Form Data', formData)
         formData['device_id'] = 1;
         axios
         .post(baseURL, formData)
@@ -99,9 +114,10 @@ const Login = () => {
 
                                 <div className="form-outline mb-4 mx-5">
                                     <input type="text" id="form1Example1" value={getData('username')} onChange={handleEmail} placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
-                                    {error && <h2 style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
+                                        {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
                                     <div className='position-relative'>
-                                        <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={(e) => setData('password', e.target.value)} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
+                                        <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
+                                        {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>
                                 </div>
@@ -139,11 +155,14 @@ const Login = () => {
                                 <div className='col-6 mt-5'>
                                     <form className='mx-4 border border rounded-5 Bor-1 border-primary' onSubmit={onSubmit}>
                                         <div className="form mx-5">
-                                            <input type="text" value={getCandiData('Email')} onChange={(e) => setCandiData('Email', e.target.value)} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required />
+                                            <input type="text" value={getCandiData('email')} onChange={handleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
+                                           {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
                                         </div>
 
                                         <div className="form mx-5 row position-relative">
-                                            <input type={!isVisible ? "password" : "text"} value={getCandiData('Candipassword')} onChange={(e) => setCandiData('Candipassword', e.target.value)} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" required />
+                                            <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={handlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
+                                        {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
+
                                             <span className='position-absolute icon-Posi-1' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         </div>
 

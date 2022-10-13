@@ -11,10 +11,8 @@ const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/new-user-signup/";
 
 const Navbar = () => {
     const [show, setshow] = useState(true);
-    // const [isError ,  setisError] = useState(false);
     const [signupName, setSignupName] = useState({}); 
     const [EmpsignupName, setEmpSignupName] = useState({});   
-
     const [isVisible, setVisible] = useState(false);
     const [ConfirmVisible, setconVisible] =useState(false);
 
@@ -60,6 +58,12 @@ const Navbar = () => {
     const setEmpSignUpData = (key, value) => {
         return setEmpSignupName({ ...EmpsignupName, [key]: value });
     };
+
+  
+
+    const handleEmail=(e)=>{
+        setSignUpData('First_name', e.target.value)
+    }
  
     return (
         <>
@@ -82,7 +86,8 @@ const Navbar = () => {
                         <div className="col-6">
                             <form onSubmit={onSignupSubmit}>
                                 <div className='mx-5'>
-                                    <input type="text" value={getSignUpData('First_name')} onChange={(e) => setSignUpData('First_name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required ></input>
+                                   
+                                    <input type="text" value={getSignUpData('First_name')} onChange={handleEmail } placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required ></input>
                                     <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
                                     <input type="Email" value={getSignUpData('email')} onChange={(e) => setSignUpData('email', e.target.value)} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' ></input>
 
