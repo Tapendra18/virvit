@@ -5,10 +5,13 @@ import { NavLink } from "react-router-dom"
 import HeaderLanding from './HeaderLanding'
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
+import axios from 'axios'
 
+const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/new-user-signup/";
 
 const Navbar = () => {
     const [show, setshow] = useState(true);
+    // const [isError ,  setisError] = useState(false);
     const [signupName, setSignupName] = useState({}); 
     const [EmpsignupName, setEmpSignupName] = useState({});   
 
@@ -26,6 +29,11 @@ const Navbar = () => {
     const onSignupSubmit = (event) => {
         event.preventDefault();
         console.log('SignUpData', signupName)
+        onSignupSubmit['device_1'] = 1;
+        axios
+        .post(baseURL,signupName)
+        .then(data => console.log(data.data))
+        .catch(error => console.log(error))
         // Submit here
     };
 
@@ -74,9 +82,9 @@ const Navbar = () => {
                         <div className="col-6">
                             <form onSubmit={onSignupSubmit}>
                                 <div className='mx-5'>
-                                    <input type="text" value={getSignUpData('name')} onChange={(e) => setSignUpData('name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required ></input>
-                                    <input type="text" value={getSignUpData('Lname')} onChange={(e) => setSignUpData('Lname', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
-                                    <input type="Email" value={getSignUpData('Email')} onChange={(e) => setSignUpData('Email', e.target.value)} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' ></input>
+                                    <input type="text" value={getSignUpData('First_name')} onChange={(e) => setSignUpData('First_name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required ></input>
+                                    <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
+                                    <input type="Email" value={getSignUpData('email')} onChange={(e) => setSignUpData('email', e.target.value)} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' ></input>
 
                                     <div className='row mt-1'>
                                         <div className='col-5'>
@@ -89,12 +97,12 @@ const Navbar = () => {
                                         </div>
 
                                         <div className='col-7'>
-                                          <input value={getSignUpData('Date')} onChange={(e) => setSignUpData('Date', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' />
+                                          <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' />
                                         </div>
                                     </div>
 
-                                    <input type="tel" value={getSignUpData('Phone No')} onChange={(e) => setSignUpData('Phone No', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' ></input>
-                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('Skills')} onChange={(e) => setSignUpData('Skills', e.target.value)} >
+                                    <input type="tel" value={getSignUpData('mobile')}  onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' ></input>
+                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('SkillList')} onChange={(e) => setSignUpData('SkillList', e.target.value)} >
                                         <option selected>Key Skills</option>
                                         <option value="c++">C++</option>
                                         <option value="html">Html</option>
@@ -102,7 +110,7 @@ const Navbar = () => {
                                         <option value="java script">Java Script</option>
                                     </select>
 
-                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('Job Preference')} onChange={(e) => setSignUpData('Job Preference', e.target.value)} >
+                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('job_Preference')} onChange={(e) => setSignUpData('job_Preference', e.target.value)} >
                                         <option selected>Job Preference</option>
                                         <option value="part time">Part Time</option>
                                         <option value="full time">Full Time</option>
@@ -110,18 +118,18 @@ const Navbar = () => {
                                         <option value="Internship with job">Internship with job</option>
                                     </select>
 
-                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('Start Work')} onChange={(e) => setSignUpData('Start Work', e.target.value)}>
+                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('start_Work')} onChange={(e) => setSignUpData('start_Work', e.target.value)}>
                                         <option selected>Start Work</option>
                                         <option value="immediately">immediately</option>
                                         <option value="15 Days">15 Days</option>
                                         <option value="30 Days">30 Days</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                    <input type="file"  className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Share Resume' value={getSignUpData('Resume')} onChange={(e) => setSignUpData('Resume', e.target.value)} ></input>
+                                    <input type="file"  className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} ></input>
                                     <div className='position-relative'>
-                                    <input type={!isVisible ? "password" : "text"}  className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('Password')} onChange={(e) => setSignUpData('Password', e.target.value)}></input>
+                                    <input type={!isVisible ? "password" : "text"}  className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('password')} onChange={(e) => setSignUpData('password', e.target.value)}></input>
                                     <span className='position-absolute icon-Posi-3' onClick={toggle}> {isVisible ? <AiFillEye/> : <AiFillEyeInvisible/>}</span> 
-                                    <input type={!ConfirmVisible ? "password" : "text"} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('Confirm Password')} onChange={(e) => setSignUpData('Confirm Password', e.target.value)}></input>
+                                    <input type={!ConfirmVisible ? "password" : "text"} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={(e) => setSignUpData('cPassword', e.target.value)}></input>
                                     <span className='position-absolute icon-Posi-2' onClick={toggleConfirm}>{ConfirmVisible ? <AiFillEye/> : <AiFillEyeInvisible/>}</span> 
                                     </div>
                                    
