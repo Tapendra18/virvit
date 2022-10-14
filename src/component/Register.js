@@ -101,14 +101,14 @@ const Navbar = () => {
                             <form onSubmit={onSignupSubmit} >
                                 <div className='mx-5'>
                                    
-                                    <input  type="text" value={getSignUpData('First_name')} onChange={handleEmail} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4'></input>
-                                    <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75'></input>
-                                    <input type="Email" value={getSignUpData('email')} onChange={handleEmail} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' />
+                                    <input  type="text" value={getSignUpData('First_name')} onChange={handleEmail} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required></input>
+                                    <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
+                                    <input type="Email" value={getSignUpData('email')} onChange={handleEmail} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required/>
                                     {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
 
                                     <div className='row mt-1'>
                                         <div className='col-5'>
-                                            <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example' value={getSignUpData('Gender')} onChange={(e) => setSignUpData('Gender', e.target.value)} >
+                                            <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example' value={getSignUpData('Gender')} onChange={(e) => setSignUpData('Gender', e.target.value)} required>
                                                 <option selected>Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
@@ -117,11 +117,11 @@ const Navbar = () => {
                                         </div>
 
                                         <div className='col-7'>
-                                          <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' />
+                                          <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' required/>
                                         </div>
                                     </div>
 
-                                    <input type="tel" value={getSignUpData('mobile')}  onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' ></input>
+                                    <input type="tel" value={getSignUpData('mobile')}  onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' required></input>
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('SkillList')} onChange={(e) => setSignUpData('SkillList', e.target.value)} >
                                         <option selected>Key Skills</option>
                                         <option value="c++">C++</option>
