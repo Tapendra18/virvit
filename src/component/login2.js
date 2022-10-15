@@ -5,108 +5,54 @@ import { NavLink } from "react-router-dom"
 import "./Register.css"
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
-import axios from 'axios'
+// import axios from 'axios'
 
-const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
+// const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
-const Login = () => {
-
-    const [formData, setFormData] = useState({});
-  const [CandidateData, setCandidateData] = useState({});
-    const [show, setshow] = useState(true)
+const Login2 = () => {  
     const [isVisible, setVisible] = useState(false);
-    // const [post, setPost] = React.useState(null);
-    const [error , setError] = useState(false);
-    const [Cerror , setCError] = useState(false);
-
-    const [passworderror , setpasswordError] = useState(false);
-    const [Cpassworderror , setCpasswordError] = useState(false);
-
+    const [show, setshow] = useState(true)
+   
+    const [error, setError] = useState(null);
+    const [state, setState] = useState({
+      email: '',
+      password: '',
+    });
+  
+    const validateEmail = (email) => {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    };
+  
+    const handleChange = (e) => {
+      const { id, value } = e.target;
+      setState((prevState) => ({
+        ...prevState,
+        [id]: value,
+      }));
+    };
+  
+    const handleSubmitClick = (e) => {
+      e.preventDefault();
+  
+      if (!validateEmail(state.email)) {
+        setError('Invalid Email');
+      }
+  
+      if (state.password.length < 8) {
+        setError('Password must be at least 8 chars long');
+      }
+  
+      if (!error) {
+        // No errors.
+      }
+    };
 
     const toggle = () => {
         setVisible(!isVisible);
     };
  
-    function isValidEmail(email){
-        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email)
-    }
-    const handleEmail =(e)=>{ 
-        if(!isValidEmail(e.target.value)){
-            setError("email is invalid")
-        } else setError(false);
-
-        setData('username', e.target.value)
-       
-    }
-
-    const ChandleEmail =(e)=>{ 
-        if(!isValidEmail(e.target.value)){
-            setCError("email is invalid")
-        } else setCError(false);
-
-        setCandiData('email', e.target.value)
-    }
-
-    function passwordValidator(value){
-        return value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
-    }
-    const handlePaswword = (e) =>{
-        if(!passwordValidator(e.target.value)){
-            setpasswordError("password is not strong")
-        }  else setpasswordError(false)
-
-        setData('password', e.target.value)
-  
-    }
-
-    const ChandlePaswword = (e) =>{
-        if(!passwordValidator(e.target.value)){
-            setCpasswordError("password is not strong")
-        } else if(ChandlePaswword(e.target.value)===null){
-            setCpasswordError("fill the input")
-        } else setCpasswordError(false)
-
-        setCandiData('password', e.target.value)
-    }
-
-    const onFormSubmit = (event) => {
-        event.preventDefault();
-        
-        console.log('Form Data', formData)
-        formData['device_id'] = 1;
-        axios
-        .post(baseURL, formData)
-        .then(formData => console.log(formData.formData))
-        .catch(error => console.log(error));
-    };
-
-    const onSubmit = (event) => {
-        event.preventDefault();
-        console.log('CandidateData', CandidateData)
-        CandidateData['device_id'] = 1;
-        axios
-        .post(baseURL,CandidateData)
-        .then(data => console.log(data.data))
-        .catch(error => console.log(error));
-        
-    };
-
-    const getData = (key) => {
-        return formData.hasOwnProperty(key) ? formData[key] : '';
-    };
-
-    const setData = (key, value) => {
-        return setFormData({ ...formData, [key]: value });
-    };
-
-    const getCandiData = (key) => {
-        return CandidateData.hasOwnProperty(key) ? CandidateData[key] : '';
-    };
-
-    const setCandiData = (key, value) => {
-        return setCandidateData({ ...CandidateData, [key]: value });
-    };
-
     return (
         <>
             <HeaderLanding />
@@ -126,7 +72,7 @@ const Login = () => {
                 show ? <div className='container-fluid'>
                     <div className='row text-center'>
                         <div className='col-6 mt-5'>
-                            <form className='mx-5 border border-bottom-0 rounded-5 border-2 border-primary' onSubmit={onFormSubmit}>
+                            <form className='mx-5 border border-bottom-0 rounded-5 border-2 border-primary'  onSubmit={handleSubmitClick}>
                                 <div className='row'>
                                     <div className='col-12 mt-5 mb-4'>
                                         <span className='header fs-5 fw-bold'>Login to start your search !</span>
@@ -134,11 +80,12 @@ const Login = () => {
                                 </div>
 
                                 <div className="form-outline mb-4 mx-5">
-                                    <input type="text" id="form1Example1" value={getData('username')} onChange={handleEmail} placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required/>
-                                        {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
+                                    <input type="text" id="form1Example1" value={state.email}
+                                    onChange={handleChange}  placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required/>
+                                   
                                     <div className='position-relative'>
-                                        <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" required/>
-                                        {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
+                                        <input type={!isVisible ? "password" : "text"} value={state.email} onChange={handleChange} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"  required/>
+                                 
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>
                                 </div>
@@ -174,15 +121,15 @@ const Login = () => {
                         <div className='container'>
                             <div className='row text-center'>
                                 <div className='col-6 mt-5'>
-                                    <form className='mx-4 border border rounded-5 Bor-1 border-primary' onSubmit={onSubmit}>
+                                    <form className='mx-4 border border rounded-5 Bor-1 border-primary'>
                                         <div className="form mx-5">
-                                            <input type="text" value={getCandiData('email')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
-                                           {Cerror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{Cerror}</h2>}
+                                            <input type="text"   placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
+                                         
                                         </div>
 
                                         <div className="form mx-5 row position-relative">
-                                            <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={ChandlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
-                                        {Cpassworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{Cpassworderror}</h2>}
+                                            <input type={!isVisible ? "password" : "text"}   id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
+                                        
 
                                             <span className='position-absolute icon-Posi-1' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         </div>
@@ -229,4 +176,4 @@ const Login = () => {
     )
 }
 
-export default Login    
+export default Login2    

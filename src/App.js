@@ -11,7 +11,7 @@ import Contact from "./component/Contact"
 import EditProfile from "./component/EditProfile"
 import Privacy from "./component/Privacy"
 import ChangePassword from "./component/ChangePassword"
-// import Login2 from "./component/login2";
+import Login2 from "./component/login2";
 import './App.css'
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/changepassword" element={<ChangePassword/>} />
-        {/* <Route path="/login2" element={<Login2/>} /> */}
+        <Route path="/login2" element={<Login2/>} />
 
       </Routes>
 
