@@ -18,6 +18,8 @@ const Navbar = () => {
     const [error, seterror] = useState(false)
     const [passworderror, setpasswordError] = useState(false);
     const [Cpassworderror, setCpasswordError] = useState(false);
+    const [Eerror, setEError] = useState(false);
+
     // const [passMatch, setPassMatch] = React.useState(true);
 
 
@@ -38,7 +40,6 @@ const Navbar = () => {
     const onSignupSubmit = (event) => {
         event.preventDefault();
         console.log('SignUpData', signupName)
-
         signupName['device_1'] = 1;
         axios
             .post(baseURL, signupName)
@@ -62,7 +63,7 @@ const Navbar = () => {
         console.log('EmpSignUpData', EmpsignupName)
         EmpsignupName['device_1'] = 1;
         axios
-            .post(baseURL, signupName)
+            .post(baseURL, EmpsignupName)
             .then(data => console.log(data.data))
             .catch(error => console.log(error))
     };
@@ -97,7 +98,7 @@ const Navbar = () => {
             setpasswordError("password is not strong")
         } else setpasswordError(false)
 
-        setSignUpData('Spassword', e.target.value)
+        setSignUpData('password', e.target.value)
     }
 
     function CpasswordValidator(value) {
@@ -110,6 +111,27 @@ const Navbar = () => {
 
         setSignUpData('cPassword', e.target.value)
     }
+
+
+
+
+
+    // Emp validation>>>>>>
+
+    function isValidEmpEmail(email) {
+        return /\S+@\S+\.\S+/.test(email)
+    }
+
+    const EmphandleEmail = (e) => {
+        if (!isValidEmpEmail(e.target.value)) {
+            setEError("invalid email id");
+
+        } else setEError(false)
+        setEmpSignUpData('Email_id', e.target.value)
+
+        // setSignUpData('First_name', e.target.value)
+    }
+
 
     return (
         <>
@@ -146,7 +168,6 @@ const Navbar = () => {
                                                 <option selected>Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
-
                                             </select>
                                         </div>
 
@@ -156,7 +177,7 @@ const Navbar = () => {
                                     </div>
 
                                     <input type="tel" value={getSignUpData('mobile')} onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' required></input>
-                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('SkillList')} onChange={(e) => setSignUpData('SkillList', e.target.value)} >
+                                    <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('skill')} onChange={(e) => setSignUpData('skill', e.target.value)} >
                                         <option selected>Key Skills</option>
                                         <option value="c++">C++</option>
                                         <option value="html">Html</option>
@@ -182,13 +203,16 @@ const Navbar = () => {
                                     <input type="file" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} ></input>
                                     <div className='position-relative'>
 
-                                        <input type={!isVisible ? "password" : "text"} Name="password1" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('Spassword')} onChange={handlePassword}></input>
-                                        {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
+                                        <input type={!isVisible ? "password" : "text"} Name="password1" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('password')} onChange={handlePassword}></input>
                                         <span className='position-absolute icon-Posi-3' onClick={toggle}> {isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
+                                        {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
+                                        
 
                                         <input type={!ConfirmVisible ? "password" : "text"} Name="password2" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={ChandlePassword}></input>
                                         <span className='position-absolute icon-Posi-2' onClick={toggleConfirm}>{ConfirmVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
+                                        
+                                    
                                     
                                     </div>
 
@@ -224,25 +248,27 @@ const Navbar = () => {
                                     </div>
 
                                     <div className="form mx-5">
-                                        <input value={getEmpSignUpData('Email_id')} onChange={(e) => setEmpSignUpData('Email_id', e.target.value)} type="email" placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required />
+                                        <input value={getEmpSignUpData('Email_id')} onChange={EmphandleEmail} type="email" placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                        {Eerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Eerror}</h2>}
+
                                     </div>
 
                                     <div className="form mx-5">
-                                        <input value={getEmpSignUpData('Person_name')} onChange={(e) => setEmpSignUpData('Person_name', e.target.value)} type="text" id="form1Example2" placeholder='Contact Person Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required />
+                                        <input value={getEmpSignUpData('Person_name')} onChange={(e) => setEmpSignUpData('Person_name', e.target.value)} type="text" id="form1Example2" placeholder='Contact Person Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
                                     </div>
 
                                     <div className="form  mx-5">
-                                        <input value={getEmpSignUpData('Number')} onChange={(e) => setEmpSignUpData('Number', e.target.value)} type="tel" id="form1Example2" placeholder='Phone Number' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required />
+                                        <input value={getEmpSignUpData('Number')} onChange={(e) => setEmpSignUpData('Number', e.target.value)} type="tel" id="form1Example2" placeholder='Phone Number' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"  />
                                     </div>
 
                                     <div className="form mx-5 mb-3">
-                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required />
+                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"  />
                                     </div>
 
                                     <div className="row ">
                                         <div className="col d-flex justify-content-start mx-5 mt-3">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" value="remember me" required />
+                                                <input className="form-check-input" type="checkbox" value="remember me"/>
                                                 <span className=' fs-10 fw-lighter mt-3'>By continuing you acknowledge that you accept virVit's</span>
                                                 <p className='fs-6 fw-lighter'><a className='text-decoration-none footer-a' href='/'>Privacy Policies</a> and  <a className='text-decoration-none footer-a' href='/'>Terms & Conditions</a></p>
                                             </div>

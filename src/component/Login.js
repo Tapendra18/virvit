@@ -44,7 +44,7 @@ const Login = () => {
             setCError("email is invalid")
         } else setCError(false);
 
-        setCandiData('email', e.target.value)
+        setCandiData('username', e.target.value)
     }
 
     function passwordValidator(value){
@@ -176,7 +176,7 @@ const Login = () => {
                                 <div className='col-6 mt-5'>
                                     <form className='mx-4 border border rounded-5 Bor-1 border-primary' onSubmit={onSubmit}>
                                         <div className="form mx-5">
-                                            <input type="text" value={getCandiData('email')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
+                                            <input type="text" value={getCandiData('username')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
                                            {Cerror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{Cerror}</h2>}
                                         </div>
 
