@@ -16,6 +16,10 @@ const Navbar = () => {
     const [isVisible, setVisible] = useState(false);
     const [ConfirmVisible, setconVisible] =useState(false);
     const [error , seterror] = useState(false)
+    const [passworderror , setpasswordError] = useState(false);
+    const [Cpassworderror , setCpasswordError] = useState(false);
+
+
 
     const toggle = ()=>{
         setVisible(!isVisible);
@@ -29,7 +33,7 @@ const Navbar = () => {
         event.preventDefault();
         console.log('SignUpData', signupName)
        
-        onSignupSubmit['device_1'] = 1;
+        signupName['device_1'] = 1;
         axios
         .post(baseURL,signupName)
         .then(data => console.log(data.data))
@@ -50,7 +54,7 @@ const Navbar = () => {
     const onEmpSignUpSubmit = (event) => {
         event.preventDefault();
         console.log('EmpSignUpData', EmpsignupName)
-        onSignupSubmit['device_1'] = 1;
+        EmpsignupName['device_1'] = 1;
         axios
         .post(baseURL,signupName)
         .then(data => console.log(data.data))
@@ -79,6 +83,28 @@ const Navbar = () => {
         // setSignUpData('First_name', e.target.value)
     }
 
+    function passwordValidator(value){
+        return  value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
+    }
+    const handlePassword = (e) =>{
+        if(!passwordValidator(e.target.value)){
+            setpasswordError("password is not strong")
+        }  else setpasswordError(false)
+
+        setSignUpData('Spassword', e.target.value)  
+    }
+
+    function CpasswordValidator(value){
+        return  value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
+    }
+    const ChandlePassword = (e) =>{
+        if(!CpasswordValidator(e.target.value)){
+            setCpasswordError("password is not strong")
+        } else setCpasswordError(false)
+
+        setSignUpData('cPassword', e.target.value)
+    }
+
     return (
         <>
             <HeaderLanding />
@@ -101,7 +127,9 @@ const Navbar = () => {
                             <form onSubmit={onSignupSubmit} >
                                 <div className='mx-5'>
                                    
-                                    <input  type="text" value={getSignUpData('First_name')} onChange={handleEmail} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required></input>
+                                    <input  type="text" value={getSignUpData('first_name')} onChange={(e) => setSignUpData('first_name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required></input>
+                                    {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
+
                                     <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)}  placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
                                     <input type="Email" value={getSignUpData('email')} onChange={handleEmail} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required/>
                                     {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
@@ -147,10 +175,15 @@ const Navbar = () => {
                                     </select>
                                     <input type="file"  className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} ></input>
                                     <div className='position-relative'>
-                                    <input type={!isVisible ? "password" : "text"}  className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('password')} onChange={(e) => setSignUpData('password', e.target.value)}></input>
+
+                                    <input type={!isVisible ? "password" : "text"} Name="password1" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('Spassword')} onChange={handlePassword}></input>
+                                    {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
                                     <span className='position-absolute icon-Posi-3' onClick={toggle}> {isVisible ? <AiFillEye/> : <AiFillEyeInvisible/>}</span> 
-                                    <input type={!ConfirmVisible ? "password" : "text"} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={(e) => setSignUpData('cPassword', e.target.value)}></input>
+
+                                    <input type={!ConfirmVisible ? "password" : "text"} Name="password2" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={ChandlePassword}></input>
                                     <span className='position-absolute icon-Posi-2' onClick={toggleConfirm}>{ConfirmVisible ? <AiFillEye/> : <AiFillEyeInvisible/>}</span> 
+                                    {Cpassworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{Cpassworderror}</h2>}
+
                                     </div>
                                    
                                 </div>
