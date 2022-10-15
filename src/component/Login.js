@@ -12,7 +12,7 @@ const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 const Login = () => {
 
     const [formData, setFormData] = useState({});
-    const [CandidateData, setCandidateData] = useState({});
+  const [CandidateData, setCandidateData] = useState({});
     const [show, setshow] = useState(true)
     const [isVisible, setVisible] = useState(false);
     // const [post, setPost] = React.useState(null);
@@ -32,6 +32,14 @@ const Login = () => {
         } else setError(false);
 
         setData('username', e.target.value)
+       
+    }
+
+    const ChandleEmail =(e)=>{ 
+        if(!isValidEmail(e.target.value)){
+            setError("email is invalid")
+        } else setError(false);
+
         setCandiData('email', e.target.value)
     }
 
@@ -44,6 +52,14 @@ const Login = () => {
         }  else setpasswordError(false)
 
         setData('password', e.target.value)
+  
+    }
+
+    const ChandlePaswword = (e) =>{
+        if(!passwordValidator(e.target.value)){
+            setpasswordError("password is not strong")
+        }  else setpasswordError(false)
+
         setCandiData('password', e.target.value)
     }
 
@@ -154,12 +170,12 @@ const Login = () => {
                                 <div className='col-6 mt-5'>
                                     <form className='mx-4 border border rounded-5 Bor-1 border-primary' onSubmit={onSubmit}>
                                         <div className="form mx-5">
-                                            <input type="text" value={getCandiData('email')} onChange={handleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
+                                            <input type="text" value={getCandiData('email')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
                                            {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
                                         </div>
 
                                         <div className="form mx-5 row position-relative">
-                                            <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={handlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
+                                            <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={ChandlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
                                         {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
 
                                             <span className='position-absolute icon-Posi-1' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
