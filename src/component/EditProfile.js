@@ -1,13 +1,41 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Footer from './Footer'
 import HeaderEdit from './HeaderEdit'
-import {Link} from 'react-router-dom'
-
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 const Home = () => {
-   
+    const [job, setjob] = useState([])
+    const [skills, setskill] = useState([])
+    const [country, setcountry] = useState([]);
+    const [state, setstate] = useState([]);
+
+    useEffect(function () {
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
+            .then((response) => setjob(response.data.results))
+            .catch((error) => console.log(error))
+    }, [])
+
+    useEffect(function () {
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
+            .then((response) => setskill(response.data.results))
+            .catch((error) => console.log(error))
+    }, [])
+
+    useEffect(function () {
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/state/")
+            .then((response) => setcountry(response.data.results))
+            .catch((error) => console.log(error))
+    }, [])
+
+    useEffect(function () {
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
+            .then((response) => setstate(response.data.results))
+            .catch((error) => console.log(error))
+    }, [])
+
     return (
         <>
-         <HeaderEdit/>
+            <HeaderEdit />
             <div className='container-fluid Div-top'>
                 <div className='container d-flex Div-top'>
                     <div className='col-1 mt-4'>
@@ -65,10 +93,12 @@ const Home = () => {
                                 <div className='d-flex justify-content-between '>
                                     <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
                                         <option selected>Job Preference</option>
-                                        <option value="1">Internship</option>
-                                        <option>Part Time</option>
-                                        <option>Full Time</option>
-                                        <option>Internship with Job</option>
+                                        {
+                                            job.map((jobs) => (
+                                                <option key={jobs.id} value={jobs.id}>
+                                                    {jobs.name}
+                                                </option>))
+                                        }
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2'>
@@ -110,10 +140,27 @@ const Home = () => {
                             <div className='container'>
                                 <div className='row '>
                                     <div className='col-6'>
-                                        <input type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                        <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
+                                            <option>country</option>
+                                            {
+                                                country.map((countrys) => (
+                                                    <option key={countrys.id} value={countrys.id}>
+                                                        {countrys.name}
+                                                    </option>))
+                                            }
+                                        </select>
                                     </div>
                                     <div className='col-6'>
-                                        <input type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                        <select type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
+                                            <option>State</option>
+                                            {
+                                                state.map((states)=>(
+                                                    <option key={states.id} value={states.id}>
+                                                        {states.name}
+                                                    </option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -141,10 +188,27 @@ const Home = () => {
                             <div className='container'>
                                 <div className='row '>
                                     <div className='col-6'>
-                                        <input type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                        <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" >
+                                            <option>country</option>
+                                            {
+                                                country.map((countrys) => (
+                                                    <option key={countrys.id} value={countrys.id}>
+                                                        {countrys.name}
+                                                    </option>))
+                                            }
+                                        </select>
                                     </div>
                                     <div className='col-6'>
-                                        <input type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                        <select type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" >
+                                            <option>state</option>
+                                            {
+                                                state.map((states) => (
+                                                    <option key={states.id} value={states.id}>
+                                                        {states.name}
+                                                    </option>))
+                                            }
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -241,8 +305,25 @@ const Home = () => {
                 {/* country , skills resume Part>>>>>>>> */}
                 <div className='row Edit-Skill'>
                     <div className='col-6'>
-                        <input type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" />
-                        <input type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" />
+                        <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
+                            <option>country</option>
+                            {
+                                country.map((countrys) => (
+                                    <option key={countrys.id} value={countrys.id}>
+                                        {countrys.name}
+                                    </option>))
+                            }
+
+                        </select>
+                        <select type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
+                            <option>skill</option>
+                            {
+                                skills.map((skill) => (
+                                    <option key={skill.id} value={skill.id}>
+                                        {skill.name}
+                                    </option>))
+                            }
+                        </select>
                     </div>
 
                     <div className='col-6 '>
@@ -266,7 +347,7 @@ const Home = () => {
                 </div>
                 {/* footer >>>>> */}
             </div>
-            <Footer/>
+            <Footer />
         </>
     )
 }
