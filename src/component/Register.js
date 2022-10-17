@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import './Register.css'
 import { NavLink } from "react-router-dom"
@@ -19,15 +19,9 @@ const Navbar = () => {
     const [passworderror, setpasswordError] = useState(false);
     const [Cpassworderror, setCpasswordError] = useState(false);
     const [Eerror, setEError] = useState(false);
+    const [skills, setskill] = useState([])
 
-    // const [passMatch, setPassMatch] = React.useState(true);
 
-
-    // const validatePassword = () => {
-    //     Spassword === cPassword
-    //         ? setPassMatch(true)
-    //         : setPassMatch(false);
-    // };
 
     const toggle = () => {
         setVisible(!isVisible);
@@ -113,9 +107,6 @@ const Navbar = () => {
     }
 
 
-
-
-
     // Emp validation>>>>>>
 
     function isValidEmpEmail(email) {
@@ -131,6 +122,15 @@ const Navbar = () => {
 
         // setSignUpData('First_name', e.target.value)
     }
+
+
+
+    useEffect(function(){
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/" )
+        .then((response)=>setskill(response.data.results))
+        .catch((error)=>console.log(error))
+    })
+
 
 
     return (
@@ -177,20 +177,37 @@ const Navbar = () => {
                                     </div>
 
                                     <input type="tel" value={getSignUpData('mobile')} onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' required></input>
+
+
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('skill')} onChange={(e) => setSignUpData('skill', e.target.value)} >
-                                        <option selected>Key Skills</option>
+                                      <option>skills</option>
+                                      {
+                                        skills.map((skill)=>(
+                                        <option  key={skill.id} value={skill.id}>
+                                            {skill.name}
+                                            </option>))
+                                      }
+                                      
+                                        {/* <option selected>Key Skills</option>
                                         <option value="c++">C++</option>
                                         <option value="html">Html</option>
                                         <option value="css">css</option>
-                                        <option value="java script">Java Script</option>
+                                        <option value="java script">Java Script</option> */}
+                                        {/* {Ferror && <p>{Ferror}</p>}
+                                        {users.length > 0 && (
+                                            <ul>
+                                                {users.map(user => (
+                                                    <li key={user.id}>{user.name}</li>
+                                                ))}
+                                            </ul>
+                                        )} */}
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('job_Preference')} onChange={(e) => setSignUpData('job_Preference', e.target.value)} >
                                         <option selected>Job Preference</option>
-                                        <option value="part time">Part Time</option>
-                                        <option value="full time">Full Time</option>
-                                        <option value="internship">Internship</option>
-                                        <option value="Internship with job">Internship with job</option>
+                                      {
+
+                                      }
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('start_Work')} onChange={(e) => setSignUpData('start_Work', e.target.value)}>
@@ -206,14 +223,14 @@ const Navbar = () => {
                                         <input type={!isVisible ? "password" : "text"} Name="password1" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('password')} onChange={handlePassword}></input>
                                         <span className='position-absolute icon-Posi-3' onClick={toggle}> {isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
-                                        
+
 
                                         <input type={!ConfirmVisible ? "password" : "text"} Name="password2" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={ChandlePassword}></input>
                                         <span className='position-absolute icon-Posi-2' onClick={toggleConfirm}>{ConfirmVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
-                                        
-                                    
-                                    
+
+
+
                                     </div>
 
                                 </div>
@@ -254,21 +271,21 @@ const Navbar = () => {
                                     </div>
 
                                     <div className="form mx-5">
-                                        <input value={getEmpSignUpData('Person_name')} onChange={(e) => setEmpSignUpData('Person_name', e.target.value)} type="text" id="form1Example2" placeholder='Contact Person Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
+                                        <input value={getEmpSignUpData('Person_name')} onChange={(e) => setEmpSignUpData('Person_name', e.target.value)} type="text" id="form1Example2" placeholder='Contact Person Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                     </div>
 
                                     <div className="form  mx-5">
-                                        <input value={getEmpSignUpData('Number')} onChange={(e) => setEmpSignUpData('Number', e.target.value)} type="tel" id="form1Example2" placeholder='Phone Number' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"  />
+                                        <input value={getEmpSignUpData('Number')} onChange={(e) => setEmpSignUpData('Number', e.target.value)} type="tel" id="form1Example2" placeholder='Phone Number' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                     </div>
 
                                     <div className="form mx-5 mb-3">
-                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"  />
+                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                     </div>
 
                                     <div className="row ">
                                         <div className="col d-flex justify-content-start mx-5 mt-3">
                                             <div className="form-check">
-                                                <input className="form-check-input" type="checkbox" value="remember me"/>
+                                                <input className="form-check-input" type="checkbox" value="remember me" />
                                                 <span className=' fs-10 fw-lighter mt-3'>By continuing you acknowledge that you accept virVit's</span>
                                                 <p className='fs-6 fw-lighter'><a className='text-decoration-none footer-a' href='/'>Privacy Policies</a> and  <a className='text-decoration-none footer-a' href='/'>Terms & Conditions</a></p>
                                             </div>

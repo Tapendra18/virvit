@@ -12,42 +12,10 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 const Login2 = () => {  
     const [isVisible, setVisible] = useState(false);
     const [show, setshow] = useState(true)
-   
-    const [error, setError] = useState(null);
-    const [state, setState] = useState({
-      email: '',
-      password: '',
-    });
-  
-    const validateEmail = (email) => {
-      const re =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    };
-  
-    const handleChange = (e) => {
-      const { id, value } = e.target;
-      setState((prevState) => ({
-        ...prevState,
-        [id]: value,
-      }));
-    };
-  
-    const handleSubmitClick = (e) => {
-      e.preventDefault();
-  
-      if (!validateEmail(state.email)) {
-        setError('Invalid Email');
-      }
-  
-      if (state.password.length < 8) {
-        setError('Password must be at least 8 chars long');
-      }
-  
-      if (!error) {
-        // No errors.
-      }
-    };
+    const [email , setEmail] = useState("demo@gmail.com")
+    const [password , setpassword] = useState("")
+
+
 
     const toggle = () => {
         setVisible(!isVisible);
@@ -72,7 +40,7 @@ const Login2 = () => {
                 show ? <div className='container-fluid'>
                     <div className='row text-center'>
                         <div className='col-6 mt-5'>
-                            <form className='mx-5 border border-bottom-0 rounded-5 border-2 border-primary'  onSubmit={handleSubmitClick}>
+                            <form className='mx-5 border border-bottom-0 rounded-5 border-2 border-primary'>
                                 <div className='row'>
                                     <div className='col-12 mt-5 mb-4'>
                                         <span className='header fs-5 fw-bold'>Login to start your search !</span>
@@ -80,11 +48,11 @@ const Login2 = () => {
                                 </div>
 
                                 <div className="form-outline mb-4 mx-5">
-                                    <input type="text" id="form1Example1" value={state.email}
-                                    onChange={handleChange}  placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required/>
+                                    <input type="text" id="form1Example1" 
+                                    placeholder='Email Login ID' value={email} onChange={(e)=>{ setEmail(e.target.value)}} className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
                                    
                                     <div className='position-relative'>
-                                        <input type={!isVisible ? "password" : "text"} value={state.email} onChange={handleChange} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"  required/>
+                                        <input type={!isVisible ? "password" : "text"} value={password} onChange={(e)=>{setpassword(e.target.value)}} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"  required/>
                                  
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>
