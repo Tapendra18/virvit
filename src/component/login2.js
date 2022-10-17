@@ -12,9 +12,7 @@ import { AiFillEyeInvisible } from "react-icons/ai";
 const Login2 = () => {  
     const [isVisible, setVisible] = useState(false);
     const [show, setshow] = useState(true)
-    const [email , setEmail] = useState("demo@gmail.com")
-    const [password , setpassword] = useState("")
-
+   
 
 
     const toggle = () => {
@@ -49,10 +47,10 @@ const Login2 = () => {
 
                                 <div className="form-outline mb-4 mx-5">
                                     <input type="text" id="form1Example1" 
-                                    placeholder='Email Login ID' value={email} onChange={(e)=>{ setEmail(e.target.value)}} className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
+                                    placeholder='Email Login ID'  className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
                                    
                                     <div className='position-relative'>
-                                        <input type={!isVisible ? "password" : "text"} value={password} onChange={(e)=>{setpassword(e.target.value)}} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"  required/>
+                                        <input type={!isVisible ? "password" : "text"} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"  required/>
                                  
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>

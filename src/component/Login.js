@@ -156,7 +156,7 @@ const Login = () => {
                                     <div className="col d-flex justify-content-start mx-5 mt-3">
                                         <div className="form-check">
                                             <input className="form-check-input" type="checkbox" value="remember me" />
-                                            <label className="form-check-label Rem-me" for="form1Example3"> Remember me </label>
+                                            <label className="form-check-label Rem-me" htmlFor="form1Example3"> Remember me </label>
                                         </div>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@ const Login = () => {
                                             <div className="col d-flex justify-content-start mx-5 mt-3">
                                                 <div className="form-check">
                                                     <input className="form-check-input" type="checkbox" value="remember me" />
-                                                    <label className="form-check-label Rem-me mx-2" for="form1Example3"> Remember me </label>
+                                                    <label className="form-check-label Rem-me mx-2" htmlFor="form1Example3"> Remember me </label>
                                                     <a className='text-decoration-none mx-4 fw-normal' href="#!">Forgot password ?</a>
                                                 </div>
                                             </div>

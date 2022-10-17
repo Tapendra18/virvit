@@ -131,13 +131,14 @@ const Navbar = () => {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
             .then((response) => setskill(response.data.results))
             .catch((error) => console.log(error))
-    },[])
+    }, [])
 
     useEffect(function () {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
             .catch((error) => console.log(error))
-    },[])
+    }, [])
+
 
     return (
         <>
@@ -186,7 +187,7 @@ const Navbar = () => {
 
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('skill')} onChange={(e) => setSignUpData('skill', e.target.value)} >
-                                        <option>skills</option>
+                                        <option >skills</option>
                                         {
                                             skills.map((skill) => (
                                                 <option key={skill.id} value={skill.id}>
@@ -194,19 +195,19 @@ const Navbar = () => {
                                                 </option>))
                                         }
 
-                                
+
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('job_Preference')} onChange={(e) => setSignUpData('job_Preference', e.target.value)} >
                                         <option selected>Job Preference</option>
-                                        
-                                            {
-                                                job.map((jobs) => (
-                                                    <option key={jobs.id} value={jobs.id}>
-                                                        {jobs.name}
-                                                    </option>))
-                                            }
-                                        
+
+                                        {
+                                            job.map((jobs) => (
+                                                <option key={jobs.id} value={jobs.id}>
+                                                    {jobs.name}
+                                                </option>))
+                                        }
+
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('start_Work')} onChange={(e) => setSignUpData('start_Work', e.target.value)}>
@@ -228,8 +229,6 @@ const Navbar = () => {
                                         <span className='position-absolute icon-Posi-2' onClick={toggleConfirm}>{ConfirmVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
 
-
-
                                     </div>
 
                                 </div>
@@ -243,7 +242,6 @@ const Navbar = () => {
                                 </div>
 
                             </form>
-
                         </div>
                         {/* Right Image >>>>>>> */}
                         <div className="col-6 mt-5">
