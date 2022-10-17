@@ -20,6 +20,8 @@ const Navbar = () => {
     const [Cpassworderror, setCpasswordError] = useState(false);
     const [Eerror, setEError] = useState(false);
     const [skills, setskill] = useState([])
+    const [job, setjob] = useState([])
+
 
 
 
@@ -125,13 +127,17 @@ const Navbar = () => {
 
 
 
-    useEffect(function(){
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/" )
-        .then((response)=>setskill(response.data.results))
-        .catch((error)=>console.log(error))
-    })
+    useEffect(function () {
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
+            .then((response) => setskill(response.data.results))
+            .catch((error) => console.log(error))
+    },[])
 
-
+    useEffect(function () {
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
+            .then((response) => setjob(response.data.results))
+            .catch((error) => console.log(error))
+    },[])
 
     return (
         <>
@@ -156,7 +162,7 @@ const Navbar = () => {
                                 <div className='mx-5'>
 
                                     <input type="text" value={getSignUpData('first_name')} onChange={(e) => setSignUpData('first_name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required></input>
-                                    {error && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{error}</h2>}
+                                    {/* {error && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{error}</h2>} */}
 
                                     <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)} placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
                                     <input type="Email" value={getSignUpData('email')} onChange={handleEmail} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required />
@@ -180,34 +186,27 @@ const Navbar = () => {
 
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('skill')} onChange={(e) => setSignUpData('skill', e.target.value)} >
-                                      <option>skills</option>
-                                      {
-                                        skills.map((skill)=>(
-                                        <option  key={skill.id} value={skill.id}>
-                                            {skill.name}
-                                            </option>))
-                                      }
-                                      
-                                        {/* <option selected>Key Skills</option>
-                                        <option value="c++">C++</option>
-                                        <option value="html">Html</option>
-                                        <option value="css">css</option>
-                                        <option value="java script">Java Script</option> */}
-                                        {/* {Ferror && <p>{Ferror}</p>}
-                                        {users.length > 0 && (
-                                            <ul>
-                                                {users.map(user => (
-                                                    <li key={user.id}>{user.name}</li>
-                                                ))}
-                                            </ul>
-                                        )} */}
+                                        <option>skills</option>
+                                        {
+                                            skills.map((skill) => (
+                                                <option key={skill.id} value={skill.id}>
+                                                    {skill.name}
+                                                </option>))
+                                        }
+
+                                
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('job_Preference')} onChange={(e) => setSignUpData('job_Preference', e.target.value)} >
                                         <option selected>Job Preference</option>
-                                      {
-
-                                      }
+                                        
+                                            {
+                                                job.map((jobs) => (
+                                                    <option key={jobs.id} value={jobs.id}>
+                                                        {jobs.name}
+                                                    </option>))
+                                            }
+                                        
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('start_Work')} onChange={(e) => setSignUpData('start_Work', e.target.value)}>
