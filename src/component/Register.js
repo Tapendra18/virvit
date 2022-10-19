@@ -135,6 +135,7 @@ const Navbar = () => {
             .catch((error) => console.log(error))
     }, [])
 
+    
     return (
         <>
             <HeaderLanding />
@@ -174,7 +175,7 @@ const Navbar = () => {
                                         </div>
 
                                         <div className='col-7'>
-                                            <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' required />
+                                            <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' placeholder='year of birth'  minDate={new Date()} format="yyyy-MM-DD" required />
                                         </div>
                                     </div>
 
@@ -212,7 +213,7 @@ const Navbar = () => {
                                         <option value="30 Days">30 Days</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                    <input type="file" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} ></input>
+                                    <input type="file" accept="application/pdf,application/msword" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} ></input>
                                     <div className='position-relative'>
 
                                         <input type={!isVisible ? "password" : "text"} Name="password1" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('password')} onChange={handlePassword}></input>

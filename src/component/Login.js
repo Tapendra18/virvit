@@ -12,57 +12,57 @@ const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 const Login = () => {
 
     const [formData, setFormData] = useState({});
-  const [CandidateData, setCandidateData] = useState({});
+    const [CandidateData, setCandidateData] = useState({});
     const [show, setshow] = useState(true)
     const [isVisible, setVisible] = useState(false);
     // const [post, setPost] = React.useState(null);
-    const [error , setError] = useState(false);
-    const [Cerror , setCError] = useState(false);
+    const [error, setError] = useState(false);
+    const [Cerror, setCError] = useState(false);
 
-    const [passworderror , setpasswordError] = useState(false);
-    const [Cpassworderror , setCpasswordError] = useState(false);
+    const [passworderror, setpasswordError] = useState(false);
+    const [Cpassworderror, setCpasswordError] = useState(false);
 
 
     const toggle = () => {
         setVisible(!isVisible);
     };
- 
-    function isValidEmail(email){
-        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email)
+
+    function isValidEmail(email) {
+        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/i.test(email)
     }
-    const handleEmail =(e)=>{ 
-        if(!isValidEmail(e.target.value)){
+    const handleEmail = (e) => {
+        if (!isValidEmail(e.target.value)) {
             setError("email is invalid")
         } else setError(false);
 
+
         setData('username', e.target.value)
-       
     }
 
-    const ChandleEmail =(e)=>{ 
-        if(!isValidEmail(e.target.value)){
+    const ChandleEmail = (e) => {
+        if (!isValidEmail(e.target.value)) {
             setCError("email is invalid")
         } else setCError(false);
 
         setCandiData('username', e.target.value)
     }
 
-    function passwordValidator(value){
+    function passwordValidator(value) {
         return value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
     }
-    const handlePaswword = (e) =>{
-        if(!passwordValidator(e.target.value)){
+    const handlePaswword = (e) => {
+        if (!passwordValidator(e.target.value)) {
             setpasswordError("password is not strong")
-        }  else setpasswordError(false)
+        } else setpasswordError(false)
 
         setData('password', e.target.value)
-  
+
     }
 
-    const ChandlePaswword = (e) =>{
-        if(!passwordValidator(e.target.value)){
+    const ChandlePaswword = (e) => {
+        if (!passwordValidator(e.target.value)) {
             setCpasswordError("password is not strong")
-        } else if(ChandlePaswword(e.target.value)===null){
+        } else if (ChandlePaswword(e.target.value) === null) {
             setCpasswordError("fill the input")
         } else setCpasswordError(false)
 
@@ -71,24 +71,31 @@ const Login = () => {
 
     const onFormSubmit = (event) => {
         event.preventDefault();
-        
-        console.log('Form Data', formData)
+
         formData['device_id'] = 1;
-        axios
-        .post(baseURL, formData)
-        .then(formData => console.log(formData.formData))
-        .catch(error => console.log(error));
+        if (getData('username' &&'password').length === 0) {
+            alert("invalid")
+        }
+        else   
+          {  axios
+            .post(baseURL, formData)
+            .then(formData => console.log(formData.formData))
+            .catch(error => console.log(error));
+              console.log('Form Data', formData) }
     };
 
     const onSubmit = (event) => {
         event.preventDefault();
-        console.log('CandidateData', CandidateData)
         CandidateData['device_id'] = 1;
-        axios
-        .post(baseURL,CandidateData)
-        .then(data => console.log(data.data))
-        .catch(error => console.log(error));
-        
+        if(getCandiData('username' && 'password').length ===0){
+            alert("invalid")
+        }else
+        { axios
+            .post(baseURL, CandidateData)
+            .then(data => console.log(data.data))
+            .catch(error => console.log(error));
+             console.log('CandidateData', CandidateData)}
+
     };
 
     const getData = (key) => {
@@ -134,11 +141,11 @@ const Login = () => {
                                 </div>
 
                                 <div className="form-outline mb-4 mx-5">
-                                    <input type="text" id="form1Example1" value={getData('username')} onChange={handleEmail} placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" required/>
-                                        {error && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{error}</h2>}
+                                    <input type="text" id="form1Example1" value={getData('username')} onChange={handleEmail} placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                    {error && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{error}</h2>}
                                     <div className='position-relative'>
-                                        <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" required/>
-                                        {passworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{passworderror}</h2>}
+                                        <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
+                                        {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>
                                 </div>
@@ -176,13 +183,13 @@ const Login = () => {
                                 <div className='col-6 mt-5'>
                                     <form className='mx-4 border border rounded-5 Bor-1 border-primary' onSubmit={onSubmit}>
                                         <div className="form mx-5">
-                                            <input type="text" value={getCandiData('username')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
-                                           {Cerror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{Cerror}</h2>}
+                                            <input type="text" value={getCandiData('username')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                            {Cerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cerror}</h2>}
                                         </div>
 
                                         <div className="form mx-5 row position-relative">
-                                            <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={ChandlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative"/>
-                                        {Cpassworderror && <h2 className='text-start' style={{color: 'red' ,fontSize:15 ,}}>{Cpassworderror}</h2>}
+                                            <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={ChandlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
+                                            {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
 
                                             <span className='position-absolute icon-Posi-1' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         </div>
