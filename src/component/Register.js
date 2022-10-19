@@ -125,20 +125,15 @@ const Navbar = () => {
         // setSignUpData('First_name', e.target.value)
     }
 
-
-
     useEffect(function () {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
             .then((response) => setskill(response.data.results))
             .catch((error) => console.log(error))
-    }, [])
 
-    useEffect(function () {
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
+            axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
             .catch((error) => console.log(error))
     }, [])
-
 
     return (
         <>

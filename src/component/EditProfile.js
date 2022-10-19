@@ -10,28 +10,23 @@ const Home = () => {
     const [state, setstate] = useState([]);
 
     useEffect(function () {
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
             .catch((error) => console.log(error))
-    }, [])
 
-    useEffect(function () {
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
+            axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
             .then((response) => setskill(response.data.results))
             .catch((error) => console.log(error))
-    }, [])
 
-    useEffect(function () {
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/state/")
+            axios.get("https://virvit.mydevpartner.website/vvapi/v1/state/")
             .then((response) => setcountry(response.data.results))
             .catch((error) => console.log(error))
-    }, [])
 
-    useEffect(function () {
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
+            axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
             .then((response) => setstate(response.data.results))
             .catch((error) => console.log(error))
     }, [])
+
 
     return (
         <>
