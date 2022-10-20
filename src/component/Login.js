@@ -7,6 +7,7 @@ import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from 'axios'
 
+
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
 const Login = () => {
@@ -18,6 +19,10 @@ const Login = () => {
     // const [post, setPost] = React.useState(null);
     const [error, setError] = useState(false);
     const [Cerror, setCError] = useState(false);
+    const [Merror , setMerror] = useState(false);
+    const [Lerror , setLerror] = useState(false);
+    const [LogUserError ,  setLogUserError] = useState(false);
+    const [LogPassError , setLogPassError] = useState(false);
 
     const [passworderror, setpasswordError] = useState(false);
     const [Cpassworderror, setCpasswordError] = useState(false);
@@ -35,7 +40,6 @@ const Login = () => {
             setError("email is invalid")
         } else setError(false);
 
-
         setData('username', e.target.value)
     }
 
@@ -48,7 +52,7 @@ const Login = () => {
     }
 
     function passwordValidator(value) {
-        return value.length >= 8 && /[A-Z]/.test(value) && /[^a-zA-Z]/.test(value) && /[0-9]/.test(value)
+        return value.length >= 8 && /[A-Z]/.test(value) && /[a-zA-Z]/.test(value) && /[0-9]/.test(value)
     }
     const handlePaswword = (e) => {
         if (!passwordValidator(e.target.value)) {
@@ -73,23 +77,30 @@ const Login = () => {
         event.preventDefault();
 
         formData['device_id'] = 1;
-        if (getData('username' &&'password').length === 0) {
-            alert("invalid")
+        if (getData('username').length === 0 ) {
+         setLogUserError("please Enter email")      
+            
+        }if(getData('password').length ===0 ){
+            setLogPassError("please Enter the password")
         }
         else   
           {  axios
             .post(baseURL, formData)
             .then(formData => console.log(formData.formData))
             .catch(error => console.log(error));
-              console.log('Form Data', formData) }
+              console.log('Form Data', formData) 
+            setLogUserError("everything good ")}
     };
 
     const onSubmit = (event) => {
         event.preventDefault();
         CandidateData['device_id'] = 1;
-        if(getCandiData('username' && 'password').length ===0){
-            alert("invalid")
-        }else
+        if(getCandiData('username').length ===0 ){
+            setMerror("Fill the Name");
+        }if(getCandiData('password').length === 0 ) {
+            setLerror("Fill the password")
+        }    
+        else
         { axios
             .post(baseURL, CandidateData)
             .then(data => console.log(data.data))
@@ -143,9 +154,12 @@ const Login = () => {
                                 <div className="form-outline mb-4 mx-5">
                                     <input type="text" id="form1Example1" value={getData('username')} onChange={handleEmail} placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                     {error && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{error}</h2>}
+                                    {LogUserError&& <h2 className='text-start mx-2' style={{color:'red' , fontSize:15,}}>{LogUserError}</h2>}
                                     <div className='position-relative'>
                                         <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
                                         {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
+                                       {LogPassError&& <h2 className='text-start mx-2' style={{color:'red' , fontSize:15,}}>{LogPassError}</h2>}
+
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>
                                 </div>
@@ -185,12 +199,14 @@ const Login = () => {
                                         <div className="form mx-5">
                                             <input type="text" value={getCandiData('username')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                             {Cerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cerror}</h2>}
+                                           {Merror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Merror}</h2>}
+
                                         </div>
 
                                         <div className="form mx-5 row position-relative">
                                             <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={ChandlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
                                             {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
-
+                                            {Lerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Lerror}</h2>}
                                             <span className='position-absolute icon-Posi-1' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         </div>
 
