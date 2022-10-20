@@ -33,6 +33,11 @@ const Navbar = () => {
     const [Resumeerror, setResumeerror] = useState(false);
     const [passerror, setpasserror] = useState(false);
     const [Cerror, setCerror] = useState(false);
+    const [EmpEmailerror , setEmpEmailerror] = useState(false);
+    const [Personerror , setPersonerror] = useState(false);
+    const[Phoneerror , setPhoneerror] = useState(false)
+    const[Registererror ,  setRegistererror] = useState(false)
+
 
     const toggle = () => {
         setVisible(!isVisible);
@@ -75,8 +80,8 @@ const Navbar = () => {
         else {
             axios
                 .post(baseURL, signupName)
-            .then(data => console.log(data.data))
-            .catch(error => console.log(error))
+                .then(data => console.log(data.data))
+                .catch(error => console.log(error))
             console.log('SignUpData', signupName)
         }
         // Submit here
@@ -96,11 +101,20 @@ const Navbar = () => {
         event.preventDefault();
 
         EmpsignupName['device_1'] = 1;
+        if (getEmpSignUpData('Email_id').length === 0) {
+            setEmpEmailerror("enter Name")
+        } if (getEmpSignUpData('Person_name').length === 0) {
+            setPersonerror("enter person Name")
+        } if (getEmpSignUpData('Number').length === 0) {
+            setPhoneerror("enter Number")
+        } if (getEmpSignUpData('Bussiness Name').length === 0) {
+            setRegistererror("enter Register Bussiness name")
+        }else{
         axios
             .post(baseURL, EmpsignupName)
             .then(data => console.log(data.data))
             .catch(error => console.log(error))
-        console.log('EmpSignUpData', EmpsignupName)
+        console.log('EmpSignUpData', EmpsignupName)}
     };
 
     const getEmpSignUpData = (key) => {
@@ -232,7 +246,7 @@ const Navbar = () => {
                                                 <option key={skill.id} value={skill.id}>
                                                     {skill.name}
                                                 </option>))
-                                        } 
+                                        }
                                     </select>
                                     {skillerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{skillerror}</h2>}
 
@@ -305,19 +319,24 @@ const Navbar = () => {
                                     <div className="form mx-5">
                                         <input value={getEmpSignUpData('Email_id')} onChange={EmphandleEmail} type="email" placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                         {Eerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Eerror}</h2>}
+                                       {EmpEmailerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{EmpEmailerror}</h2>}
 
                                     </div>
 
                                     <div className="form mx-5">
                                         <input value={getEmpSignUpData('Person_name')} onChange={(e) => setEmpSignUpData('Person_name', e.target.value)} type="text" id="form1Example2" placeholder='Contact Person Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                       {Personerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Personerror}</h2>}
+
                                     </div>
 
                                     <div className="form  mx-5">
                                         <input value={getEmpSignUpData('Number')} onChange={(e) => setEmpSignUpData('Number', e.target.value)} type="tel" id="form1Example2" placeholder='Phone Number' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                       {Phoneerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Phoneerror}</h2>}
                                     </div>
 
                                     <div className="form mx-5 mb-3">
-                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
+                                       {Registererror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Registererror}</h2>}
                                     </div>
 
                                     <div className="row ">
