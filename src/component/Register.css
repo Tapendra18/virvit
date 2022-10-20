@@ -252,3 +252,8 @@ Carousel slide.active{
     background-color: none;
     border: none;
 }
+
+div div input  h2.ErrorValidation{
+    transition: all .8s ease-in-out;
+    color: #020b3b;
+}

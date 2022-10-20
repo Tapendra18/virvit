@@ -157,8 +157,9 @@ const Login = () => {
                                     {LogUserError&& <h2 className='text-start mx-2' style={{color:'red' , fontSize:15,}}>{LogUserError}</h2>}
                                     <div className='position-relative'>
                                         <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
-                                        {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
-                                       {LogPassError&& <h2 className='text-start mx-2' style={{color:'red' , fontSize:15,}}>{LogPassError}</h2>}
+                                       {passworderror && <h2 className='text-start ' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
+   
+                                       {LogPassError&& <h2 className='text-start mx-2 ErrorValidation' style={{color:'red' , fontSize:15, animationDelay: "2s"}}>{LogPassError}</h2>}
 
                                         <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                     </div>

@@ -21,9 +21,18 @@ const Navbar = () => {
     const [Eerror, setEError] = useState(false);
     const [skills, setskill] = useState([])
     const [job, setjob] = useState([])
-
-
-
+    const [ferror, setFerror] = useState(false);
+    const [lerror, setlerror] = useState(false);
+    const [Emailerror, setEmailerror] = useState(false);
+    const [Gendererror, setGendererror] = useState(false);
+    const [DOBerror, setDOBerror] = useState(false);
+    const [Mobileerror, setMobileerror] = useState(false);
+    const [skillerror, setSkillerror] = useState(false)
+    const [joberror, setJoberror] = useState(false)
+    const [Workerror, setWorkerror] = useState(false)
+    const [Resumeerror, setResumeerror] = useState(false);
+    const [passerror, setpasserror] = useState(false);
+    const [Cerror, setCerror] = useState(false);
 
     const toggle = () => {
         setVisible(!isVisible);
@@ -35,12 +44,41 @@ const Navbar = () => {
 
     const onSignupSubmit = (event) => {
         event.preventDefault();
-        console.log('SignUpData', signupName)
+
         signupName['device_1'] = 1;
-        axios
-            .post(baseURL, signupName)
+        EmpsignupName['device_1'] = 1;
+        if (getSignUpData('first_name').length === 0) {
+            setFerror("enter first Name")
+        } if (getSignUpData('last_name').length === 0) {
+            setlerror("enter last Name")
+        } if (getSignUpData('email').length === 0) {
+            setEmailerror("enter email")
+        } if (getSignUpData('Gender').length === 0) {
+            setGendererror("enter gender")
+        } if (getSignUpData('Dob').length === 0) {
+            setDOBerror("enter DOB")
+        } if (getSignUpData('mobile').length === 0) {
+            setMobileerror("enter Mobile Number")
+        } if (getSignUpData('skill').length === 0) {
+            setSkillerror("Enter skill ")
+        } if (getSignUpData('job_Preference').length === 0) {
+            setJoberror("enter job")
+        } if (getSignUpData('start_Work').length === 0) {
+            setWorkerror("enter Work ")
+        } if (getSignUpData('resume').length === 0) {
+            setResumeerror("enter resume")
+        } if (getSignUpData('password').length === 0) {
+            setpasserror("enter password")
+        } if (getSignUpData('cPassword').length === 0) {
+            setCerror("enter Confirm password")
+        }
+        else {
+            axios
+                .post(baseURL, signupName)
             .then(data => console.log(data.data))
             .catch(error => console.log(error))
+            console.log('SignUpData', signupName)
+        }
         // Submit here
     };
 
@@ -56,12 +94,13 @@ const Navbar = () => {
 
     const onEmpSignUpSubmit = (event) => {
         event.preventDefault();
-        console.log('EmpSignUpData', EmpsignupName)
+
         EmpsignupName['device_1'] = 1;
         axios
             .post(baseURL, EmpsignupName)
             .then(data => console.log(data.data))
             .catch(error => console.log(error))
+        console.log('EmpSignUpData', EmpsignupName)
     };
 
     const getEmpSignUpData = (key) => {
@@ -107,8 +146,6 @@ const Navbar = () => {
 
         setSignUpData('cPassword', e.target.value)
     }
-
-
     // Emp validation>>>>>>
 
     function isValidEmpEmail(email) {
@@ -130,12 +167,12 @@ const Navbar = () => {
             .then((response) => setskill(response.data.results))
             .catch((error) => console.log(error))
 
-            axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
             .catch((error) => console.log(error))
     }, [])
 
-    
+
     return (
         <>
             <HeaderLanding />
@@ -158,29 +195,35 @@ const Navbar = () => {
                             <form onSubmit={onSignupSubmit} >
                                 <div className='mx-5'>
 
-                                    <input type="text" value={getSignUpData('first_name')} onChange={(e) => setSignUpData('first_name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' required></input>
+                                    <input type="text" value={getSignUpData('first_name')} onChange={(e) => setSignUpData('first_name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' />
                                     {/* {error && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{error}</h2>} */}
+                                    {ferror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{ferror}</h2>}
 
-                                    <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)} placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required></input>
-                                    <input type="Email" value={getSignUpData('email')} onChange={handleEmail} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' required />
+                                    <input type="text" value={getSignUpData('last_name')} onChange={(e) => setSignUpData('last_name', e.target.value)} placeholder='Last Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' />
+                                    {lerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{lerror}</h2>}
+
+                                    <input type="Email" value={getSignUpData('email')} onChange={handleEmail} placeholder='E-mail' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' />
                                     {error && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{error}</h2>}
+                                    {Emailerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Emailerror}</h2>}
 
                                     <div className='row mt-1'>
                                         <div className='col-5'>
-                                            <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example' value={getSignUpData('Gender')} onChange={(e) => setSignUpData('Gender', e.target.value)} required>
+                                            <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example' value={getSignUpData('Gender')} onChange={(e) => setSignUpData('Gender', e.target.value)}>
                                                 <option selected>Gender</option>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                             </select>
+                                            {Gendererror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Gendererror}</h2>}
                                         </div>
 
                                         <div className='col-7'>
-                                            <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' placeholder='year of birth'  minDate={new Date()} format="yyyy-MM-DD" required />
+                                            <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' placeholder='year of birth' minDate={new Date()} format="yyyy-MM-DD" />
+                                            {DOBerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{DOBerror}</h2>}
                                         </div>
                                     </div>
 
-                                    <input type="tel" value={getSignUpData('mobile')} onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' required></input>
-
+                                    <input type="tel" value={getSignUpData('mobile')} onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' />
+                                    {Mobileerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Mobileerror}</h2>}
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('skill')} onChange={(e) => setSignUpData('skill', e.target.value)} >
                                         <option >skills</option>
@@ -189,22 +232,20 @@ const Navbar = () => {
                                                 <option key={skill.id} value={skill.id}>
                                                     {skill.name}
                                                 </option>))
-                                        }
-
-
+                                        } 
                                     </select>
+                                    {skillerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{skillerror}</h2>}
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('job_Preference')} onChange={(e) => setSignUpData('job_Preference', e.target.value)} >
                                         <option selected>Job Preference</option>
-
                                         {
                                             job.map((jobs) => (
                                                 <option key={jobs.id} value={jobs.id}>
                                                     {jobs.name}
                                                 </option>))
                                         }
-
                                     </select>
+                                    {joberror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{joberror}</h2>}
 
                                     <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('start_Work')} onChange={(e) => setSignUpData('start_Work', e.target.value)}>
                                         <option selected>Start Work</option>
@@ -213,17 +254,21 @@ const Navbar = () => {
                                         <option value="30 Days">30 Days</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                    <input type="file" accept="application/pdf,application/msword" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} ></input>
-                                    <div className='position-relative'>
+                                    {Workerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Workerror}</h2>}
 
-                                        <input type={!isVisible ? "password" : "text"} Name="password1" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('password')} onChange={handlePassword}></input>
+                                    <input type="file" accept="application/pdf,application/msword" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} />
+                                    {Resumeerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Resumeerror}</h2>}
+
+                                    <div className='position-relative'>
+                                        <input type={!isVisible ? "password" : "text"} Name="password1" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 position-relative' placeholder='Password' value={getSignUpData('password')} onChange={handlePassword} />
                                         <span className='position-absolute icon-Posi-3' onClick={toggle}> {isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
+                                        {passerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{passerror}</h2>}
 
-
-                                        <input type={!ConfirmVisible ? "password" : "text"} Name="password2" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={ChandlePassword}></input>
+                                        <input type={!ConfirmVisible ? "password" : "text"} Name="password2" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={ChandlePassword} />
                                         <span className='position-absolute icon-Posi-2' onClick={toggleConfirm}>{ConfirmVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
+                                        {Cerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Cerror}</h2>}
 
                                     </div>
 
