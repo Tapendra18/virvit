@@ -6,7 +6,7 @@ const Home = () => {
    return (
         <>
          <HeaderEdit/>
-            <div className='container-fluid mt-3 Div-top'>
+            <div className='container-fluid mt-5 Div-top'>
                
                <div className='row text-center p-5'>
                  <div className='col-6'>

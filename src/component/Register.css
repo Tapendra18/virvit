@@ -141,11 +141,12 @@ div select.HomeLog {
     height: 30px;
 }
 
-select option.HomePro {
+
+div .homeuser{
     color: #0b2cec;
     background-color: #ffffff;
-    font-size: 15px;
-
+    margin-top: -50px;
+    margin-right: 15px;
 }
 
 div button.CandiView {
