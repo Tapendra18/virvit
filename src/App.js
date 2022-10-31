@@ -15,6 +15,7 @@ import Login2 from "./component/login2";
 import './App.css'
 
 function App() {
+ 
   return (
     <>
 
@@ -50,7 +51,6 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/changepassword" element={<ChangePassword/>} />
         <Route path="/login2" element={<Login2/>} />
-
       </Routes>
 
     </>

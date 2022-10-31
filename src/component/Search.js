@@ -1,5 +1,6 @@
 import React from 'react'
 import HeaderEdit from './HeaderEdit'
+import Footer from './Footer'
 
 const Home = () => {
  
@@ -39,6 +40,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   )
 }

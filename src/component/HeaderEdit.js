@@ -1,7 +1,9 @@
 import React from "react";
 
 const HeaderEdit = () => {
-  
+
+  const data = JSON.parse(window.localStorage.getItem('loginUser'))
+  // console.log(data)
   return (
     <> 
     <div className="row Header">
@@ -12,13 +14,13 @@ const HeaderEdit = () => {
 
         <div className='col-7 d-flex align-item-center justify-content-end'>
             <select className=' text-center HomeLog rounded-2  mt-3 m-2'>
-               <option className=' bg-light HomePro'>Name</option>
-               <option className='bg-light HomePro fw-bold mb-3'>Edit Porfile </option>
-               <option className='bg-light HomePro fw-bold'>Job Application </option>  
-               <option className='bg-light HomePro fw-bold text-danger'>Logout </option>
+               <option selected className=' bg-light HomePro'>{data.fullname}</option>
+               <option className='bg-light HomePro fw-bold mb-3'>Edit Porfile</option>
+               <option className='bg-light HomePro fw-bold'>Job Application</option>  
+               <option className='bg-light HomePro fw-bold text-danger'>Logout</option>
            </select>
         </div>
-    </div>
+        </div>
     </>
   )
 }

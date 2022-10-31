@@ -6,11 +6,12 @@ import "./Register.css"
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from 'axios'
-
+import { useNavigate } from 'react-router-dom';
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
 const Login = () => {
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({});
     const [CandidateData, setCandidateData] = useState({});
@@ -19,13 +20,14 @@ const Login = () => {
     // const [post, setPost] = React.useState(null);
     const [error, setError] = useState(false);
     const [Cerror, setCError] = useState(false);
-    const [Merror , setMerror] = useState(false);
-    const [Lerror , setLerror] = useState(false);
-    const [LogUserError ,  setLogUserError] = useState(false);
-    const [LogPassError , setLogPassError] = useState(false);
-
+    const [Merror, setMerror] = useState(false);
+    const [Lerror, setLerror] = useState(false);
+    const [LogUserError, setLogUserError] = useState(false);
+    const [LogPassError, setLogPassError] = useState(false);
     const [passworderror, setpasswordError] = useState(false);
     const [Cpassworderror, setCpasswordError] = useState(false);
+    // const [loginUser, setItem] = useState("");
+
 
 
     const toggle = () => {
@@ -60,53 +62,64 @@ const Login = () => {
         } else setpasswordError(false)
 
         setData('password', e.target.value)
-
     }
 
     const ChandlePaswword = (e) => {
         if (!passwordValidator(e.target.value)) {
             setCpasswordError("password is not strong")
-        } else if (ChandlePaswword(e.target.value) === null) {
-            setCpasswordError("fill the input")
-        } else setCpasswordError(false)
+        }
+        else setCpasswordError(false)
 
         setCandiData('password', e.target.value)
     }
 
     const onFormSubmit = (event) => {
         event.preventDefault();
-
         formData['device_id'] = 1;
-        if (getData('username').length === 0 ) {
-         setLogUserError("please Enter email")      
-            
-        }if(getData('password').length ===0 ){
-            setLogPassError("please Enter the password")
+        if (getData('username').length === 0) {
+            setLogUserError("please Enter email")
         }
-        else   
-          {  axios
-            .post(baseURL, formData)
-            .then(formData => console.log(formData.formData))
-            .catch(error => console.log(error));
-              console.log('Form Data', formData) 
-            setLogUserError("everything good ")}
+        // if (getData('username').length<=10) {
+        //     setLogUserError("proper email fill")
+        // }
+        if (getData('password').length === 0) {
+            setLogPassError("please Enter the password")
+        } if (getData('password').length <= 5) {
+            setLogPassError("password greater than 6")
+        }
+
+        else {
+            axios
+                .post(baseURL, formData)
+            .then((res) =>
+                //  console.log(res.formData))
+            localStorage.setItem("loginUser", JSON.stringify(res.data)),
+            navigate("/search"));
+            // console.log('Form Data', formData)
+        }
+
     };
 
     const onSubmit = (event) => {
         event.preventDefault();
         CandidateData['device_id'] = 1;
-        if(getCandiData('username').length ===0 ){
+        if (getCandiData('username').length === 0) {
             setMerror("Fill the Name");
-        }if(getCandiData('password').length === 0 ) {
+        } if (getCandiData('password').length === 0) {
             setLerror("Fill the password")
-        }    
-        else
-        { axios
-            .post(baseURL, CandidateData)
-            .then(data => console.log(data.data))
-            .catch(error => console.log(error));
-             console.log('CandidateData', CandidateData)}
+        }if (getData('password').length <= 5) {
+            setLogPassError("password greater than 6")
+        }
 
+        else {
+            axios
+                .post(baseURL, CandidateData)
+            .then(data => console.log(data.data))
+            localStorage.setItem("loginUser", JSON.stringify(CandidateData));
+            navigate("/search")
+                .catch(error => console.log(error));
+            console.log('CandidateData', CandidateData)
+        }
     };
 
     const getData = (key) => {
@@ -132,65 +145,66 @@ const Login = () => {
             <nav className='Nav-top'>
                 <ul className="d-flex align-items-center justify-content-center">
                     <li className="ListRemove mx-3">
-                        <NavLink onClick={() => setshow(true)} className="text-decoration-none"> employe login</NavLink>
+                        <NavLink onClick={() => setshow(true)} className="text-decoration-none">Candidate login</NavLink>
                     </li>
                     <li className="ListRemove">
-                        <NavLink onClick={() => setshow(false)} className="text-decoration-none">Candidate login</NavLink>
+                        <NavLink onClick={() => setshow(false)} className="text-decoration-none">employe login</NavLink>
                     </li>
                 </ul>
             </nav>
 
             {
-                show ? <div className='container-fluid'>
-                    <div className='row text-center'>
-                        <div className='col-6 mt-5'>
-                            <form className='mx-5 border border-bottom-0 rounded-5 border-2 border-primary' onSubmit={onFormSubmit}>
-                                <div className='row'>
-                                    <div className='col-12 mt-5 mb-4'>
-                                        <span className='header fs-5 fw-bold'>Login to start your search !</span>
-                                    </div>
-                                </div>
-
-                                <div className="form-outline mb-4 mx-5">
-                                    <input type="text" id="form1Example1" value={getData('username')} onChange={handleEmail} placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
-                                    {error && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{error}</h2>}
-                                    {LogUserError&& <h2 className='text-start mx-2' style={{color:'red' , fontSize:15,}}>{LogUserError}</h2>}
-                                    <div className='position-relative'>
-                                        <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
-                                       {passworderror && <h2 className='text-start ' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
-   
-                                       {LogPassError&& <h2 className='text-start mx-2 ErrorValidation' style={{color:'red' , fontSize:15, animationDelay: "2s"}}>{LogPassError}</h2>}
-
-                                        <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
-                                    </div>
-                                </div>
-
-                                <div className="form-outline mb-4 mx-5">
-                                </div>
-
-                                <div className='row'>
-                                    <div className="col d-flex justify-content-end mx-4">
-                                        <a className='text-decoration-none mx-4 fw-normal fs-6' href="/changepassword">Forgot password ?</a>
-                                    </div>
-                                </div>
-
-                                <div className="row mb-4">
-                                    <div className="col d-flex justify-content-start mx-5 mt-3">
-                                        <div className="form-check">
-                                            <input className="form-check-input" type="checkbox" value="remember me" />
-                                            <label className="form-check-label Rem-me" htmlFor="form1Example3"> Remember me </label>
+                show ?
+                    <div className='container-fluid'>
+                        <div className='row text-center'>
+                            <div className='col-6 mt-5'>
+                                <form className='mx-5 border border-bottom-0 rounded-5 border-2 border-primary' onSubmit={onFormSubmit}>
+                                    <div className='row'>
+                                        <div className='col-12 mt-5 mb-4'>
+                                            <span className='header fs-5 fw-bold'>Login to start your search !</span>
                                         </div>
                                     </div>
-                                </div>
-                                <button type="submit" className="btn1 w-75 mb-5">Login</button>
-                            </form>
-                        </div>
-                        {/* Image >>>>>> */}
-                        <div className="col-6 mt-5">
-                            <img className='w-100 mt-5' src='./image/hiring-process2.png' alt='Candidate' />
+
+                                    <div className="form-outline mb-4 mx-5">
+                                        <input type="text" id="form1Example1" value={getData('username')} onChange={handleEmail} placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                        {error && <h2 className='text-start mx-2' style={{ color: 'red', fontSize: 12, }}>{error}</h2>}
+                                        {LogUserError && <h2 className='text-start mx-2' style={{ color: 'red', fontSize: 12, }}>{LogUserError}</h2>}
+                                        <div className='position-relative'>
+                                            <input type={!isVisible ? "password" : "text"} value={getData('password')} onChange={handlePaswword} id="form1Example2" placeholder='password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
+                                            {passworderror && <h2 className='text-start ' style={{ color: 'red', fontSize: 12, }}>{passworderror}</h2>}
+
+                                            {LogPassError && <h2 className='text-start mx-2 ErrorValidation' style={{ color: 'red', fontSize: 12, animationDelay: "2s" }}>{LogPassError}</h2>}
+
+                                            <span className='position-absolute icon-Posi' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="form-outline mb-4 mx-5">
+                                    </div>
+
+                                    <div className='row'>
+                                        <div className="col d-flex justify-content-end mx-4">
+                                            <a className='text-decoration-none mx-4 fw-normal fs-6' href="/changepassword">Forgot password ?</a>
+                                        </div>
+                                    </div>
+
+                                    <div className="row mb-4">
+                                        <div className="col d-flex justify-content-start mx-5 mt-3">
+                                            <div className="form-check">
+                                                <input className="form-check-input" type="checkbox" value="remember me" />
+                                                <label className="form-check-label Rem-me" htmlFor="form1Example3"> Remember me </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" className="btn1 w-75 mb-5">Login</button>
+                                </form>
+                            </div>
+                            {/* Image >>>>>> */}
+                            <div className="col-6 mt-5">
+                                <img className='w-100 mt-5' src='./image/hiring-process2.png' alt='Candidate' />
+                            </div>
                         </div>
                     </div>
-                </div>
                     :
                     <div className='container-fluid mt-4'>
                         <div className='container'>
@@ -199,15 +213,15 @@ const Login = () => {
                                     <form className='mx-4 border border rounded-5 Bor-1 border-primary' onSubmit={onSubmit}>
                                         <div className="form mx-5">
                                             <input type="text" value={getCandiData('username')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
-                                            {Cerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cerror}</h2>}
-                                           {Merror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Merror}</h2>}
+                                            {Cerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12 }}>{Cerror}</h2>}
+                                            {Merror && <h2 className='text-start' style={{ color: 'red', fontSize: 12 }}>{Merror}</h2>}
 
                                         </div>
 
                                         <div className="form mx-5 row position-relative">
                                             <input type={!isVisible ? "password" : "text"} value={getCandiData('password')} onChange={ChandlePaswword} id="form1Example2" placeholder='Password' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4 position-relative" />
-                                            {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
-                                            {Lerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Lerror}</h2>}
+                                            {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 12 }}>{Cpassworderror}</h2>}
+                                            {Lerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12 }}>{Lerror}</h2>}
                                             <span className='position-absolute icon-Posi-1' onClick={toggle}>{isVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                         </div>
 
