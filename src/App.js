@@ -3,7 +3,7 @@ import Login from "./component/Login";
 import Register from "./component/Register";
 import Emp from "./component/Emp";
 import CandidateLogin from "./component/CandidateLogin"
-import Search from "./component/Search"
+import Candidate from "./component/Candidate"
 import CandidateView from "./component/CandidateView"
 import Landing from "./component/Landing"
 import LandingAbout from "./component/LandingAbout"
@@ -38,7 +38,7 @@ function App() {
 
 
       <Routes>
-        <Route path="/search" element={<Search />} />
+        <Route path="/candidate" element={<Candidate />} />
         <Route path="/register" element={<Register />} />
         <Route path="/emp" element={<Emp />} />
         <Route path="/login" element={<Login />} />

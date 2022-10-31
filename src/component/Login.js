@@ -94,7 +94,7 @@ const Login = () => {
             .then((res) =>
                 //  console.log(res.formData))
             localStorage.setItem("loginUser", JSON.stringify(res.data)),
-            navigate("/search"));
+            navigate("/candidate"));
             // console.log('Form Data', formData)
         }
 
@@ -116,7 +116,7 @@ const Login = () => {
                 .post(baseURL, CandidateData)
             .then(data => console.log(data.data))
             localStorage.setItem("loginUser", JSON.stringify(CandidateData));
-            navigate("/search")
+            navigate("/candidate")
                 .catch(error => console.log(error));
             console.log('CandidateData', CandidateData)
         }

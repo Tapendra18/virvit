@@ -3,6 +3,7 @@ import HeaderEdit from './HeaderEdit'
 import Footer from './Footer'
 
 const Home = () => {
+  
   const data = JSON.parse(window.localStorage.getItem('loginUser'))
   return (
     <>
