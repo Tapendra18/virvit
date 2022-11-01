@@ -9,25 +9,25 @@ const Home = () => {
     const [country, setcountry] = useState([]);
     const [state, setstate] = useState([]);
 
+    const data = JSON.parse(window.localStorage.getItem('loginUser'))
+
     useEffect(function () {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
             .catch((error) => console.log(error))
 
-            axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
             .then((response) => setskill(response.data.results))
             .catch((error) => console.log(error))
 
-            axios.get("https://virvit.mydevpartner.website/vvapi/v1/state/")
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/state/")
             .then((response) => setcountry(response.data.results))
             .catch((error) => console.log(error))
 
-            axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
+        axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
             .then((response) => setstate(response.data.results))
             .catch((error) => console.log(error))
     }, [])
-
-
     return (
         <>
             <HeaderEdit />
@@ -41,43 +41,30 @@ const Home = () => {
                     <div className='col-6 edit'>
                         <form className=''>
                             <div>
-                                <input type="text" placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required></input>
-                                <input type="tel" placeholder='Mobile Number' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required></input>
-                                <input type="text" placeholder='designation' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required></input>
+                                <input type="text" placeholder='First Name' value={data.first_name} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required />
+                                <input type="tel" placeholder='Mobile Number' value={data.mobile} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required />
+                                <input type="text" placeholder='designation' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required />
 
                                 <div className='d-flex justify-content-between '>
                                     <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                        <option selected>Gender</option>
-                                        <option value="1">Male</option>
-                                        <option>Female</option>
+                                        <option selected>{data.gender}</option>
+                                        {/* <option value="1">Male</option>
+                                        <option>Female</option> */}
 
                                     </select>
 
-                                    <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2'>
-                                        <option selected> Year of Birth</option>
-                                        <option value="1">2000</option>
-                                        <option value="2">2001</option>
-                                        <option value="2">2002</option>
-                                        <option value="2">2003</option>
-                                        <option value="2">2004</option>
-                                        <option value="2">2005</option>
-                                        <option value="2">2006</option>
-                                        <option value="2">2007</option>
-                                        <option value="2">2008</option>
-                                        <option value="2">2009</option>
-                                        <option value="2">2010</option>
-                                    </select>
+                                    <input type="date" value={data.dob} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' />
                                 </div>
 
                                 <div className='d-flex justify-content-between '>
                                     <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                        <option selected>Year of exprience</option>
-                                        <option value="1">0-1 Year</option>
+                                        <option selected>{data.experience}</option>
+                                        {/* <option value="1">0-1 Year</option>
                                         <option>2 Year</option>
                                         <option>3 Year</option>
                                         <option>4 Year</option>
                                         <option>5 Year</option>
-                                        <option>Other</option>
+                                        <option>Other</option> */}
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2'>
@@ -97,7 +84,7 @@ const Home = () => {
                                     </select>
 
                                     <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2'>
-                                        <option selected> Salary</option>
+                                        <option selected>{data.salary}</option>
                                     </select>
                                 </div>
                             </div>
@@ -112,7 +99,7 @@ const Home = () => {
 
                 <div className='row Edit-AboutMe '>
                     <div className='col-12'>
-                        <input type="text" placeholder='About Me' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 ' required></input>
+                        <input type="text" placeholder='About Me' value={data.about} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 ' required></input>
                     </div>
                 </div>
 
@@ -149,7 +136,7 @@ const Home = () => {
                                         <select type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
                                             <option>State</option>
                                             {
-                                                state.map((states)=>(
+                                                state.map((states) => (
                                                     <option key={states.id} value={states.id}>
                                                         {states.name}
                                                     </option>
@@ -184,7 +171,7 @@ const Home = () => {
                                 <div className='row '>
                                     <div className='col-6'>
                                         <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" >
-                                            <option>country</option>
+                                            <option>{data.country}</option>
                                             {
                                                 country.map((countrys) => (
                                                     <option key={countrys.id} value={countrys.id}>
@@ -202,7 +189,6 @@ const Home = () => {
                                                         {states.name}
                                                     </option>))
                                             }
-
                                         </select>
                                     </div>
                                 </div>
@@ -260,7 +246,6 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-
                             <hr />
 
                             <div className="form mx-2 ">
@@ -322,23 +307,23 @@ const Home = () => {
                     </div>
 
                     <div className='col-6 '>
-                        <button className=' btn-3 mt-4 w-75 h-75 mx-5'>Upload Resume Here</button>
+                        <button className='btn-3 mt-4 w-75 h-75 mx-5'>Upload Resume Here</button>
                     </div>
                 </div>
                 {/* Resume Part>>>> */}
-                <div className='row Edit-Resume '>
+                <div className='row Edit-Resume'>
                     <div className='col-6'>
-                        <button className=' btn-3 btn-4'>Vedio Resume </button>
+                        <button placeholder='Vedio Resume' className='btn-3 btn-4'>Vedio Resume</button>
                     </div>
 
                     <div className='col-6 '>
-                        <button className=' btn-3  btn-5 '>Vedio Testimonial</button>
+                        <button className='btn-3 btn-5'>Vedio Testimonial</button>
                     </div>
                 </div>
 
                 {/* Need Help >>>>> */}
                 <div className='row Edit-Need'>
-                    <a className='  fs-5  mt-3 text-center' href="/about">Need Help ?</a>
+                    <a className='fs-5 mt-3 text-center' href="/about">Need Help ?</a>
                 </div>
                 {/* footer >>>>> */}
             </div>

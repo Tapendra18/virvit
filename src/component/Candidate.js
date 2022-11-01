@@ -1,17 +1,26 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import HeaderEdit from './HeaderEdit'
 import Footer from './Footer'
 
 const Home = () => {
+  const [state, setState] = useState({
+    value:'',
+    show:''
+});
   
   const data = JSON.parse(window.localStorage.getItem('loginUser'))
+  
+  const handleChange = (e) => {
+   const data = setState({value: e.target.value})
+    console.log(data)
+}
   return (
     <>
       <HeaderEdit/>
       <div className='container-fluid Div-top'>
         <div className='row mt-3 d-flex justify-content-around'>
           <div className='col-3'>
-            <input className='form-control shadow-none border-dark mx-4' placeholder='Job Title, Keyword or Company' />
+            <input onChange={(e)=>handleChange(e)}  value={state.value.keyword} className='form-control shadow-none border-dark mx-4' placeholder='Job Title, Keyword or Company' />
           </div>
 
           <div className='col-3 '>

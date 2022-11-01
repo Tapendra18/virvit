@@ -1,8 +1,6 @@
-// import { Dropdown } from "bootstrap";
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
-
 
 const HeaderEdit = () => {
   const navigate = useNavigate()
@@ -14,13 +12,10 @@ const HeaderEdit = () => {
   const logout = (e) => {
     e.preventDefault();
     console.log('Logout');
-
     // CLEAR DATA FROM STORAGE
     localStorage.removeItem('loginUser');
-
     navigate("/");
   }
-
 
   return (
     <>
@@ -30,18 +25,17 @@ const HeaderEdit = () => {
           <span className="header mx-3"><a href='/candidate' className='text-decoration-none fs-4 fw-bolder'>Building Your Dreams</a></span>
         </div>
 
-
-        <div className="d-flex align-item-center justify-content-end ">
-        <Dropdown className="homeuser">
-          <Dropdown.Toggle  id="dropdown-basic">
-         {data.fullname}
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item className="bg-light HomePro fw-bold" href="/editprofile">Edit Profile</Dropdown.Item>
-            <Dropdown.Item href="/candidateview">Job Application</Dropdown.Item>
-            <Dropdown.Item href="#/action-3" onClick={logout}>Logout</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+         <div className="d-flex align-item-center justify-content-end ">
+            <Dropdown className="homeuser">
+               <Dropdown.Toggle  id="dropdown-basic">
+                 {data.fullname}
+               </Dropdown.Toggle>
+             <Dropdown.Menu>
+               <Dropdown.Item className="bg-light HomePro fw-bold" href="/editprofile">Edit Profile</Dropdown.Item>
+               <Dropdown.Item href="/candidateview">Job Application</Dropdown.Item>
+               <Dropdown.Item href="#/action-3" onClick={logout}>Logout</Dropdown.Item>
+             </Dropdown.Menu>
+           </Dropdown>
         </div>
       </div>
     </>
