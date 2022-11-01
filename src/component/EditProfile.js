@@ -328,17 +328,17 @@ const Home = () => {
                     </div>
 
                     <div className='col-6 '>
-                        <button className='btn-3 mt-4 w-75 h-75 mx-5'>Upload Resume Here <HiOutlinePaperClip /> </button>
+                        <button className='btn-3 mt-4 w-75 h-75 mx-5'>Upload Resume Here&emsp; <HiOutlinePaperClip /> </button>
                     </div>
                 </div>
                 {/* Resume Part>>>> */}
                 <div className='row Edit-Resume'>
                     <div className='col-6'>
-                        <button placeholder='Vedio Resume' className='btn-3 btn-4'>Vedio Resume <FaUpload/></button>
+                        <button placeholder='Vedio Resume' className='btn-3 btn-4'>Vedio Resume&emsp; <FaUpload/></button>
                     </div>
 
-                    <div className='col-6 '>
-                        <button className='btn-3 btn-5'>Vedio Testimonial<FaUpload/></button>
+                    <div className='col-6'>
+                        <button className='btn-3 btn-5'>Vedio Testimonial&emsp;<FaUpload/></button>
                     </div>
                 </div>
 

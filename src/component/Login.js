@@ -89,10 +89,14 @@ const Login = () => {
         else {
             axios
                 .post(baseURL, formData)
-            .then((res) =>
+            .then((res) => {
                 //  console.log(res.formData))
-            localStorage.setItem("loginUser", JSON.stringify(res.data)),
-            navigate("/candidate"));
+                window.localStorage.setItem("loginUser", JSON.stringify(res.data));
+                setTimeout(()=> { 
+                    navigate("/candidate")
+                },);
+            
+            });
             console.log('Form Data', formData)
         }
 

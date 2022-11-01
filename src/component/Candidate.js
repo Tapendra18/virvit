@@ -6,9 +6,11 @@ const Home = () => {
   const [data ,setdata] = useState({})
 
   useEffect(()=>{
-   const data2= JSON.parse(window.localStorage.getItem('loginUser'));
+   const data2 = JSON.parse(window.localStorage.getItem('loginUser')) ;
    console.log(data2);
    setdata(data2);
+  // return data2
+
   },[])
 
   return (
@@ -33,7 +35,7 @@ const Home = () => {
 
         <div className='row border border-2 mx-2 mt-5 rounded-3 Line1'>
           <div className='col-6 mt-3'>
-            <span className='d-block mx-4 fs-4'>welcome{data.fullname}</span>
+            <span className='d-block mx-4 fs-4'>welcome {(data != null) ? data.fullname : 'N/A'}</span>
             <a className='  fw-normal fs-6 mx-4 ' href="/editprofile">Update Profile</a>
             <a className='  fw-normal fs-6' href="#!">View Profile</a>
           </div>

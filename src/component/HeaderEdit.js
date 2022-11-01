@@ -5,7 +5,7 @@ import { useState  ,useEffect} from "react";
 
 const HeaderEdit = () => {
   const navigate = useNavigate()
-  const [data , setdata] = useState({})
+  const [data , setdata] = useState(null)
   // const [isLoggedin, setIsLoggedin] = useState(false);
   // const data = JSON.parse(window.localStorage.getItem('loginUser'))
   useEffect(()=>{
@@ -14,7 +14,7 @@ const HeaderEdit = () => {
     setdata(data2);
    },[])
   // console.log(data)
-
+ 
   const logout = (e) => {
     e.preventDefault();
     console.log('Logout');
@@ -34,7 +34,7 @@ const HeaderEdit = () => {
          <div className="d-flex align-item-center justify-content-end ">
             <Dropdown className="homeuser">
                <Dropdown.Toggle  id="dropdown-basic">
-                 {data.fullname}
+                 {(data != null) ? data.fullname : 'N/A'}
                </Dropdown.Toggle>
              <Dropdown.Menu>
                <Dropdown.Item className="bg-light HomePro fw-bold" href="/editprofile">Edit Profile</Dropdown.Item>
