@@ -3,9 +3,12 @@ import Footer from './Footer'
 import HeaderEdit from './HeaderEdit'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { HiOutlinePaperClip } from "react-icons/hi";
+import { FaUpload } from "react-icons/fa";
+
 const Home = () => {
-    const [job, setjob] = useState([])
-    const [skills, setskill] = useState([])
+    const [job, setjob] = useState([]);
+    const [skills, setskill] = useState([]);
     const [country, setcountry] = useState([]);
     const [state, setstate] = useState([]);
 
@@ -34,43 +37,43 @@ const Home = () => {
             <div className='container-fluid Div-top'>
                 <div className='container d-flex Div-top'>
                     <div className='col-1 mt-4'>
-                        <button className='btn-3 mb-3 '>Edit</button>
-                        <Link to="/changepassword"> <button className=' btn1 mt-4'>Privacy</button></Link>
+                        <button className='btn-3 mb-3'>Edit</button>
+                        <Link to="/changepassword"> <button className='btn1 mt-4'>Privacy</button></Link>
                     </div>
 
                     <div className='col-6 edit'>
                         <form className=''>
                             <div>
-                                <input type="text" placeholder='First Name' value={data.first_name} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required />
-                                <input type="tel" placeholder='Mobile Number' value={data.mobile} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required />
-                                <input type="text" placeholder='designation' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' required />
+                                <div className='matPro d-flex'>
+                                    <input type="text" placeholder='First Name' value={data.first_name} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50' />
+                                    <input type="text" placeholder='last Name' value={data.last_name} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4' />
+
+                                    {/* <span className='mat_form'>{}</span> */}
+                                    {/* <label>first_name</label> */}
+                                </div>
+                                <div className='d-flex'>
+                                    <input type="email" placeholder='Email' value={data.email} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
+                                    <input type="tel" placeholder='Mobile Number' value={data.mobile} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mx-4' />
+                                </div>
+                                <div className='d-flex'>
+                                    <input type="text" placeholder='designation' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50' />
+                                    <input type="date" value={data.dob} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4' />
+                                </div>
+
 
                                 <div className='d-flex justify-content-between '>
                                     <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
                                         <option selected>{data.gender}</option>
                                         {/* <option value="1">Male</option>
                                         <option>Female</option> */}
-
                                     </select>
-
-                                    <input type="date" value={data.dob} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' />
-                                </div>
-
-                                <div className='d-flex justify-content-between '>
-                                    <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                        <option selected>{data.experience}</option>
-                                        {/* <option value="1">0-1 Year</option>
-                                        <option>2 Year</option>
-                                        <option>3 Year</option>
-                                        <option>4 Year</option>
-                                        <option>5 Year</option>
-                                        <option>Other</option> */}
-                                    </select>
-
-                                    <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2'>
+                                    <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4'>
                                         <option selected> Employment Type</option>
                                     </select>
+
                                 </div>
+
+
 
                                 <div className='d-flex justify-content-between '>
                                     <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
@@ -83,8 +86,26 @@ const Home = () => {
                                         }
                                     </select>
 
-                                    <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2'>
+                                    <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-3'>
                                         <option selected>{data.salary}</option>
+                                    </select>
+
+                                    <select className='form-control form-control-sm mt-3 shadow-none borber border-2'>
+                                        <option>USD</option>
+                                        <option>INR</option>
+                                        <option>SGD</option>
+                                    </select>
+                                </div>
+
+                                <div className='d-flex justify-content-between '>
+                                    <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-100' aria-label='default select example'>
+                                        <option selected>{data.experience}</option>
+                                        {/* <option value="1">0-1 Year</option>
+                                        <option>2 Year</option>
+                                        <option>3 Year</option>
+                                        <option>4 Year</option>
+                                        <option>5 Year</option>
+                                        <option>Other</option> */}
                                     </select>
                                 </div>
                             </div>
@@ -93,13 +114,13 @@ const Home = () => {
 
                     <div className='col-3 Edit-pho'>
                         <img src='./image/Employer_login.png' className='rounded-circle Edit-img' alt='image1'></img>
-                        <button className=' btn1'>SAVED</button>
+                        <button className='btn1 mt-3'>SAVED</button>
                     </div>
                 </div>
 
                 <div className='row Edit-AboutMe '>
                     <div className='col-12'>
-                        <input type="text" placeholder='About Me' value={data.about} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 ' required></input>
+                        <input type="text" placeholder='About Me' value={data.about} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50' required></input>
                     </div>
                 </div>
 
@@ -307,17 +328,17 @@ const Home = () => {
                     </div>
 
                     <div className='col-6 '>
-                        <button className='btn-3 mt-4 w-75 h-75 mx-5'>Upload Resume Here</button>
+                        <button className='btn-3 mt-4 w-75 h-75 mx-5'>Upload Resume Here <HiOutlinePaperClip /> </button>
                     </div>
                 </div>
                 {/* Resume Part>>>> */}
                 <div className='row Edit-Resume'>
                     <div className='col-6'>
-                        <button placeholder='Vedio Resume' className='btn-3 btn-4'>Vedio Resume</button>
+                        <button placeholder='Vedio Resume' className='btn-3 btn-4'>Vedio Resume <FaUpload/></button>
                     </div>
 
                     <div className='col-6 '>
-                        <button className='btn-3 btn-5'>Vedio Testimonial</button>
+                        <button className='btn-3 btn-5'>Vedio Testimonial<FaUpload/></button>
                     </div>
                 </div>
 

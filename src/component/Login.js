@@ -28,8 +28,6 @@ const Login = () => {
     const [Cpassworderror, setCpasswordError] = useState(false);
     // const [loginUser, setItem] = useState("");
 
-
-
     const toggle = () => {
         setVisible(!isVisible);
     };
@@ -95,7 +93,7 @@ const Login = () => {
                 //  console.log(res.formData))
             localStorage.setItem("loginUser", JSON.stringify(res.data)),
             navigate("/candidate"));
-            // console.log('Form Data', formData)
+            console.log('Form Data', formData)
         }
 
     };

@@ -141,7 +141,6 @@ div select.HomeLog {
     height: 30px;
 }
 
-
 div .homeuser{
     color: #0b2cec;
     background-color: #ffffff;
@@ -202,6 +201,7 @@ div.Edit-pho {
 div img.Edit-img {
     height: 140px;
     width: 140px;
+    display: block;
 }
 
 div.Edit-AboutMe {

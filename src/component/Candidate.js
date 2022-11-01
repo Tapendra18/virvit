@@ -1,36 +1,31 @@
-import React ,{useState} from 'react'
+import React ,{useState , useEffect} from 'react'
 import HeaderEdit from './HeaderEdit'
 import Footer from './Footer'
 
 const Home = () => {
-  const [state, setState] = useState({
-    value:'',
-    show:''
-});
-  
-  const data = JSON.parse(window.localStorage.getItem('loginUser'))
-  
-  const handleChange = (e) => {
-   const data = setState({value: e.target.value})
-    console.log(data)
-}
+  const [data ,setdata] = useState({})
+
+  useEffect(()=>{
+   const data2= JSON.parse(window.localStorage.getItem('loginUser'));
+   console.log(data2);
+   setdata(data2);
+  },[])
+
   return (
     <>
       <HeaderEdit/>
       <div className='container-fluid Div-top'>
         <div className='row mt-3 d-flex justify-content-around'>
           <div className='col-3'>
-            <input onChange={(e)=>handleChange(e)}  value={state.value.keyword} className='form-control shadow-none border-dark mx-4' placeholder='Job Title, Keyword or Company' />
+            <input className='form-control shadow-none border-dark mx-4' placeholder='Job Title, Keyword or Company' />
           </div>
 
           <div className='col-3 '>
             <input className='form-control shadow-none border-dark mx-1' placeholder='Area city or town' />
           </div>
-
           {/* <div className='col-3 '>
             <input className='form-control shadow-none border-dark mx-5' placeholder='All job Specialization' />
           </div> */}
-
           <div className='col-3'>
             <button className='btn1'>Search</button>
           </div>
@@ -38,7 +33,7 @@ const Home = () => {
 
         <div className='row border border-2 mx-2 mt-5 rounded-3 Line1'>
           <div className='col-6 mt-3'>
-            <span className='d-block mx-4 fs-4'>{data.fullname}</span>
+            <span className='d-block mx-4 fs-4'>welcome{data.fullname}</span>
             <a className='  fw-normal fs-6 mx-4 ' href="/editprofile">Update Profile</a>
             <a className='  fw-normal fs-6' href="#!">View Profile</a>
           </div>

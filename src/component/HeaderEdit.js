@@ -1,12 +1,18 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useState  ,useEffect} from "react";
 
 const HeaderEdit = () => {
   const navigate = useNavigate()
-
+  const [data , setdata] = useState({})
   // const [isLoggedin, setIsLoggedin] = useState(false);
-  const data = JSON.parse(window.localStorage.getItem('loginUser'))
+  // const data = JSON.parse(window.localStorage.getItem('loginUser'))
+  useEffect(()=>{
+    const data2= JSON.parse(window.localStorage.getItem('loginUser'));
+    console.log(data2);
+    setdata(data2);
+   },[])
   // console.log(data)
 
   const logout = (e) => {
