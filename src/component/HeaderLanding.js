@@ -1,6 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom"
 // import './App.css'
+// import Tab from 'react-bootstrap/Tab';
+// import Tabs from 'react-bootstrap/Tabs';
+// import Login from './Login'
 
 const HeaderLanding = () => {
   return (
@@ -8,7 +11,7 @@ const HeaderLanding = () => {
       <div className="container-fluid mb-5 Header">
         <div className="row">
           <div className="col-5">
-            <img src='./image/virvit_logo.png' alt='virvit' style={{ width: 90, marginLeft: 20 }}/>
+            <img src='./image/virvit_logo.png' alt='virvit' style={{ width: 90, marginLeft: 20 }} />
             <span className="header mx-3"> <a href='/' className='text-decoration-none fs-4 fw-bolder text-center'>Building Your Dreams</a></span>
           </div>
 

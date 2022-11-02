@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import Footer from './Footer'
 import HeaderLanding from './HeaderLanding'
-import { NavLink } from "react-router-dom"
+// import { NavLink } from "react-router-dom"
 import "./Register.css"
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
@@ -15,7 +17,7 @@ const Login = () => {
 
     const [formData, setFormData] = useState({});
     const [CandidateData, setCandidateData] = useState({});
-    const [show, setshow] = useState(true)
+    // const [show, setshow] = useState(true)
     const [isVisible, setVisible] = useState(false);
     // const [post, setPost] = React.useState(null);
     const [error, setError] = useState(false);
@@ -89,14 +91,14 @@ const Login = () => {
         else {
             axios
                 .post(baseURL, formData)
-            .then((res) => {
-                //  console.log(res.formData))
-                window.localStorage.setItem("loginUser", JSON.stringify(res.data));
-                setTimeout(()=> { 
-                    navigate("/candidate")
-                },);
-            
-            });
+                .then((res) => {
+                    //  console.log(res.formData))
+                    window.localStorage.setItem("loginUser", JSON.stringify(res.data));
+                    setTimeout(() => {
+                        navigate("/candidate")
+                    },);
+
+                });
             console.log('Form Data', formData)
         }
 
@@ -109,14 +111,14 @@ const Login = () => {
             setMerror("Fill the Name");
         } if (getCandiData('password').length === 0) {
             setLerror("Fill the password")
-        }if (getData('password').length <= 5) {
+        } if (getData('password').length <= 5) {
             setLogPassError("password greater than 6")
         }
 
         else {
             axios
                 .post(baseURL, CandidateData)
-            .then(data => console.log(data.data))
+                .then(data => console.log(data.data))
             localStorage.setItem("loginUser", JSON.stringify(CandidateData));
             navigate("/candidate")
                 .catch(error => console.log(error));
@@ -142,21 +144,17 @@ const Login = () => {
 
     return (
         <>
-            <HeaderLanding />
+            <HeaderLanding/>
             {/* Tab>>>>> */}
-            <nav className='Nav-top'>
-                <ul className="d-flex align-items-center justify-content-center">
-                    <li className="ListRemove mx-3">
-                        <NavLink onClick={() => setshow(true)} className="text-decoration-none">Candidate login</NavLink>
-                    </li>
-                    <li className="ListRemove">
-                        <NavLink onClick={() => setshow(false)} className="text-decoration-none">employe login</NavLink>
-                    </li>
-                </ul>
-            </nav>
-
-            {
-                show ?
+            <Tabs
+                defaultActiveKey="home"
+                id="fill-tab-example"
+                className="mb-3 mt-5"
+                fill
+                
+            >
+                <Tab  eventKey="home" title="candidate Login">
+                    {/* <Sonnet /> */}
                     <div className='container-fluid'>
                         <div className='row text-center'>
                             <div className='col-6 mt-5'>
@@ -207,8 +205,9 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
-                    :
-                    <div className='container-fluid mt-4'>
+                </Tab>
+                <Tab eventKey="profile" title="Employe Login">
+                <div className='container-fluid mt-4'>
                         <div className='container'>
                             <div className='row text-center'>
                                 <div className='col-6 mt-5'>
@@ -263,7 +262,8 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
-            }
+                </Tab>
+            </Tabs>
             <Footer />
         </>
     )

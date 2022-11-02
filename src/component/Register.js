@@ -7,6 +7,7 @@ import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from 'axios'
 
+
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/new-user-signup/";
 
 const Navbar = () => {
@@ -191,7 +192,7 @@ const Navbar = () => {
         <>
             <HeaderLanding />
             {/* Form part >>>>>> */}
-            <nav className='Nav-top'>
+            <nav className='Nav-top mt-5'>
                 <ul className="d-flex align-items-center justify-content-center">
                     <li className="ListRemove mx-3">
                         <NavLink onClick={() => setshow(true)} className="text-decoration-none btn-1">Candidate signup</NavLink>

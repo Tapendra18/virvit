@@ -9,6 +9,7 @@ li a.btn-1 {
 li.ListRemove {
     list-style: none;
     margin-top: 16px;
+    padding: 0 20px;
 }
 
 li a {
@@ -74,8 +75,9 @@ div.Header {
     /* z-index: 999; */
 }
 
-nav.Nav-top{
-    margin-top:120px;
+div ul li a.edit_text{
+    padding:8px 40px;
+    /* margin-bottom: 10px; */
 }
 
  div.Div-top{
@@ -192,6 +194,15 @@ div div form.Bor-1 {
     border: 1px solid #0b2cec;
 }
 
+div.vertical_line{
+    border-left: 1px solid #0b2cec;
+    height: 100%;
+    position: absolute;
+    left: 15%;
+    margin-left: -3px;
+    top: 10%;
+}
+
 div.bor-2 {
     margin: 50px;
 }
@@ -201,14 +212,9 @@ div.edit {
     margin-top: 30px;
 }
 div.edit_2{
-    margin-left: 170px;
-    margin-top: -50px;
+    margin-left: 200px;
+    margin-top: -70px;
 
-}
-
-div.Edit-pho {
-    margin-left: 180px;
-    margin-top: 30px;
 }
 
 div img.Edit-img {
@@ -217,24 +223,22 @@ div img.Edit-img {
     display: block;
 }
 
-div.Edit-AboutMe {
-    margin-left: 270px;
+button.nav-link{
+    margin-top: 45px !important;
+    border: 1px solid #0b2cec !important;
+    background-color: #fff !important;
+    color: #0b2cec !important;
+    width: 26% !important;
+    border-radius: 8px !important;
 }
 
-div.Edit-Box {
-    margin-left: 250px;
-    margin-top: 50px;
+ul.nav-tabs{
+     border-bottom: none !important
 }
 
-div.Edit-Skill {
-    margin-left: 250px;
-    margin-top: 20px;
-}
-
-div.Edit-Resume {
-    margin-left: 250px;
-    margin-top: 20px;
-
+li.nav-item{
+    display: flex !important;
+    justify-content: space-evenly !important;
 }
 
 div button.btn-4 {
@@ -248,9 +252,8 @@ div button.btn-5 {
     border-radius: 20px;
 
 }
-
-div.Edit-Need {
-    margin-left: 215px;
+ul li button.nav-link{
+    color: #0b2cec;
 }
 
 div.Slider-div{
