@@ -11,6 +11,8 @@ const Home = () => {
   const [data, setdata] = useState({})
   const [jobData, setjobData] = useState({});
   const [search, setSearch] = useState([]);
+  const [job , setjob] = useState(false);
+  const [area , setArea] = useState(false);
 
   useEffect(() => {
     const data2 = JSON.parse(window.localStorage.getItem('loginUser'));
@@ -40,8 +42,9 @@ const Home = () => {
     e.preventDefault();
     console.log('Search Data', jobData);
     if (getData('title').length === 0) {
-      alert('fill')
-
+     setjob("the job title skill is required")
+    }if (getData('area').length === 0){
+      setArea("the Area, city or town is required")
     }
     else {
       axios.post(baseURL, jobData)
@@ -60,11 +63,13 @@ const Home = () => {
           <div className='col-3 position-relative'>
             <span className='position-absolute IconSet'><FaSearch /></span>
             <input className='form-control shadow-none border-dark mx-4' value={getData('title')} onChange={seraching} placeholder=' Job Title, Keyword or Company' />
+            {job && <h2 className='text-start mx-4 mt-2' style={{ color: 'red', fontSize: 18, }}>{job}</h2>}
           </div>
 
           <div className='col-3 position-relative'>
             <span className='position-absolute IconSet2'><ImLocation /></span>
             <input className='form-control shadow-none border-dark mx-1' value={getData('area')} onChange={Area} placeholder='Area city or town' />
+            {area && <h2 className='text-start mx-4 mt-2' style={{ color: 'red', fontSize: 18, }}>{area}</h2>}
           </div>
           {/* <div className='col-3 '>
             <input className='form-control shadow-none border-dark mx-5' placeholder='All job Specialization' />
