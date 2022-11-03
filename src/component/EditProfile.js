@@ -43,16 +43,6 @@ const Home = () => {
         <>
             <HeaderEdit />
             <div className='Div-top'>
-                {/* <div className='col-1 Div-top'>
-                    <ul className="">
-                        <li className="ListRemove">
-                            <NavLink onClick={() => setshow(true)} className="text-decoration-none edit_text"> Edit </NavLink>
-                        </li>
-                        <li className="ListRemove">
-                            <NavLink onClick={() => setshow(false)} className="text-decoration-none">Privacy</NavLink>
-                        </li>
-                    </ul>
-                </div> */}
                 <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                     <Row>
                         <Col sm={2}>

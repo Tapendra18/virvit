@@ -118,7 +118,7 @@ const Login = () => {
         else {
             axios
                 .post(baseURL, CandidateData)
-                .then(data => console.log(data.data))
+                .then(res => console.log(res.data))
             localStorage.setItem("loginUser", JSON.stringify(CandidateData));
             navigate("/candidate")
                 .catch(error => console.log(error));
