@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Footer from './Footer'
 import './Register.css'
-import { NavLink } from "react-router-dom"
+// import { NavLink } from "react-router-dom"
 import HeaderLanding from './HeaderLanding'
 import { AiFillEye } from "react-icons/ai";
 import { AiFillEyeInvisible } from "react-icons/ai";
 import axios from 'axios'
-
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/new-user-signup/";
 
 const Navbar = () => {
-    const [show, setshow] = useState(true);
+    // const [show, setshow] = useState(true);
     const [signupName, setSignupName] = useState({});
     const [EmpsignupName, setEmpSignupName] = useState({});
     const [isVisible, setVisible] = useState(false);
@@ -34,10 +35,10 @@ const Navbar = () => {
     const [Resumeerror, setResumeerror] = useState(false);
     const [passerror, setpasserror] = useState(false);
     const [Cerror, setCerror] = useState(false);
-    const [EmpEmailerror , setEmpEmailerror] = useState(false);
-    const [Personerror , setPersonerror] = useState(false);
-    const[Phoneerror , setPhoneerror] = useState(false)
-    const[Registererror ,  setRegistererror] = useState(false)
+    const [EmpEmailerror, setEmpEmailerror] = useState(false);
+    const [Personerror, setPersonerror] = useState(false);
+    const [Phoneerror, setPhoneerror] = useState(false)
+    const [Registererror, setRegistererror] = useState(false)
 
 
     const toggle = () => {
@@ -110,12 +111,13 @@ const Navbar = () => {
             setPhoneerror("enter Number")
         } if (getEmpSignUpData('Bussiness Name').length === 0) {
             setRegistererror("enter Register Bussiness name")
-        }else{
-        axios
-            .post(baseURL, EmpsignupName)
-            .then(data => console.log(data.data))
-            .catch(error => console.log(error))
-        console.log('EmpSignUpData', EmpsignupName)}
+        } else {
+            axios
+                .post(baseURL, EmpsignupName)
+                .then(data => console.log(data.data))
+                .catch(error => console.log(error))
+            console.log('EmpSignUpData', EmpsignupName)
+        }
     };
 
     const getEmpSignUpData = (key) => {
@@ -192,19 +194,13 @@ const Navbar = () => {
         <>
             <HeaderLanding />
             {/* Form part >>>>>> */}
-            <nav className='Nav-top mt-5'>
-                <ul className="d-flex align-items-center justify-content-center">
-                    <li className="ListRemove mx-3">
-                        <NavLink onClick={() => setshow(true)} className="text-decoration-none btn-1">Candidate signup</NavLink>
-                    </li>
-                    <li className="ListRemove">
-                        <NavLink onClick={() => setshow(false)} className="text-decoration-none btn-1"> employer signup</NavLink>
-                    </li>
-                </ul>
-            </nav>
-
-            {
-                show ? <div className="container">
+            <Tabs
+                defaultActiveKey="home"
+                id="uncontrolled-tab-example"
+                className="mb-3 mt-5"
+            >
+                <Tab eventKey="home" title="Candidate SignUp">
+                <div className="container-fluid ">
                     <div className="row">
                         <div className="col-6">
                             <form onSubmit={onSignupSubmit} >
@@ -305,8 +301,9 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-
-                    : <div className='container-fluid'>
+                </Tab>
+                <Tab eventKey="profile" title="Employe SignUp">
+                <div className='container-fluid'>
                         <div className='row text-center'>
                             <div className='col-6'>
                                 <form className='mx-5 border border-bottom-0 rounded-5 border-2 mt-4 border-primary' onSubmit={onEmpSignUpSubmit}>
@@ -320,24 +317,24 @@ const Navbar = () => {
                                     <div className="form mx-5">
                                         <input value={getEmpSignUpData('Email_id')} onChange={EmphandleEmail} type="email" placeholder='Email Login ID' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                         {Eerror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Eerror}</h2>}
-                                       {EmpEmailerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{EmpEmailerror}</h2>}
+                                        {EmpEmailerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{EmpEmailerror}</h2>}
 
                                     </div>
 
                                     <div className="form mx-5">
                                         <input value={getEmpSignUpData('Person_name')} onChange={(e) => setEmpSignUpData('Person_name', e.target.value)} type="text" id="form1Example2" placeholder='Contact Person Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
-                                       {Personerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Personerror}</h2>}
+                                        {Personerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Personerror}</h2>}
 
                                     </div>
 
                                     <div className="form  mx-5">
                                         <input value={getEmpSignUpData('Number')} onChange={(e) => setEmpSignUpData('Number', e.target.value)} type="tel" id="form1Example2" placeholder='Phone Number' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
-                                       {Phoneerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Phoneerror}</h2>}
+                                        {Phoneerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Phoneerror}</h2>}
                                     </div>
 
                                     <div className="form mx-5 mb-3">
-                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4"/>
-                                       {Registererror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Registererror}</h2>}
+                                        <input value={getEmpSignUpData('Bussiness Name')} onChange={(e) => setEmpSignUpData('Bussiness Name', e.target.value)} type="text" id="form1Example2" placeholder='Register Bussiness Name' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
+                                        {Registererror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Registererror}</h2>}
                                     </div>
 
                                     <div className="row ">
@@ -358,9 +355,10 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
-            }
+                </Tab>
+             
+            </Tabs>
             {/* footer>>>>>>>> */}
-
             <Footer />
         </>
     )
