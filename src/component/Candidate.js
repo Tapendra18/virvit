@@ -41,10 +41,9 @@ const Home = () => {
   const Onsearch = (e) => {
     e.preventDefault();
     console.log('Search Data', jobData);
-    if (getData('title').length === 0) {
+    if (getData('title').length === 0 && (getData('area').length === 0)) {
      setjob("the job title skill is required")
-    }if (getData('area').length === 0){
-      setArea("the Area, city or town is required")
+     setArea("the Area, city or town is required")
     }
     else {
       axios.post(baseURL, jobData)
@@ -61,8 +60,8 @@ const Home = () => {
       <div className='container-fluid Div-top'>
         <form onSubmit={Onsearch} className='row mt-3 d-flex justify-content-around'>
           <div className='col-3 position-relative'>
-            <span className='position-absolute IconSet'><FaSearch /></span>
-            <input className='form-control shadow-none border-dark mx-4' value={getData('title')} onChange={seraching} placeholder=' Job Title, Keyword or Company' />
+            <span className='position-absolute IconSet'><FaSearch/></span>
+            <input className='form-control shadow-none border-dark mx-4' value={getData('title')} onChange={seraching} placeholder=' Job Title, Keyword or Company'/>
             {job && <h2 className='text-start mx-4 mt-2' style={{ color: 'red', fontSize: 18, }}>{job}</h2>}
           </div>
 
@@ -101,11 +100,11 @@ const Home = () => {
                 <div className='border border-primary w-50 rounded-4 mt-5 mx-4'>
                   <div className='d-flex justify-content-between align-items-center'>
                     <div>
-                      <h6 className='mt-4 mx-4'>Web technology</h6>
-                      <h6 className='mx-4'>
+                      <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
+                      <h6 className='mx-4 search-test2'>
                         {name.title}
                       </h6>
-                      <p className='mx-4'>{name.experiance_from}-{name.experiance_to} years experiance</p>
+                      <p className='mx-4'>{name.experiance_from}-{name.experiance_to} years experience</p>
                     </div>
                     <div className=''>
                       <button className='btn4'>Apply</button>

@@ -249,10 +249,6 @@ div.nav-item{
     padding: 8px 30px !important;
 }
 
-/* a.nav-link{
-    box-shadow: 0px 1px 0px 0px rgb(70, 66, 66);
-} */
-
 button.btn{
     color: #fff !important;
     background-color: #0b2cec!important;
@@ -261,6 +257,16 @@ button.btn{
     padding: 8px 25px !important;
     /* font-weight: 300 !important; */
     font-size: 13px ;
+}
+
+div h6.search-test{
+    color: #0b2cec;
+    font-size: 21px;
+}
+
+div h6.search-test2{
+    color: #0b2cec;
+    font-size: 13px;
 }
 
 button.btn4{
