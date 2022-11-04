@@ -287,6 +287,38 @@ button.btn4{
     margin-right: 30px;
 }
 
+form.form-size{
+    min-height: 50%;
+    overflow-y:scroll;
+    overflow-x: hidden;
+}
+
+div.dropdown-menu{
+    opacity: 1 !important;
+    font-weight: normal !important;
+    color: #0b2cec !important;
+    font-size: small !important;
+}
+
+i.icons-class{
+    font-size: 22px;
+    color: #0b2cec;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+i.icons-class2{
+    font-size: 22px;
+    color: #ff0000;
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+form.form2-size{
+    max-width: 90%;
+    margin-left: 25px;
+}
+
 div button a.lala:hover{
     color: #fff;
 }

@@ -5,6 +5,8 @@ import Privacy from "./Privacy"
 import axios from 'axios'
 import { HiOutlinePaperClip } from "react-icons/hi";
 import { FaUpload } from "react-icons/fa";
+import { AiFillPlusCircle } from "react-icons/ai"
+import { MdOutlineCancelPresentation } from "react-icons/md"
 // import { NavLink } from "react-router-dom"
 // import { Link } from "react-router-dom"
 import Col from 'react-bootstrap/Col';
@@ -19,6 +21,7 @@ const Home = () => {
     const [country, setcountry] = useState([]);
     const [state, setstate] = useState([]);
     const [val, setval] = useState([]);
+    const [work, setwork] = useState([]);
     // const [show, setshow] = useState(true)
 
     const data = JSON.parse(window.localStorage.getItem('loginUser'))
@@ -27,7 +30,26 @@ const Home = () => {
         // e.preventDefault()
         const abc = [...val, []]
         setval(abc);
-        e.preventDefault();
+        // e.preventDefault();
+    }
+
+    let handlecancel = (i) => {
+        // e.preventDefault();
+        let newFormValues = [...val];
+        newFormValues.splice(i, 1);
+        setval(newFormValues)
+    }
+
+    let handlecancel2 = (i) => {
+        // e.preventDefault();
+        let newFormValues = [...work];
+        newFormValues.splice(i, 1);
+        setwork(newFormValues);
+    }
+
+    const handlework = (e) => {
+        const exp = [...work, []]
+        setwork(exp);
     }
 
     useEffect(function () {
@@ -146,200 +168,223 @@ const Home = () => {
                                             </div>
                                         </div>
 
-                                        <div className='col-6'>
-                                            <form className='rounded-5 mt-5'>
-                                                <div className='d-flex justify-content-between'>
-                                                    <p className='mx-3'>Add Education</p>
-                                                    <button type='button' onClick={() => handleadd()}>+</button>
-                                                </div>
+                                         {/*>>>>>>> dyanamic from <<<<<<<< */}
+                                        <div className='col-12 d-flex'>
+                                            <div className='col-6'>
+                                                <form className='rounded-4 mt-5 border-2 border'>
+                                                    <div className='d-flex justify-content-between mb-5 border-bottom'>
+                                                        <p className='mx-3 mt-3'>Add Education</p>
+                                                        <i className='icons-class mt-2 mb-2' onClick={() => handleadd()}> <AiFillPlusCircle/></i>
+                                                    </div>
 
-                                                <form className='border border w-100'>
-                                                    {val.map((data, i) => {
-                                                        return (
-                                                            <div className='col-12 '>
-                                                                <form className=' border border rounded-5 border-2 border-primary mt-3 mb-3'>
-                                                                    <div className='row'>
-                                                                        <div className='col-12 mt-4 mx-2'>
-                                                                            <span className='header fs-5 fw-bold'>Education!</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="form  mx-2">
-                                                                        <input type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                                    </div>
-
-                                                                    <div className="form  mx-2">
-                                                                        <input type="text" id="form1Example2" placeholder='University' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                                    </div>
-
-                                                                    <div className='container'>
-                                                                        <div className='row '>
-                                                                            <div className='col-6'>
-                                                                                <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
-                                                                                    <option>country</option>
-                                                                                    {
-                                                                                        country.map((countrys) => (
-                                                                                            <option key={countrys.id} value={countrys.id}>
-                                                                                                {countrys.name}
-                                                                                            </option>))
-                                                                                    }
-                                                                                </select>
-                                                                            </div>
-                                                                            <div className='col-6'>
-                                                                                <select type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
-                                                                                    <option>State</option>
-                                                                                    {
-                                                                                        state.map((states) => (
-                                                                                            <option key={states.id} value={states.id}>
-                                                                                                {states.name}
-                                                                                            </option>
-                                                                                        ))
-                                                                                    }
-                                                                                </select>
+                                                    <form className='w-100 form-size'>
+                                                        {val.map((data, i) => {
+                                                            return (
+                                                                <div className='col-12'>
+                                                                    <form className='border border rounded-5 border-1 border-dark border-1 mt-3 mb-4 form2-size'>
+                                                                        <div className='row'>
+                                                                            <div className='col-12 mt-4 mx-2 d-flex justify-content-between'>
+                                                                                <span className='header fs-5 fw-normal mt-1'>Education!</span>
+                                                                                <i className='icons-class2' onClick={() => handlecancel()}> <MdOutlineCancelPresentation /></i>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                        <div className="form  mx-2">
+                                                                            <input type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                        </div>
 
-                                                                    <div className='container'>
-                                                                        <div className='row '>
-                                                                            <div className='col-6'>
-                                                                                <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                                            </div>
-                                                                            <div className='col-6'>
-                                                                                <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                        <div className="form  mx-2">
+                                                                            <input type="text" id="form1Example2" placeholder='University' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                        </div>
+
+                                                                        <div className='container'>
+                                                                            <div className='row '>
+                                                                                <div className='col-6'>
+                                                                                    <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
+                                                                                        <option>country</option>
+                                                                                        {
+                                                                                            country.map((countrys) => (
+                                                                                                <option key={countrys.id} value={countrys.id}>
+                                                                                                    {countrys.name}
+                                                                                                </option>))
+                                                                                        }
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div className='col-6'>
+                                                                                    <select type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
+                                                                                        <option>State</option>
+                                                                                        {
+                                                                                            state.map((states) => (
+                                                                                                <option key={states.id} value={states.id}>
+                                                                                                    {states.name}
+                                                                                                </option>
+                                                                                            ))
+                                                                                        }
+                                                                                    </select>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <hr className=''></hr>
 
-                                                                    <div className="form  mx-2">
-                                                                        <input type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                                    </div>
-
-                                                                    <div className="form  mx-2">
-                                                                        <input type="text" id="form1Example2" placeholder='University' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                                    </div>
-
-                                                                    <div className='container'>
-                                                                        <div className='row '>
-                                                                            <div className='col-6'>
-                                                                                <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" >
-                                                                                    <option>{data.country}</option>
-                                                                                    {
-                                                                                        country.map((countrys) => (
-                                                                                            <option key={countrys.id} value={countrys.id}>
-                                                                                                {countrys.name}
-                                                                                            </option>))
-                                                                                    }
-                                                                                </select>
-                                                                            </div>
-                                                                            <div className='col-6'>
-                                                                                <select type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" >
-                                                                                    <option>state</option>
-                                                                                    {
-                                                                                        state.map((states) => (
-                                                                                            <option key={states.id} value={states.id}>
-                                                                                                {states.name}
-                                                                                            </option>))
-                                                                                    }
-                                                                                </select>
+                                                                        <div className='container'>
+                                                                            <div className='row '>
+                                                                                <div className='col-6'>
+                                                                                    <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                </div>
+                                                                                <div className='col-6'>
+                                                                                    <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                        <hr className=''></hr>
 
-                                                                    <div className='container'>
-                                                                        <div className='row '>
-                                                                            <div className='col-6'>
-                                                                                <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                                            </div>
-                                                                            <div className='col-6'>
-                                                                                <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" />
+                                                                        <div className="form  mx-2">
+                                                                            <input type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                        </div>
+
+                                                                        <div className="form  mx-2">
+                                                                            <input type="text" id="form1Example2" placeholder='University' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                        </div>
+
+                                                                        <div className='container'>
+                                                                            <div className='row '>
+                                                                                <div className='col-6'>
+                                                                                    <select type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" >
+                                                                                        <option>{data.country}</option>
+                                                                                        {
+                                                                                            country.map((countrys) => (
+                                                                                                <option key={countrys.id} value={countrys.id}>
+                                                                                                    {countrys.name}
+                                                                                                </option>))
+                                                                                        }
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div className='col-6'>
+                                                                                    <select type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" >
+                                                                                        <option>state</option>
+                                                                                        {
+                                                                                            state.map((states) => (
+                                                                                                <option key={states.id} value={states.id}>
+                                                                                                    {states.name}
+                                                                                                </option>))
+                                                                                        }
+                                                                                    </select>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        )
-                                                    })}
+
+                                                                        <div className='container'>
+                                                                            <div className='row '>
+                                                                                <div className='col-6'>
+                                                                                    <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                </div>
+                                                                                <div className='col-6'>
+                                                                                    <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" />
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </form>
                                                 </form>
-                                            </form>
-                                        </div>
-                                        <div className='row mt-5'>
-                                            {/* work exprience>>>>>>> */}
-                                            <div className='col-6 '>
-                                                <form className=' border border rounded-5 border-2 w-100 border-primary'>
-                                                    <div className='row'>
-                                                        <div className='col-12 mt-4 mx-2'>
-                                                            <span className='header fs-5 fw-bold'>Work exprience</span>
-                                                        </div>
+                                            </div>
+
+                                            <div className='col-6'>
+                                                <form className='rounded-4 border border-2 mt-5 mx-3 '>
+                                                    <div className='d-flex justify-content-between mb-5 border-bottom'>
+                                                        <p className='mx-3 mt-3'>Add WorkExprience</p>
+                                                        <i className='icons-class mt-2 mb-2' onClick={() => handlework()}> <AiFillPlusCircle /></i>
                                                     </div>
 
-                                                    <div className="form mx-2">
-                                                        <input type="email" id="form1Example1" placeholder='Organization' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                    </div>
+                                                    <form className='w-100 form-size'>
+                                                        {work.map((data, i) => {
+                                                            return (
+                                                                <div className='row'>
+                                                                    {/* work exprience>>>>>>> */}
+                                                                    <div className='col-12' >
+                                                                        <form className='border border rounded-5 border-1 border-dark border-1 mt-3 mb-4 form2-size'>
+                                                                            <div className='row'>
+                                                                                <div className='col-12 d-flex justify-content-between mt-4'>
+                                                                                    <span className='header fs-5 mx-3'>Work exprience</span>
+                                                                                    <i className='icons-class2' onClick={() => handlecancel2()}> <MdOutlineCancelPresentation/></i>
+                                                                                </div>
+                                                                            </div>
 
-                                                    <div className="form mx-2">
-                                                        <input type="text" id="form1Example2" placeholder='Designation' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                    </div>
+                                                                            <div className="form mx-2">
+                                                                                <input type="email" id="form1Example1" placeholder='Organization' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                            </div>
 
-                                                    <div className='container'>
-                                                        <div className='row '>
-                                                            <div className='col-6'>
-                                                                <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                            </div>
+                                                                            <div className="form mx-2">
+                                                                                <input type="text" id="form1Example2" placeholder='Designation' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                            </div>
 
-                                                            <div className='col-6'>
-                                                                <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                                            <div className='container'>
+                                                                                <div className='row '>
+                                                                                    <div className='col-6'>
+                                                                                        <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                    </div>
 
-                                                    <div className='container'>
-                                                        <div className='row '>
-                                                            <div className='col-6'>
-                                                                <input type="text" id="form1Example2" placeholder='Currently Working' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                            </div>
+                                                                                    <div className='col-6'>
+                                                                                        <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-                                                            <div className='col-6'>
-                                                                <input type="text" id="form1Example2" placeholder='Full/Part/Contact' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <hr />
+                                                                            <div className='container'>
+                                                                                <div className='row '>
+                                                                                    <div className='col-6'>
+                                                                                        <input type="text" id="form1Example2" placeholder='Currently Working' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                    </div>
 
-                                                    <div className="form mx-2 ">
-                                                        <input type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                    </div>
+                                                                                    <div className='col-6'>
+                                                                                        <input type="text" id="form1Example2" placeholder='Full/Part/Contact' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <hr />
 
-                                                    <div className="form mx-2">
-                                                        <input type="text" id="form1Example2" placeholder='University' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                    </div>
+                                                                            <div className="form mx-2 ">
+                                                                                <input type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                            </div>
 
-                                                    <div className='container'>
-                                                        <div className='row '>
-                                                            <div className='col-6'>
-                                                                <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                            </div>
+                                                                            <div className="form mx-2">
+                                                                                <input type="text" id="form1Example2" placeholder='University' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                            </div>
 
-                                                            <div className='col-6'>
-                                                                <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                                            <div className='container'>
+                                                                                <div className='row '>
+                                                                                    <div className='col-6'>
+                                                                                        <input type="date" id="form1Example2" placeholder='Start Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                    </div>
 
-                                                    <div className='container'>
-                                                        <div className='row '>
-                                                            <div className='col-6'>
-                                                                <input type="text" id="form1Example2" placeholder='Currently Working' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
-                                                            </div>
+                                                                                    <div className='col-6'>
+                                                                                        <input type="date" id="form1Example2" placeholder='End Date' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
 
-                                                            <div className='col-6'>
-                                                                <input type="text" id="form1Example2" placeholder='FUll/Part/Contact' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                                            <div className='container'>
+                                                                                <div className='row '>
+                                                                                    <div className='col-6'>
+                                                                                        <input type="text" id="form1Example2" placeholder='Currently Working' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                    </div>
+
+                                                                                    <div className='col-6'>
+                                                                                        <input type="text" id="form1Example2" placeholder='FUll/Part/Contact' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </form>
                                                 </form>
                                             </div>
                                         </div>
+
+
                                         {/* country , skills resume Part>>>>>>>> */}
                                         <div className='row mt-4'>
                                             <div className='col-6'>
