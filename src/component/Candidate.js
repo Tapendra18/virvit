@@ -97,14 +97,16 @@ const Home = () => {
           {search && search.map((name) => {
             return (
               <>
-                <div className='border border-primary w-50 rounded-4 mt-5 mx-4'>
+                <div className='border border-primary w-50 rounded-4 mt-5 mx-2'>
                   <div className='d-flex justify-content-between align-items-center'>
                     <div>
                       <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
                       <h6 className='mx-4 search-test2'>
                         {name.title}
                       </h6>
-                      <p className='mx-4'>{name.experiance_from}-{name.experiance_to} years experience</p>
+                      <p className='mx-4 exp-text'>{name.experiance_from} - {name.experiance_to} years experience</p>
+                      <p className='mx-4 sal-text'>SGD {name.min_salary} - {name.max_salary}</p>
+
                     </div>
                     <div className=''>
                       <button className='btn4'>Apply</button>
