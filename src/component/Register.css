@@ -28,6 +28,13 @@ div span.IconSet2{
     color: #0b2cec;
  }
 
+ a.icon-set{
+    margin: 15px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #0b2cec;
+ }
+
 input:hover {
     border-bottom: 2px solid rgb(0, 0, 0);
 }
@@ -52,6 +59,12 @@ hr.Line {
 
 div.Line1 {
     border-top: 2px solid #0b2cec;
+    margin-bottom: 10px;
+}
+
+a.text-line{
+    font-size: small;
+    color: #0b2cec;
 }
 
 div img.right-image {
@@ -196,7 +209,11 @@ div div.grad {
 div.grid-2 {
     background-image: linear-gradient(to left, rgb(207, 210, 250), rgb(57, 60, 241));
     height: 170px;
-    width: 100%;
+}
+
+form.grid-2 {
+    background-image: linear-gradient(to left, rgb(207, 210, 250), rgb(57, 60, 241));
+    height: 170px;
 }
 
 div div form.Bor-1 {
@@ -288,7 +305,7 @@ button.btn4{
 }
 
 form.form-size{
-    min-height: 50%;
+    /* min-height: 50%; */
     overflow-y:scroll;
     overflow-x: hidden;
 }
@@ -371,12 +388,12 @@ form.Form-slider:hover {
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
 
-Carousel slide.active {
-    background-color: none;
-    border: none;
-}
 
 div div input h2.ErrorValidation {
     transition: all .8s ease-in-out;
     color: #020b3b;
+}
+
+div input.lalala{
+   padding-left: 43px;
 }

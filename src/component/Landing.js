@@ -80,7 +80,7 @@ const Landing = () => {
                             </div>
                             
                             <div className='w-25 mx-3'>
-                                <input className='form-control shadow-none border-dark mt-2 mx-3' value={getData('area')} onChange={Area} placeholder='Area city or town' />
+                                <input className='form-control shadow-none border-dark mt-2 mx-3' value={getData('area')} onChange={Area} placeholder='Area city or town'/>
                                 {area && <h2 className='text-start mx-4 mt-2' style={{ color: 'red', fontSize: 18, }}>{area}</h2>}
                             </div>
                             <div>
