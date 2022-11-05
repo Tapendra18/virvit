@@ -85,7 +85,7 @@ const Home = () => {
                                 </Nav.Item>
                             </Nav>
                         </Col>
-                        <Col sm={10}>
+                        <Col sm={9}>
                             <Tab.Content>
                                 <Tab.Pane eventKey="first">
                                     <div className='edit_cont mt-2'>
@@ -168,13 +168,13 @@ const Home = () => {
                                             </div>
                                         </div>
 
-                                         {/*>>>>>>> dyanamic from <<<<<<<< */}
+                                        {/*>>>>>>> dyanamic from <<<<<<<< */}
                                         <div className='col-12 d-flex'>
                                             <div className='col-6'>
                                                 <form className='rounded-4 mt-5 border-2 border'>
                                                     <div className='d-flex justify-content-between mb-5 border-bottom'>
                                                         <p className='mx-3 mt-3'>Add Education</p>
-                                                        <i className='icons-class mt-2 mb-2' onClick={() => handleadd()}> <AiFillPlusCircle/></i>
+                                                        <i className='icons-class mt-2 mb-2' onClick={() => handleadd()}> <AiFillPlusCircle /></i>
                                                     </div>
 
                                                     <form className='w-100 form-size'>
@@ -306,7 +306,7 @@ const Home = () => {
                                                                             <div className='row'>
                                                                                 <div className='col-12 d-flex justify-content-between mt-4'>
                                                                                     <span className='header fs-5 mx-3'>Work exprience</span>
-                                                                                    <i className='icons-class2' onClick={() => handlecancel2()}> <MdOutlineCancelPresentation/></i>
+                                                                                    <i className='icons-class2' onClick={() => handlecancel2()}> <MdOutlineCancelPresentation /></i>
                                                                                 </div>
                                                                             </div>
 
@@ -384,7 +384,6 @@ const Home = () => {
                                             </div>
                                         </div>
 
-
                                         {/* country , skills resume Part>>>>>>>> */}
                                         <div className='row mt-4'>
                                             <div className='col-6'>
@@ -409,23 +408,34 @@ const Home = () => {
                                                 </select>
                                             </div>
 
-                                            <div className='col-6 '>
-                                                <button className='btn-3 mt-4 w-75 h-75 mx-5'>Upload Resume Here&emsp; <HiOutlinePaperClip /> </button>
+                                            <div className='col-6 position-relative upload-resumee'>
+                                                <input id='resume-upload' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 hahaha position-relative' />
+                                                <label for="resume-upload" className='label-resume position-absolute'>Upload resume Here
+                                                    <HiOutlinePaperClip/>
+                                                <label className='resume-upload2'>download</label>
+                                                </label>
                                             </div>
                                         </div>
                                         {/* Resume Part>>>> */}
                                         <div className='row '>
-                                            <div className='col-6'>
-                                                <button placeholder='Vedio Resume' className='btn-3 btn-4'>Vedio Resume&emsp; <FaUpload /></button>
+                                           
+                                            <div className='col-6 position-relative upload-resumee1'>
+                                                <input id='resume-vedio' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
+                                                <label for="resume-vedio" className='label-resume position-absolute'>Vedio Resume
+                                                    <FaUpload />
+                                                </label>
                                             </div>
 
-                                            <div className='col-6'>
-                                                <button className='btn-3 btn-5'>Vedio Testimonial&emsp;<FaUpload /></button>
+                                            <div className='col-6 position-relative upload-resumee2'>
+                                                <input id='resume-testimonial' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
+                                                <label for="resume-testimonial" className='label-resume position-absolute'>Vedio Testimonial
+                                                    <FaUpload />
+                                                </label>
                                             </div>
                                         </div>
 
                                         {/* Need Help >>>>> */}
-                                        <div className='row '>
+                                        <div className='row mt-5'>
                                             <a className='fs-5 mt-3 text-center' href="/about">Need Help ?</a>
                                         </div>
                                         {/* footer >>>>> */}

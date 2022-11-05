@@ -1,3 +1,8 @@
+div.Div-top {
+    height: 2000px;
+}
+
+
 li a.btn-1 {
     border: 1px solid #0b2cec;
     padding: 5px 32px;
@@ -14,26 +19,30 @@ li a {
     transition: none;
 }
 
-div span.IconSet{
-   top: 5px;
-   left: 50px;
-   font-size: 18px;
-   color: #0b2cec;
+div span.IconSet {
+    top: 5px;
+    left: 50px;
+    font-size: 18px;
+    color: #0b2cec;
 }
 
-div span.IconSet2{
+div span.IconSet2 {
     top: 0px;
     left: 30px;
     font-size: 23px;
     color: #0b2cec;
- }
+}
 
- a.icon-set{
+a.icon-set {
     margin: 15px;
     font-size: 14px;
     font-weight: bolder;
     color: #0b2cec;
- }
+}
+
+div a.dropdown-item:last-child {
+    color: #ff0000;
+}
 
 input:hover {
     border-bottom: 2px solid rgb(0, 0, 0);
@@ -62,7 +71,7 @@ div.Line1 {
     margin-bottom: 10px;
 }
 
-a.text-line{
+a.text-line {
     font-size: small;
     color: #0b2cec;
 }
@@ -202,6 +211,16 @@ div button.btn-3 {
     border-radius: 10px;
 }
 
+button#justify-tab-example-tab-apply {
+    padding: 12px 280px !important;
+
+}
+
+button#justify-tab-example-tab-saved {
+    padding: 2px 280px !important;
+
+}
+
 div div.grad {
     background-image: linear-gradient(to right, rgb(207, 210, 250), rgb(57, 60, 241));
 }
@@ -250,7 +269,7 @@ div img.Edit-img {
     display: block;
 }
 
-button.nav-link{
+button.nav-link {
     margin-top: 45px !important;
     border: 1px solid #0b2cec !important;
     background-color: #fff !important;
@@ -262,31 +281,31 @@ button.nav-link{
 
 }
 
-div.nav-item{
+div.nav-item {
     padding: 8px 30px !important;
 }
 
-button.btn{
+button.btn {
     color: #fff !important;
-    background-color: #0b2cec!important;
+    background-color: #0b2cec !important;
     border: 1px solid #0b2cec !important;
     border-radius: 14px !important;
     padding: 8px 25px !important;
     /* font-weight: 300 !important; */
-    font-size: 13px ;
+    font-size: 13px;
 }
 
-div h6.search-test{
+div h6.search-test {
     color: #0b2cec;
     font-size: 21px;
 }
 
-div h6.search-test2{
+div h6.search-test2 {
     color: #0b2cec;
     font-size: 13px;
 }
 
-button.btn4{
+button.btn4 {
     color: #0b2cec;
     background-color: #fff;
     border: 1px solid #0b2cec;
@@ -295,7 +314,7 @@ button.btn4{
     margin-right: 30px;
 }
 
- button.btn4:hover{
+button.btn4:hover {
     color: #fff;
     background-color: #0b2cec;
     border: 1px solid #0b2cec;
@@ -304,39 +323,39 @@ button.btn4{
     margin-right: 30px;
 }
 
-form.form-size{
+form.form-size {
     /* min-height: 50%; */
-    overflow-y:scroll;
+    overflow-y: scroll;
     overflow-x: hidden;
 }
 
-div.dropdown-menu{
+div.dropdown-menu {
     opacity: 1 !important;
     font-weight: normal !important;
     color: #0b2cec !important;
     font-size: small !important;
 }
 
-i.icons-class{
+i.icons-class {
     font-size: 22px;
     color: #0b2cec;
     margin-right: 15px;
     cursor: pointer;
 }
 
-i.icons-class2{
+i.icons-class2 {
     font-size: 22px;
     color: #ff0000;
     margin-right: 16px;
     cursor: pointer;
 }
 
-form.form2-size{
+form.form2-size {
     max-width: 90%;
     margin-left: 25px;
 }
 
-div button a.lala:hover{
+div button a.lala:hover {
     color: #fff;
 }
 
@@ -362,12 +381,12 @@ div button.btn-5 {
 
 }
 
-div p.exp-text{
+div p.exp-text {
     color: gray;
     font-size: 11px;
 }
 
-div p.sal-text{
+div p.sal-text {
     color: gray;
     font-size: 12px;
     margin-top: -16px;
@@ -382,8 +401,6 @@ div.Slider-div {
     width: 70%;
 }
 
-
-
 form.Form-slider:hover {
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
@@ -394,6 +411,66 @@ div div input h2.ErrorValidation {
     color: #020b3b;
 }
 
-div input.lalala{
-   padding-left: 43px;
+div input.lalala {
+    padding-left: 43px;
+}
+
+label.label-resume {
+    top: 55px;
+    left: 120px;
+    margin-left: 35px;
+    cursor: pointer;
+    color: #0b2cec;
+   
+}
+
+label.resume-upload2{
+    display: block;
+    margin-bottom: 10px;
+}
+
+label svg{
+    margin-left:20px;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+
+div.upload-resumee{
+    margin-top: 10px;
+    border: 1px solid #b1afaf;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 11px 4px -1px hsl(0deg 3% 87% / 75%);
+    -webkit-box-shadow: 0 5px 4px -1px hsl(0deg 3% 87% / 75%);
+    -moz-box-shadow: 0 11px 4px -1px hsla(0,3%,87%,.75);
+    text-align: center;
+    font-size: 1vw;
+    font-weight: 500;
+}
+
+div.upload-resumee1{
+    margin-top: 20px;
+    border: 1px solid #b1afaf;
+    border-radius: 12px;
+    padding: 55px 10px;
+    box-shadow: 0 11px 4px -1px hsl(0deg 3% 87% / 75%);
+    -webkit-box-shadow: 0 5px 4px -1px hsl(0deg 3% 87% / 75%);
+    -moz-box-shadow: 0 11px 4px -1px hsla(0,3%,87%,.75);
+    /* text-align: start; */
+    font-size: 1vw;
+    font-weight: 500;
+}
+
+div.upload-resumee2{
+    margin-top: 20px;
+    border: 1px solid #b1afaf;
+    border-radius: 12px;
+    padding: 55px 10px;
+    box-shadow: 0 11px 4px -1px hsl(0deg 3% 87% / 75%);
+    -webkit-box-shadow: 0 5px 4px -1px hsl(0deg 3% 87% / 75%);
+    -moz-box-shadow: 0 11px 4px -1px hsla(0,3%,87%,.75);
+    /* text-align: start; */
+    font-size: 1vw;
+    font-weight: 500;
 }
