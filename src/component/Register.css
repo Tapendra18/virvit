@@ -1,7 +1,6 @@
 div.Div-top {
-    height: 2000px;
+    overflow-x: hidden;
 }
-
 
 li a.btn-1 {
     border: 1px solid #0b2cec;
@@ -421,56 +420,73 @@ label.label-resume {
     margin-left: 35px;
     cursor: pointer;
     color: #0b2cec;
-   
+
 }
 
-label.resume-upload2{
+label.resume-upload2 {
     display: block;
     margin-bottom: 10px;
 }
 
-label svg{
-    margin-left:20px;
+label svg {
+    margin-left: 20px;
     width: 1.1rem;
     height: 1.1rem;
 }
 
-
-div.upload-resumee{
+div.upload-resumee {
     margin-top: 10px;
     border: 1px solid #b1afaf;
     border-radius: 12px;
-    padding: 35px;
+    padding: 55px 10px;
     box-shadow: 0 11px 4px -1px hsl(0deg 3% 87% / 75%);
     -webkit-box-shadow: 0 5px 4px -1px hsl(0deg 3% 87% / 75%);
-    -moz-box-shadow: 0 11px 4px -1px hsla(0,3%,87%,.75);
+    -moz-box-shadow: 0 11px 4px -1px hsla(0, 3%, 87%, .75);
     text-align: center;
     font-size: 1vw;
     font-weight: 500;
 }
 
-div.upload-resumee1{
+div.upload-resumee1 {
     margin-top: 20px;
     border: 1px solid #b1afaf;
     border-radius: 12px;
     padding: 55px 10px;
     box-shadow: 0 11px 4px -1px hsl(0deg 3% 87% / 75%);
     -webkit-box-shadow: 0 5px 4px -1px hsl(0deg 3% 87% / 75%);
-    -moz-box-shadow: 0 11px 4px -1px hsla(0,3%,87%,.75);
+    -moz-box-shadow: 0 11px 4px -1px hsla(0, 3%, 87%, .75);
     /* text-align: start; */
     font-size: 1vw;
     font-weight: 500;
 }
 
-div.upload-resumee2{
+div.upload-resumee2 {
     margin-top: 20px;
     border: 1px solid #b1afaf;
     border-radius: 12px;
     padding: 55px 10px;
     box-shadow: 0 11px 4px -1px hsl(0deg 3% 87% / 75%);
     -webkit-box-shadow: 0 5px 4px -1px hsl(0deg 3% 87% / 75%);
-    -moz-box-shadow: 0 11px 4px -1px hsla(0,3%,87%,.75);
+    -moz-box-shadow: 0 11px 4px -1px hsla(0, 3%, 87%, .75);
     /* text-align: start; */
     font-size: 1vw;
     font-weight: 500;
+    margin-left: 20px;
+}
+
+div.hahaha2 {
+    margin-right: 20px;
+}
+
+div.form-size3 {
+    margin-right: 20px;
+}
+
+p.information:hover {
+    color: #0b2cec;
+    cursor: pointer;
+}
+
+div.underline {
+    border-bottom: 1px solid #0b2cec;
 }

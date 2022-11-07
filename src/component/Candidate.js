@@ -84,7 +84,7 @@ const Home = () => {
           <div className='col-6 mt-3 mb-4'>
             <span className='d-block mx-4 fs-4 mb-2 text-secondary'>welcome {(data != null) ? data.fullname : 'N/A'}</span>
             <a className='fw-normal mx-4 text-line' href="/editprofile">Update Profile</a>
-            <a className='fw-normal text-line' href="/editprofile">View Profile</a>
+            <a className='fw-normal text-line' href="/viewprofile">View Profile</a>
           </div>
 
           <div className='col-6 mt-4 fs-5 d-flex justify-content-around align-items-center'>

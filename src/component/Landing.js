@@ -72,7 +72,7 @@ const Landing = () => {
             <HeaderLanding />
             <div className='container-fluid grid-2 Div-top'>
                 <form onSubmit={Onsearch}>
-                    <div className='row mt-5 mx-5'>
+                    <div className='row mx-5'>
                         <div className='col-12 d-flex mt-5 '>
                             <div className='w-25 mx-3'>
                             <input className='form-control shadow-none border-dark mt-2 mx-3' value={getData('title')} onChange={seraching} placeholder='Job Title, Keyword or Company' />

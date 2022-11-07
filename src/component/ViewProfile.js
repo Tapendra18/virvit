@@ -14,63 +14,20 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 
-// const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/user-profile-update/"
 
 const Home = () => {
-    let data = JSON.parse(window.localStorage.getItem('loginUser'))
-    // const data2=  JSON.parse(window.localStorage.getItem('loginUser'))
-
     const [job, setjob] = useState([]);
     const [skills, setskill] = useState([]);
     const [country, setcountry] = useState([]);
     const [state, setstate] = useState([]);
     const [val, setval] = useState([]);
     const [work, setwork] = useState([]);
+ 
     // const [show, setshow] = useState(true)
-    const [userData, setUserData] = useState(
-        {
-            first_name: data.first_name,
-            last_name: data.last_name,
-            email: data.email,
-            mobile: data.mobile,
-            designation: data.designation,
-            dob: data.dob,
-            gender: data.gender,
-            employment_status: data.employment_status,
-            job_preference: data.job_preference,
-            currency:data.currency,
-            experience:data.experience,
-            salary:data.salary,
-            about:data.about,
-        }
-    );
+   
 
-    const inputHandler = (evt) => {
-        console.log(evt);
-        const value = evt.target.value;
-        setUserData({
-            ...userData,
-            [evt.target.value]: value
-        });
-    }
+    const data = JSON.parse(window.localStorage.getItem('loginUser'))
 
-    useEffect(() => {
-        console.log(userData);
-        JSON.parse(window.localStorage.getItem('loginUser'))
-    }, []);
-
-    // const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
-
-    const saved = (e) => {
-        userData['token'] = "";
-        axios.post("https://virvit.mydevpartner.website/vvapi/v1/user-profile-update/")
-            .then(res => {
-                const getData = res.data.data;
-                setUserData(getData);
-            })
-        e.preventDefault();
-            
-    }
     const handleadd = (e) => {
         // e.preventDefault()
         const abc = [...val, []]
@@ -97,8 +54,6 @@ const Home = () => {
         setwork(exp);
     }
 
-
-
     useEffect(function () {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
@@ -115,8 +70,6 @@ const Home = () => {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
             .then((response) => setstate(response.data.results))
             .catch((error) => console.log(error))
-
-
     }, [])
     return (
         <>
@@ -138,43 +91,39 @@ const Home = () => {
                             <Tab.Content>
                                 <Tab.Pane eventKey="first">
                                     <div className='edit_cont mt-2'>
-                                       
-                                        <div className=''>
-                                            <div className='col-6'>
-                                                <form onSubmit={saved}>
+                                        <div className=' d-flex'>
+                                            <div className='col-6 '>
+                                                <form className=''>
                                                     <div>
                                                         <div className='d-flex'>
-                                                            <input type="text" placeholder='First Name' onChange={inputHandler} defaultValue={userData.first_name} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
-                                                            <input type="text" placeholder='last Name' defaultValue={userData.last_name} onChange={inputHandler} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mx-4' />
+                                                            <input type="text" placeholder='First Name' value={data.first_name}  className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
+                                                            <input type="text" placeholder='last Name' value={data.last_name} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mx-4' />
 
                                                         </div>
                                                         <div className='d-flex'>
-                                                            <input type="email" placeholder='Email' onChange={inputHandler} defaultValue={userData.email} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
-                                                            <input type="tel" placeholder='Mobile Number' defaultValue={userData.mobile} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mx-4' />
+                                                            <input type="email" placeholder='Email' value={data.email} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
+                                                            <input type="tel" placeholder='Mobile Number' value={data.mobile} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mx-4' />
                                                         </div>
                                                         <div className='d-flex'>
-                                                            <input type="text" onChange={inputHandler} defaultValue={userData.designation} placeholder='designation' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50' />
-                                                            <input type="date" onChange={inputHandler} defaultValue={userData.dob} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4' />
+                                                            <input type="text" placeholder='designation' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50' />
+                                                            <input type="date" value={data.dob} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4' />
                                                         </div>
 
                                                         <div className='d-flex justify-content-between '>
-                                                            <select onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                                                <option selected>{userData.gender}</option>
-                                                                {/* <option value="1">Male</option> */}
-                                                                <option>Female</option>
+                                                            <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
+                                                                <option selected>{data.gender}</option>
+                                                                {/* <option value="1">Male</option>
+                                                                  <option>Female</option> */}
                                                             </select>
-                                                            <select onChange={inputHandler} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4'>
-                                                                <option selected>{userData.employment_status}</option>
-                                                                <option defaultValue="1">Part time</option>
-                                                                <option defaultValue="2">intern</option>
-                                                                <option defaultValue="3">Remote</option>
+                                                            <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4'>
+                                                                <option selected> Employment Type</option>
                                                             </select>
 
                                                         </div>
 
                                                         <div className='d-flex justify-content-between '>
-                                                            <select onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                                                <option selected>{userData.job_preference}</option>
+                                                            <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
+                                                                <option selected>Job Preference</option>
                                                                 {
                                                                     job.map((jobs) => (
                                                                         <option key={jobs.id} value={jobs.id}>
@@ -183,30 +132,40 @@ const Home = () => {
                                                                 }
                                                             </select>
 
-                                                
-                                                            <input type="number" placeholder='salary' onChange={inputHandler} defaultValue={userData.salary} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
+                                                            <select className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-3'>
+                                                                <option selected>{data.salary}</option>
+                                                            </select>
 
-
-                                                            <select onChange={inputHandler} className='form-control form-control-sm mt-3 shadow-none borber border-2'>{userData.currency}
-                                                                <option defaultValue='1' >USD</option>
-                                                                <option defaultValue='2' >INR</option>
-                                                                <option defaultValue='3' >SGD</option>
+                                                            <select className='form-control form-control-sm mt-3 shadow-none borber border-2'>
+                                                                <option>USD</option>
+                                                                <option>INR</option>
+                                                                <option>SGD</option>
                                                             </select>
                                                         </div>
 
-                                                        <input type="number" placeholder='exprience' onChange={inputHandler} defaultValue={userData.experience} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
-
-                                                        <div className='row'>
-                                                            <div className='col-12'>
-                                                                <input type="text" placeholder='About Me' onChange={inputHandler} defaultValue={userData.about} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100'></input>
-                                                            </div>
+                                                        <div className='d-flex justify-content-between '>
+                                                            <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-100' aria-label='default select example'>
+                                                                <option selected>{data.experience}</option>
+                                                                {/* <option value="1">0-1 Year</option>
+                                          <option>2 Year</option>
+                                          <option>3 Year</option>
+                                          <option>4 Year</option>
+                                          <option>5 Year</option>
+                                          <option>Other</option> */}
+                                                            </select>
                                                         </div>
                                                     </div>
-                                                    <div className='col-3 Edit-pho'>
-                                                        <img src='./image/Employer_login.png' className='rounded-circle Edit-img' alt='image1'></img>
-                                                        <button className='btn1 mt-3'>SAVED</button>
-                                                    </div>
                                                 </form>
+                                            </div>
+
+                                            <div className='col-3'>
+                                                <button className='btn1 mt-3'><a href='/editprofile'>editprofile</a></button>
+                                            </div>
+                                        </div>
+
+                                        <div className='row'>
+                                            <div className='col-12'>
+                                                <input type="text" placeholder='About Me' value={data.about} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50' required></input>
                                             </div>
                                         </div>
 
@@ -226,15 +185,15 @@ const Home = () => {
                                                                     <form className='border rounded-4 border-secondary border-1 mt-3 mb-4 form2-size'>
                                                                         <div className='row'>
                                                                             <div className='col-12 mt-2 mx-2 d-flex justify-content-end'>
-
+                                                                               
                                                                                 <i className='icons-class2' onClick={() => handlecancel()}> <MdOutlineCancelPresentation /></i>
                                                                             </div>
                                                                         </div>
-                                                                        <div className="form mx-2">
+                                                                        <div className="form  mx-2">
                                                                             <input type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
                                                                         </div>
 
-                                                                        <div className="form mx-2">
+                                                                        <div className="form  mx-2">
                                                                             <input type="text" id="form1Example2" placeholder='University' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
                                                                         </div>
 
@@ -276,7 +235,7 @@ const Home = () => {
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-
+                                                                      
                                                                     </form>
                                                                 </div>
                                                             )
@@ -336,8 +295,8 @@ const Home = () => {
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-
-                                                                        </form>
+                                                                
+                                                              </form>
                                                                     </div>
                                                                 </div>
                                                             )
@@ -372,24 +331,24 @@ const Home = () => {
                                             </div>
 
                                             <div className='col-6 position-relative upload-resumee'>
-                                                <input id='resume-upload' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 hahaha position-relative'/>
+                                                <input id='resume-upload' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 hahaha position-relative' />
                                                 <label for="resume-upload" className='label-resume position-absolute'>Upload resume Here
-                                                    <HiOutlinePaperClip />
-                                                    <label className='resume-upload2'>download</label>
+                                                    <HiOutlinePaperClip/>
+                                                <label className='resume-upload2'>download</label>
                                                 </label>
                                             </div>
                                         </div>
                                         {/* Resume Part>>>> */}
-                                        <div className='d-flex '>
+                                        <div className='d-flex '>     
                                             <div className='col-6 position-relative upload-resumee1'>
-                                                <input id='resume-vedio' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative'/>
+                                                <input id='resume-vedio' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
                                                 <label for="resume-vedio" className='label-resume position-absolute'>Vedio Resume
                                                     <FaUpload />
                                                 </label>
                                             </div>
 
                                             <div className='col-6 position-relative upload-resumee2'>
-                                                <input id='resume-testimonial' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative'/>
+                                                <input id='resume-testimonial' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
                                                 <label for="resume-testimonial" className='label-resume position-absolute'>Vedio Testimonial
                                                     <FaUpload />
                                                 </label>
@@ -400,7 +359,6 @@ const Home = () => {
                                         <div className='row mt-5'>
                                             <a className='fs-5 mt-3 text-center' href="/about">Need Help ?</a>
                                         </div>
-                
                                         {/* footer >>>>> */}
                                     </div>
                                 </Tab.Pane>

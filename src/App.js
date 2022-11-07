@@ -13,6 +13,7 @@ import Privacy from "./component/Privacy"
 import ChangePassword from "./component/ChangePassword"
 import Login2 from "./component/login2";
 // import ProfileEdit from "./component/ProfileEdit"
+import ViewProfile from "./component/ViewProfile"
 import './App.css'
 
 function App() {
@@ -52,6 +53,8 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/changepassword" element={<ChangePassword/>} />
         <Route path="/login2" element={<Login2/>} />
+        <Route path="/viewprofile" element={<ViewProfile/>} />
+
         {/* <Route path="/profileEdit" element={<ProfileEdit/>}/> */}
       </Routes>
 
