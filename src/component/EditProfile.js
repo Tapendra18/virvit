@@ -62,7 +62,6 @@ const Home = () => {
     // const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
     const saved = (e) => {
-        userData['token'] = "";
         axios.post("https://virvit.mydevpartner.website/vvapi/v1/user-profile-update/")
             .then(res => {
                 const getData = res.data.data;
@@ -97,8 +96,6 @@ const Home = () => {
         setwork(exp);
     }
 
-
-
     useEffect(function () {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
@@ -115,8 +112,6 @@ const Home = () => {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
             .then((response) => setstate(response.data.results))
             .catch((error) => console.log(error))
-
-
     }, [])
     return (
         <>
@@ -183,9 +178,7 @@ const Home = () => {
                                                                 }
                                                             </select>
 
-                                                
                                                             <input type="number" placeholder='salary' onChange={inputHandler} defaultValue={userData.salary} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
-
 
                                                             <select onChange={inputHandler} className='form-control form-control-sm mt-3 shadow-none borber border-2'>{userData.currency}
                                                                 <option defaultValue='1' >USD</option>
