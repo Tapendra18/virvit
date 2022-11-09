@@ -490,3 +490,13 @@ p.information:hover {
 div.underline {
     border-bottom: 1px solid #0b2cec;
 }
+                                            
+#imageFile{
+display: none;
+}
+
+div label.icon{
+  font-size: 40px;
+  margin-left:  40px; 
+  cursor: pointer;
+}

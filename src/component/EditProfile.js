@@ -6,6 +6,7 @@ import axios from 'axios'
 import { HiOutlinePaperClip } from "react-icons/hi";
 import { FaUpload } from "react-icons/fa";
 import { AiFillPlusCircle } from "react-icons/ai"
+import { ImUpload2 } from "react-icons/im"
 import { MdOutlineCancelPresentation } from "react-icons/md"
 // import { NavLink } from "react-router-dom"
 // import { Link } from "react-router-dom"
@@ -26,6 +27,7 @@ const Home = () => {
     const [val, setval] = useState([]);
     const [work, setwork] = useState([]);
     const token = data.token;
+    // const [userImage, setUserImage] = useState([]);
 
     // const [show, setshow] = useState(true)
     const [userData, setUserData] = useState(
@@ -43,8 +45,15 @@ const Home = () => {
             experience: data.experience,
             salary: data.salary,
             about: data.about,
+            image: data.image,
+            title:data.education_detail.title   
         }
     );
+
+    const handleImage = (e) => {
+        e.persist();
+        setUserData({ image: e.target.files[0]})
+    }
 
     const inputHandler = (evt) => {
         console.log(evt);
@@ -64,21 +73,34 @@ const Home = () => {
 
     const saved = (e) => {
         e.preventDefault();
+        let formData = new FormData();
+        formData.append('first_name', userData.first_name)
+        formData.append('last_name', userData.last_name)
+        formData.append('email', userData.email)
+        formData.append('mobile', userData.mobile)
+        formData.append('designation', userData.designation)
+        formData.append('dob', userData.dob)
+        formData.append('gender', userData.gender)
+        formData.append('job_preference', userData.job_preference)
+        formData.append('salary', userData.salary)
+        formData.append('currency', userData.currency)
+        formData.append('experience', userData.experience)
+        formData.append('dial_code', '+91')
+        formData.append('about', userData.about)
+        formData.append('image', userData.image);
         console.log(userData, 'form dtatatatat');
-        const headers = { headers:
-            { 'Authorization':`token ${token}`}
+        const headers = {
+            headers:
+                { 'Authorization': `token ${token}` }
         }
-    
-        axios.post("https://virvit.mydevpartner.website/vvapi/v1/user-profile-update/", userData, headers)
+
+        axios.post("https://virvit.mydevpartner.website/vvapi/v1/user-profile-update/", formData, headers)
             .then(res => {
                 const getData = res.data.data;
                 console.log(getData)
-                setUserData({
-                    key:" "
-                })
-            }).catch(error => console.log(error));
-            
+            })
     }
+
     const handleadd = (e) => {
         // e.preventDefault()
         const abc = [...val, []]
@@ -163,7 +185,7 @@ const Home = () => {
 
                                                             <div className='d-flex justify-content-between '>
                                                                 <select id='gender' onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                                                    <option  selected>{userData.gender}</option>
+                                                                    <option selected>{userData.gender}</option>
                                                                     {/* <option value="1">Male</option> */}
                                                                     <option>Female</option>
                                                                 </select>
@@ -177,7 +199,6 @@ const Home = () => {
 
                                                             <div className='d-flex justify-content-between '>
                                                                 <select id='job_preference' onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                                                    <option selected>{userData.job_preference}</option>
                                                                     {
                                                                         job.map((jobs) => (
                                                                             <option key={jobs.id} value={jobs.id}>
@@ -189,13 +210,13 @@ const Home = () => {
                                                                 <input id='salary' type="number" placeholder='salary' onChange={inputHandler} defaultValue={userData.salary} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
 
                                                                 <select id='currency' onChange={inputHandler} className='form-control form-control-sm mt-3 shadow-none borber border-2'>{userData.currency}
-                                                                    <option defaultValue='1' >USD</option>
-                                                                    <option defaultValue='2' >INR</option>
-                                                                    <option defaultValue='3' >SGD</option>
+                                                                    <option defaultValue='1'>USD</option>
+                                                                    <option defaultValue='2'>INR</option>
+                                                                    <option defaultValue='3'>SGD</option>
                                                                 </select>
                                                             </div>
 
-                                                            <input id='exprience' type="number" placeholder='exprience' onChange={inputHandler} defaultValue={userData.experience} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
+                                                            <input id='experience' type="number" placeholder='experience' onChange={inputHandler} defaultValue={userData.experience} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
 
                                                             <div className='row'>
                                                                 <div className='col-12'>
@@ -203,13 +224,22 @@ const Home = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                    </form>                                                
+                                                    </form>
                                                 </div>
-                                                <div className='col-6 mx-5 Edit-pho'>
-                                                        <img src='./image/Employer_login.png' className='rounded-circle Edit-img' alt='image1'></img>
+                                                <div className='col-3 mx-5 Edit-pho'>
+                                                    {/* <img onClick={handleImage} src='./image/Employer_login.png' className='rounded-circle Edit-img' alt='image1'></img> */}
+                                                    < img src={`${userData.image}`} alt={userData.image} width="200px" height="200px" className="border rounded-circle" />
+                                                    <div>
+                                                        <input accept="image/png, image/gif, image/jpeg" id='imageFile' onClick={handleImage} type='file'/>
+                                                    </div>
+                                                    <div >
+                                                       <label className='icon' for="imageFile"><ImUpload2/></label> 
+                                                    </div>
+
+                                                    <div className=''>
                                                         <button className='btn1 mt-3'>SAVED</button>
                                                     </div>
+                                                </div>
                                             </div>
 
                                             {/*>>>>>>> dyanamic from <<<<<<<< */}
@@ -228,12 +258,11 @@ const Home = () => {
                                                                         <form className='border rounded-4 border-secondary border-1 mt-3 mb-4 form2-size'>
                                                                             <div className='row'>
                                                                                 <div className='col-12 mt-2 mx-2 d-flex justify-content-end'>
-
                                                                                     <i className='icons-class2' onClick={() => handlecancel()}> <MdOutlineCancelPresentation /></i>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="form mx-2">
-                                                                                <input onChange={inputHandler} type="email" id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
+                                                                                <input onChange={inputHandler} type="text" defaultValue={userData.title} id="form1Example1" placeholder='Title' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1" />
                                                                             </div>
 
                                                                             <div className="form mx-2">
@@ -244,24 +273,22 @@ const Home = () => {
                                                                                 <div className='row '>
                                                                                     <div className='col-6'>
                                                                                         <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
-                                                                                            <option>country</option>
-                                                                                            {
-                                                                                                country.map((countrys) => (
-                                                                                                    <option key={countrys.id} value={countrys.id}>
-                                                                                                        {countrys.name}
-                                                                                                    </option>))
-                                                                                            }
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <div className='col-6'>
-                                                                                        <select onChange={inputHandler} type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
-                                                                                            <option>State</option>
                                                                                             {
                                                                                                 state.map((states) => (
                                                                                                     <option key={states.id} value={states.id}>
                                                                                                         {states.name}
                                                                                                     </option>
                                                                                                 ))
+                                                                                            }
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div className='col-6'>
+                                                                                        <select onChange={inputHandler} type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
+                                                                                            {
+                                                                                                country.map((countrys) => (
+                                                                                                    <option key={countrys.id} value={countrys.id}>
+                                                                                                        {countrys.name}
+                                                                                                    </option>))
                                                                                             }
                                                                                         </select>
                                                                                     </div>
@@ -278,7 +305,6 @@ const Home = () => {
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-
                                                                         </form>
                                                                     </div>
                                                                 )
@@ -338,7 +364,6 @@ const Home = () => {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -353,7 +378,7 @@ const Home = () => {
                                             <div className='d-flex mt-4'>
                                                 <div className='col-6 hahaha2'>
                                                     <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
-                                                        <option>country</option>
+
                                                         {
                                                             country.map((countrys) => (
                                                                 <option key={countrys.id} value={countrys.id}>
@@ -363,7 +388,6 @@ const Home = () => {
 
                                                     </select>
                                                     <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
-                                                        <option>skill</option>
                                                         {
                                                             skills.map((skill) => (
                                                                 <option key={skill.id} value={skill.id}>

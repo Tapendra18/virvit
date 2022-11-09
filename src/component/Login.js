@@ -9,6 +9,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
@@ -94,12 +96,13 @@ const Login = () => {
                 .then((res) => {
                     //  console.log(res.formData))
                     window.localStorage.setItem("loginUser", JSON.stringify(res.data));
+                    toast("login success")
                     setTimeout(() => {
                         navigate("/candidate")
-                    },);
+                    }, 1000);
 
                 });
-            console.log('Form Data', formData)
+                   console.log('Form Data', formData)
         }
 
     };
@@ -144,16 +147,16 @@ const Login = () => {
 
     return (
         <>
-            <HeaderLanding/>
+            <HeaderLanding />
             {/* Tab>>>>> */}
             <Tabs
                 defaultActiveKey="home"
                 id="fill-tab-example"
                 className="mb-3 mt-5"
                 fill
-                
+
             >
-                <Tab  eventKey="home" title="candidate Login">
+                <Tab eventKey="home" title="candidate Login">
                     {/* <Sonnet /> */}
                     <div className='container-fluid'>
                         <div className='row text-center'>
@@ -184,7 +187,7 @@ const Login = () => {
 
                                     <div className='row'>
                                         <div className="col d-flex justify-content-end mx-4">
-                                            <a className='text-decoration-none mx-4 fw-normal fs-6' href="/changepassword">Forgot password ?</a>
+                                            <a className='text-decoration-none mx-4 fw-normal fs-6' href="/privacy">Forgot password ?</a>
                                         </div>
                                     </div>
 
@@ -197,6 +200,7 @@ const Login = () => {
                                         </div>
                                     </div>
                                     <button type="submit" className="btn1 w-75 mb-5">Login</button>
+                                    <ToastContainer />
                                 </form>
                             </div>
                             {/* Image >>>>>> */}
@@ -207,7 +211,7 @@ const Login = () => {
                     </div>
                 </Tab>
                 <Tab eventKey="profile" title="Employe Login">
-                <div className='container-fluid mt-4'>
+                    <div className='container-fluid mt-4'>
                         <div className='container'>
                             <div className='row text-center'>
                                 <div className='col-6 mt-5'>
