@@ -46,13 +46,16 @@ const Home = () => {
             salary: data.salary,
             about: data.about,
             image: data.image,
-            title:data.education_detail.title   
+            title: data.education_detail.title,
+            country: data.country
         }
     );
 
     const handleImage = (e) => {
         e.persist();
-        setUserData({ image: e.target.files[0]})
+        console.log(e.target.files);
+        setUserData({ image: URL.createObjectURL(e.target.files[0]) })
+
     }
 
     const inputHandler = (evt) => {
@@ -137,11 +140,11 @@ const Home = () => {
             .catch((error) => console.log(error))
 
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/state/")
-            .then((response) => setcountry(response.data.results))
+            .then((response) => setstate(response.data.results))
             .catch((error) => console.log(error))
 
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/country/")
-            .then((response) => setstate(response.data.results))
+            .then((response) => setcountry(response.data.results))
             .catch((error) => console.log(error))
     }, [])
     return (
@@ -155,6 +158,7 @@ const Home = () => {
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">Edit Profile</Nav.Link>
                                 </Nav.Item>
+
                                 <Nav.Item>
                                     <Nav.Link eventKey="second">Privacy</Nav.Link>
                                 </Nav.Item>
@@ -185,15 +189,14 @@ const Home = () => {
 
                                                             <div className='d-flex justify-content-between '>
                                                                 <select id='gender' onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                                                    <option selected>{userData.gender}</option>
-                                                                    {/* <option value="1">Male</option> */}
-                                                                    <option>Female</option>
+                                                                    <option defaultValue="1">{userData.gender}</option>
+                                                                    <option defaultValue="2">Female</option>
                                                                 </select>
                                                                 <select id='employment_status' onChange={inputHandler} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-4'>
-                                                                    <option selected>{userData.employment_status}</option>
-                                                                    <option defaultValue="1">Part time</option>
-                                                                    <option defaultValue="2">intern</option>
-                                                                    <option defaultValue="3">Remote</option>
+                                                                    <option defaultValue="1">{userData.employment_status}</option>
+                                                                    <option defaultValue="2">Part time</option>
+                                                                    <option defaultValue="3">intern</option>
+                                                                    <option defaultValue="4">Remote</option>
                                                                 </select>
                                                             </div>
 
@@ -201,7 +204,7 @@ const Home = () => {
                                                                 <select id='job_preference' onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
                                                                     {
                                                                         job.map((jobs) => (
-                                                                            <option key={jobs.id} value={jobs.id}>
+                                                                            <option key={jobs.id} defaultValue={jobs.id}>
                                                                                 {jobs.name}
                                                                             </option>))
                                                                     }
@@ -230,10 +233,10 @@ const Home = () => {
                                                     {/* <img onClick={handleImage} src='./image/Employer_login.png' className='rounded-circle Edit-img' alt='image1'></img> */}
                                                     < img src={`${userData.image}`} alt={userData.image} width="200px" height="200px" className="border rounded-circle" />
                                                     <div>
-                                                        <input accept="image/png, image/gif, image/jpeg" id='imageFile' onClick={handleImage} type='file'/>
+                                                        <input accept="image/png, image/gif, image/jpeg" id='imageFile' onChange={handleImage} type='file' />
                                                     </div>
                                                     <div >
-                                                       <label className='icon' for="imageFile"><ImUpload2/></label> 
+                                                        <label className='icon' for="imageFile"><ImUpload2 /></label>
                                                     </div>
 
                                                     <div className=''>
@@ -274,7 +277,7 @@ const Home = () => {
                                                                                     <div className='col-6'>
                                                                                         <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
                                                                                             {
-                                                                                                state.map((states) => (
+                                                                                                country.map((states) => (
                                                                                                     <option key={states.id} value={states.id}>
                                                                                                         {states.name}
                                                                                                     </option>
@@ -285,7 +288,7 @@ const Home = () => {
                                                                                     <div className='col-6'>
                                                                                         <select onChange={inputHandler} type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
                                                                                             {
-                                                                                                country.map((countrys) => (
+                                                                                                state.map((countrys) => (
                                                                                                     <option key={countrys.id} value={countrys.id}>
                                                                                                         {countrys.name}
                                                                                                     </option>))
@@ -380,20 +383,31 @@ const Home = () => {
                                                     <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
 
                                                         {
-                                                            country.map((countrys) => (
+                                                            state.map((countrys) => (
                                                                 <option key={countrys.id} value={countrys.id}>
                                                                     {countrys.name}
                                                                 </option>))
                                                         }
 
                                                     </select>
-                                                    <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
+                                                    <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3">
                                                         {
                                                             skills.map((skill) => (
-                                                                <option key={skill.id} value={skill.id}>
-                                                                    {skill.name}
+                                                                <option type="checkbox" key={skill.id} value={skill.id}>
+                                                                    <li type="checkbox">{skill.name}</li>
                                                                 </option>))
                                                         }
+
+                                                        {/* {skills.map((obj, index) => (
+                                                            <li key={index}>
+                                                                <checkbox
+                                                                    obj={obj}
+                                                                    onChange={(item) => {
+                                                                        userData(skills.map((d) => (d.order === item.order ? item : d)));
+                                                                    }}
+                                                                />
+                                                            </li>
+                                                        ))} */}
                                                     </select>
                                                 </div>
 

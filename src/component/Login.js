@@ -80,12 +80,16 @@ const Login = () => {
         formData['device_id'] = 1;
         if (getData('username').length === 0) {
             setLogUserError("please Enter email")
+            toast("please Enter email", {
+                position: toast.POSITION.TOP_CENTER
+            })
         }
-        // if (getData('username').length<=10) {
-        //     setLogUserError("proper email fill")
-        // }
+
         if (getData('password').length === 0) {
             setLogPassError("please Enter the password")
+            toast("please Enter password", {
+                position: toast.POSITION.TOP_CENTER
+            })
         } if (getData('password').length <= 5) {
             setLogPassError("password greater than 6")
         }
@@ -96,15 +100,18 @@ const Login = () => {
                 .then((res) => {
                     //  console.log(res.formData))
                     window.localStorage.setItem("loginUser", JSON.stringify(res.data));
-                    toast("login success")
+                    toast("login success", {
+                        position: toast.POSITION.TOP_CENTER
+                    })
                     setTimeout(() => {
                         navigate("/candidate")
                     }, 1000);
 
-                });
-                   console.log('Form Data', formData)
+                }).catch(error=>{  toast("please check entry", {
+                    position: toast.POSITION.TOP_CENTER
+                })});
+            console.log('Form Data', formData)
         }
-
     };
 
     const onSubmit = (event) => {
@@ -154,7 +161,6 @@ const Login = () => {
                 id="fill-tab-example"
                 className="mb-3 mt-5"
                 fill
-
             >
                 <Tab eventKey="home" title="candidate Login">
                     {/* <Sonnet /> */}
@@ -195,11 +201,12 @@ const Login = () => {
                                         <div className="col d-flex justify-content-start mx-5 mt-3">
                                             <div className="form-check">
                                                 <input className="form-check-input" type="checkbox" value="remember me" />
-                                                <label className="form-check-label Rem-me" htmlFor="form1Example3"> Remember me </label>
+                                                <label className="form-check-label Rem-me" for="rememberPassword" htmlFor="form1Example3"> Remember me </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" className="btn1 w-75 mb-5">Login</button>
+                                    <button type="submit" className="btn1 w-75 mb-5">Login
+                                    </button>
                                     <ToastContainer />
                                 </form>
                             </div>
@@ -220,7 +227,6 @@ const Login = () => {
                                             <input type="text" value={getCandiData('username')} onChange={ChandleEmail} placeholder='Email/Username' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-4" />
                                             {Cerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12 }}>{Cerror}</h2>}
                                             {Merror && <h2 className='text-start' style={{ color: 'red', fontSize: 12 }}>{Merror}</h2>}
-
                                         </div>
 
                                         <div className="form mx-5 row position-relative">
