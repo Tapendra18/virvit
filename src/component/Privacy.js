@@ -5,10 +5,8 @@ import { NavLink } from "react-router-dom"
 import { useState } from 'react'
 import axios from 'axios'
 // import ChangePassword from "./ChangePassword"
-
 // const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/forgot-password/"
 const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/change-password/"
-
 
 const Home = () => {
 
@@ -42,7 +40,6 @@ const Home = () => {
             settogle(false)
             console.log("data......");
         }
-
     }
 
     const sendLink2 = async (e) => {
@@ -66,8 +63,6 @@ const Home = () => {
         console.log({ ...password, [key]: value });
         return setpassword({ ...password, [key]: value });
     };
-
-
 
     return (
         <>

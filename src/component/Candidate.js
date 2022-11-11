@@ -4,18 +4,27 @@ import Footer from './Footer'
 import { FaSearch } from "react-icons/fa";
 import { ImLocation } from "react-icons/im";
 import { BsBookmarkFill } from "react-icons/bs";
-import {BsShieldFill} from "react-icons/bs";
-import {FaBell} from "react-icons/fa"
+import { BsShieldFill } from "react-icons/bs";
+import { FaBell } from "react-icons/fa"
 import axios from 'axios'
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
+const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/";
 
 const Home = () => {
+  let local = JSON.parse(window.localStorage.getItem('loginUser'))
+
+  // let local2=window.localStorage.getItem("search key", JSON.stringify))
   const [data, setdata] = useState({})
   const [jobData, setjobData] = useState({});
   const [search, setSearch] = useState([]);
   const [job, setjob] = useState(false);
   const [area, setArea] = useState(false);
+  const [Apply, setApply] = useState({
+    user: local.id,
+    job: null
+  })
+  const token = local.token;
 
   useEffect(() => {
     const data2 = JSON.parse(window.localStorage.getItem('loginUser'));
@@ -42,7 +51,7 @@ const Home = () => {
   }
 
   const Onsearch = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     console.log('Search Data', jobData);
     if (getData('title').length === 0 && (getData('area').length === 0)) {
       setjob("the job title skill is required")
@@ -55,6 +64,20 @@ const Home = () => {
           window.localStorage.setItem("search key", JSON.stringify(res.data));
         })
     }
+  };
+
+  const btnapply = (id) => {
+    console.log(id)
+    Apply.job = id;
+    // setApply()
+    const headers = {
+      headers:
+        { 'Authorization': `token ${token}` }
+    }
+    axios.post(URL, Apply, headers)
+      .then((res) => {
+        // setApply(res.Apply);
+      })
   }
 
   return (
@@ -71,13 +94,12 @@ const Home = () => {
           <div className='col-3 position-relative'>
             <span className='position-absolute IconSet2 border-start-0'><ImLocation /></span>
             <input className='form-control shadow-none border-dark mx-1 lalala' value={getData('area')} onChange={Area} placeholder='Area city or town' />
-            {area && <h2 className='text-start mx-4' style={{color: 'red', fontSize: 18,}}>{area}</h2>}
+            {area && <h2 className='text-start mx-4' style={{ color: 'red', fontSize: 18, }}>{area}</h2>}
           </div>
 
           <div className='col-3'>
-            <button className='btn4'>Search</button>
+            <button type="submit" className='btn4'>Search</button>
           </div>
-
         </form>
 
         <div className='row border border-1 mx-3 mt-5 rounded-3 Line1'>
@@ -89,43 +111,48 @@ const Home = () => {
 
           <div className='col-6 mt-4 fs-5 d-flex justify-content-around align-items-center'>
             <div>
-              <BsBookmarkFill/>
+              <BsBookmarkFill />
               <a className='fw-normal text-decoration-none icon-set' href="#!">Saved Jobs</a>
             </div>
             <div>
-              <BsShieldFill/>
+              <BsShieldFill />
               <a className='fw-normal text-decoration-none icon-set' href="/candidateview">Job Applications</a>
             </div>
             <div>
-              <FaBell/>
+              <FaBell />
               <a className='fw-normal text-decoration-none icon-set' href="#!">Job Alert</a>
             </div>
           </div>
         </div>
 
         <div className='d-flex'>
-          {search && search.map((name) => {
-            return (
-              <>
-                <div className='border border-primary w-50 rounded-4 mt-5 mx-2'>
-                  <div className='d-flex justify-content-between align-items-center'>
-                    <div>
-                      <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
-                      <h6 className='mx-4 search-test2'>
-                        {name.title}
-                      </h6>
-                      <p className='mx-4 exp-text'>{name.experiance_from} - {name.experiance_to} years experience</p>
-                      <p className='mx-4 sal-text'>SGD {name.min_salary} - {name.max_salary}</p>
+          {
+            search && search.map((name, index) => {
+              return (
+                <>
+                  <div key={index} className='border border-primary w-50 rounded-4 mt-5 mx-2'>
+                    <div className='d-flex justify-content-between align-items-center'>
+                      <div>
+                        <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
+                        <h6 className='mx-4 search-test2'>
+                          {name.title}
+                        </h6>
+                        <p className='mx-4 exp-text'>{name.experiance_from} - {name.experiance_to} years experience</p>
+                        <p className='mx-4 sal-text'>SGD {name.min_salary} - {name.max_salary}</p>
 
-                    </div>
-                    <div className=''>
-                      <button className='btn4'>Apply</button>
-                      <button className='btn4'>Save</button>
+                      </div>
+                      <div>
+                        {
+                          name.is_applied?
+                            <button type="button" className='btn4'>applied</button> :
+                            <button type="button" onClick={() => btnapply(name.id)} className='btn4'>apply</button>
+                        }
+                        <button className='btn4'>Save</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </>)
-          })
+                </>)
+            })
           }
         </div>
       </div>
