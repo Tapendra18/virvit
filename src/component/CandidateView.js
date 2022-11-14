@@ -4,7 +4,10 @@ import HeaderEdit from './HeaderEdit'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
+
+const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/?user"
 const Home = () => {
+
    return (
       <>
          <HeaderEdit />
@@ -18,14 +21,11 @@ const Home = () => {
                <Tab eventKey="apply" className='CandiView' title="ApplyiedJobs">
                   {/* <Sonnet /> */}
 
-                
-
                </Tab>
                <Tab eventKey="saved" title=" SavedJobs">
                   {/* <Sonnet /> */}
                </Tab>
             </Tabs>
-           
          </div>
          <div className='col-12 d-flex justify-content-center'>
                      <a className='text-decoration-none footer-a mx-2' href='/'>Page No: </a>

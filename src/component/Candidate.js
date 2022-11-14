@@ -5,7 +5,8 @@ import { FaSearch } from "react-icons/fa";
 import { ImLocation } from "react-icons/im";
 import { BsBookmarkFill } from "react-icons/bs";
 import { BsShieldFill } from "react-icons/bs";
-import { FaBell } from "react-icons/fa"
+import { FaBell } from "react-icons/fa";
+import {ImCancelCircle} from "react-icons/im"
 import axios from 'axios'
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
@@ -29,6 +30,7 @@ const Home = () => {
     user : local.id,
     job : null
   })
+  const [ inputValue, setInputValue ] = useState(""); 
 
   // const [Saved , setsaved] = useState({});
   const token = local.token;
@@ -100,20 +102,26 @@ const Home = () => {
     }).catch("error")
   }
 
+  const handleCancel =()=>{
+    setInputValue("");
+  }
+
   return (
     <>
       <HeaderEdit />
       <div className='container-fluid Div-top'>
         <form onSubmit={Onsearch} className='row d-flex justify-content-around align-items-center grid-2'>
           <div className='col-3 position-relative'>
-            <span className='position-absolute IconSet'><FaSearch /></span>
-            <input className='form-control shadow-none border-dark mx-4 lalala' value={getData('title')} onChange={seraching} placeholder=' Job Title, Keyword or Company' />
+            <span className='position-absolute IconSet'><FaSearch/></span>
+            <input className='form-control shadow-none border-dark mx-4 lalala' value={getData('title')} onChange={seraching} placeholder=' Job Title, Keyword or Company'/>
+            <i className='position-absolute cancelSet2'><ImCancelCircle/></i>
             {job && <h2 className='text-start mx-4' style={{ color: 'red', fontSize: 18, }}>{job}</h2>}
           </div>
 
           <div className='col-3 position-relative'>
-            <span className='position-absolute IconSet2 border-start-0'><ImLocation /></span>
-            <input className='form-control shadow-none border-dark mx-1 lalala' value={getData('area')} onChange={Area} placeholder='Area city or town' />
+            <span className='position-absolute IconSet2 border-start-0'><ImLocation/></span>
+            <input className='form-control shadow-none border-dark mx-1 lalala' value={getData('area')} onChange={Area} placeholder='Area city or town'/>
+            <i className='position-absolute cancelSet' onClick={handleCancel}><ImCancelCircle/></i>
             {area && <h2 className='text-start mx-4' style={{ color: 'red', fontSize: 18, }}>{area}</h2>}
           </div>
 

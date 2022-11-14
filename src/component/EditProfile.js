@@ -261,7 +261,7 @@ const Home = () => {
                                                                         <form className='border rounded-4 border-secondary border-1 mt-3 mb-4 form2-size'>
                                                                             <div className='row'>
                                                                                 <div className='col-12 mt-2 mx-2 d-flex justify-content-end'>
-                                                                                    <i className='icons-class2' onClick={() => handlecancel()}> <MdOutlineCancelPresentation /></i>
+                                                                                    <i className='icons-class2' onClick={() => handlecancel()}><MdOutlineCancelPresentation /></i>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="form mx-2">
