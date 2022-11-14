@@ -10,6 +10,7 @@ import axios from 'axios'
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
 const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/";
+const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/";
 
 const Home = () => {
   let local = JSON.parse(window.localStorage.getItem('loginUser'))
@@ -24,6 +25,12 @@ const Home = () => {
     user: local.id,
     job: null
   })
+  const [save , setsave] = useState({
+    user : local.id,
+    job : null
+  })
+
+  // const [Saved , setsaved] = useState({});
   const token = local.token;
 
   useEffect(() => {
@@ -67,7 +74,6 @@ const Home = () => {
   };
 
   const btnapply = (id) => {
-    console.log(id)
     Apply.job = id;
     // setApply()
     const headers = {
@@ -76,8 +82,22 @@ const Home = () => {
     }
     axios.post(URL, Apply, headers)
       .then((res) => {
-        // setApply(res.Apply);
+        setApply(res.Apply);
       })
+  }
+
+  const btnsave =(id) =>{
+    save.job = id;
+
+    const headers = {
+      headers:
+      { 'Authorization': `token ${token}` }
+    }
+    axios.post(URL2 , save , headers)
+    .then((res)=>{
+      setsave(res.data)
+      console.log("bookmark done");
+    }).catch("error")
   }
 
   return (
@@ -125,7 +145,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='d-flex'>
+        <div className=' mb-5'>
           {
             search && search.map((name, index) => {
               return (
@@ -143,11 +163,14 @@ const Home = () => {
                       </div>
                       <div>
                         {
-                          name.is_applied?
+                          name.is_applied= true || false?
                             <button type="button" className='btn4'>applied</button> :
                             <button type="button" onClick={() => btnapply(name.id)} className='btn4'>apply</button>
                         }
-                        <button className='btn4'>Save</button>
+                        {name.is_status = false || true?
+                        <button className='btn4'>Saved</button> :
+                        <button className='btn4' onClick={()=>btnsave(name.id)}>Save</button> 
+                        }
                       </div>
                     </div>
                   </div>
