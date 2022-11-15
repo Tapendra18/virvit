@@ -10,7 +10,6 @@ const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/change-password/"
 
 const Home = () => {
 
-
     let data = JSON.parse(window.localStorage.getItem('loginUser'))
     const [password, setpassword] = useState({});
     

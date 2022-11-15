@@ -140,7 +140,7 @@ const Home = () => {
           <div className='col-6 mt-4 fs-5 d-flex justify-content-around align-items-center'>
             <div>
               <BsBookmarkFill />
-              <a className='fw-normal text-decoration-none icon-set' href="#!">Saved Jobs</a>
+              <a className='fw-normal text-decoration-none icon-set' href="/candidateview">Saved Jobs</a>
             </div>
             <div>
               <BsShieldFill />
@@ -171,11 +171,11 @@ const Home = () => {
                       </div>
                       <div>
                         {
-                          name.is_applied= true || false?
+                          name.is_applied?
                             <button type="button" className='btn4'>applied</button> :
                             <button type="button" onClick={() => btnapply(name.id)} className='btn4'>apply</button>
                         }
-                        {name.is_status = false || true?
+                        {name.is_status?
                         <button className='btn4'>Saved</button> :
                         <button className='btn4' onClick={()=>btnsave(name.id)}>Save</button> 
                         }
