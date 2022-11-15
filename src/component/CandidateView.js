@@ -8,6 +8,8 @@ import axios from "axios"
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+
+const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
 const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/?user=130"
 const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/?user=130"
 const Home = () => {
@@ -52,12 +54,12 @@ const Home = () => {
                               <div key={index} className='border border-primary w-100 rounded-4 mt-3'>
                                  <div className='d-flex justify-content-between align-items-center mx-2'>
                                     <div>
-                                       <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
+                                       <h6 className='mt-4 mx-4 search-test'>{name.job_detail.organisation_detail.description}</h6>
                                        <h6 className='mx-4 search-test2'>
-                                          {name.title}
+                                          {name.job_detail.title}
                                        </h6>
-                                       <p className='mx-4 exp-text'>{name.experiance_from} - {name.experiance_to} years experience</p>
-                                       <p className='mx-4 sal-text'>SGD {name.min_salary} - {name.max_salary}</p>
+                                       <p className='mx-4 exp-text'>{name.job_detail.experiance_from} - {name.job_detail.experiance_to} years experience</p>
+                                       <p className='mx-4 sal-text'>SGD {name.job_detail.min_salary} - {name.job_detail.max_salary}</p>
                                     </div>
 
                                     <div>
@@ -82,12 +84,12 @@ const Home = () => {
                               <div key={index} className='border border-primary w-100 rounded-4 mt-3'>
                                  <div className='d-flex justify-content-between align-items-center mx-2'>
                                     <div>
-                                       <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
+                                       <h6 className='mt-4 mx-4 search-test'>{name.job_detail.organisation_detail.description}</h6>
                                        <h6 className='mx-4 search-test2'>
-                                          {name.title}
+                                          {name.job_detail.title}
                                        </h6>
-                                       <p className='mx-4 exp-text'>{name.experiance_from} - {name.experiance_to} years experience</p>
-                                       <p className='mx-4 sal-text'>SGD {name.min_salary} - {name.max_salary}</p>
+                                       <p className='mx-4 exp-text'>{name.job_detail.experiance_from} - {name.job_detail.experiance_to} years experience</p>
+                                       <p className='mx-4 sal-text'>SGD {name.job_detail.min_salary} - {name.job_detail.max_salary}</p>
                                     </div>
 
                                     <div>

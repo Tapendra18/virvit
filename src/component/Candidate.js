@@ -127,6 +127,7 @@ const Home = () => {
 
           <div className='col-3'>
             <button type="submit" className='btn4'>Search</button>
+            <button type="button" className="btn4">Clear</button>
           </div>
         </form>
 
