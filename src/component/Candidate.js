@@ -148,7 +148,7 @@ const Home = () => {
             </div>
             <div>
               <FaBell />
-              <a className='fw-normal text-decoration-none icon-set' href="#!">Job Alert</a>
+              <a className='fw-normal text-decoration-none icon-set' href="/notification">Job Alert</a>
             </div>
           </div>
         </div>

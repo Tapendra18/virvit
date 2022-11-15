@@ -534,3 +534,16 @@ div label.icon{
   margin-left:  40px; 
   cursor: pointer;
 }
+
+div button.candiButton{
+    border: none;
+    color: gray;
+    background-color: #fff;
+    ;
+}
+
+div button.candiCount{
+   color: #b1afaf;
+   background-color: #0b2cec;
+    border: none;
+}
