@@ -6,7 +6,7 @@ import { useState } from 'react'
 import axios from 'axios'
 // import ChangePassword from "./ChangePassword"
 // const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/forgot-password/"
-const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/change-password/"
+// const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/change-password/"
 
 const Home = () => {
 
@@ -48,7 +48,7 @@ const Home = () => {
                 { 'Authorization': `token ${token}` }
         }
         console.log(password)
-        axios.post(baseUrl, password, headers)
+        axios.post(`${process.env.REACT_APP_BASE_URL}/change-password/`, password, headers)
             .then(res => {
                 console.log(res)
             })

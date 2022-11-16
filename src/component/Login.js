@@ -12,7 +12,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
-const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
+// const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/login/";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -96,7 +96,7 @@ const Login = () => {
 
         else {
             axios
-                .post(baseURL, formData)
+                .post(`${process.env.REACT_APP_BASE_URL}/login/`, formData)
                 .then((res) => {
                     //  console.log(res.formData))
                     window.localStorage.setItem("loginUser", JSON.stringify(res.data));
@@ -127,7 +127,7 @@ const Login = () => {
 
         else {
             axios
-                .post(baseURL, CandidateData)
+                .post(`${process.env.REACT_APP_BASE_URL}/login/`, CandidateData)
                 .then(res => console.log(res.data))
             localStorage.setItem("loginUser", JSON.stringify(CandidateData));
             navigate("/candidate")
@@ -193,7 +193,7 @@ const Login = () => {
 
                                     <div className='row'>
                                         <div className="col d-flex justify-content-end mx-4">
-                                            <a className='text-decoration-none mx-4 fw-normal fs-6' href="/privacy">Forgot password ?</a>
+                                            <a className='text-decoration-none mx-4 fw-normal fs-6' href="/forgetpassword">Forgot password ?</a>
                                         </div>
                                     </div>
 

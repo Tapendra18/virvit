@@ -9,9 +9,9 @@ import { FaBell } from "react-icons/fa";
 import {ImCancelCircle} from "react-icons/im"
 import axios from 'axios'
 
-const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
-const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/";
-const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/";
+// const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/";
+// const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/";
+// const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/";
 
 const Home = () => {
   let local = JSON.parse(window.localStorage.getItem('loginUser'))
@@ -29,10 +29,10 @@ const Home = () => {
   const [save , setsave] = useState({
     user : local.id,
     job : null
-  })
-  const [ inputValue, setInputValue ] = useState(""); 
+  }) 
+  const [show , setShow] = useState("")
+  const [type , setType] = useState("");
 
-  // const [Saved , setsaved] = useState({});
   const token = local.token;
 
   useEffect(() => {
@@ -67,10 +67,11 @@ const Home = () => {
       setArea("the Area, city or town is required")
     }
     else {
-      axios.post(baseURL, jobData)
+      axios.post(`${process.env.REACT_APP_BASE_URL}/job-filter/`, jobData)
         .then((res) => {
           setSearch(res.data);
           window.localStorage.setItem("search key", JSON.stringify(res.data));
+          setShow(prev => !prev)
         })
     }
   };
@@ -82,7 +83,7 @@ const Home = () => {
       headers:
         { 'Authorization': `token ${token}` }
     }
-    axios.post(URL, Apply, headers)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/apply-job/`, Apply, headers)
       .then((res) => {
         setApply(res.Apply);
       })
@@ -95,7 +96,7 @@ const Home = () => {
       headers:
       { 'Authorization': `token ${token}` }
     }
-    axios.post(URL2 , save , headers)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/bookmark-job/`, save , headers)
     .then((res)=>{
       setsave(res.data)
       console.log("bookmark done");
@@ -103,31 +104,33 @@ const Home = () => {
   }
 
   const handleCancel =()=>{
-    setInputValue("");
+    if(getData('title').length !==0 && (getData('area').length !== 0)){
+      setType(prev => !prev)
+    }
   }
 
   return (
     <>
       <HeaderEdit />
       <div className='container-fluid Div-top'>
-        <form onSubmit={Onsearch} className='row d-flex justify-content-around align-items-center grid-2'>
+        <form  onSubmit={Onsearch} className='row d-flex justify-content-around align-items-center grid-2'>
           <div className='col-3 position-relative'>
             <span className='position-absolute IconSet'><FaSearch/></span>
             <input className='form-control shadow-none border-dark mx-4 lalala' value={getData('title')} onChange={seraching} placeholder=' Job Title, Keyword or Company'/>
-            <i className='position-absolute cancelSet2'><ImCancelCircle/></i>
-            {job && <h2 className='text-start mx-4' style={{ color: 'red', fontSize: 18, }}>{job}</h2>}
+            {type ? <i className='position-absolute cancelSet2' onClick={handleCancel}><ImCancelCircle/></i> : ""}
+            {job && <h2 className='text-start mx-4' style={{color: 'red', fontSize: 18}}>{job}</h2>}
           </div>
 
           <div className='col-3 position-relative'>
             <span className='position-absolute IconSet2 border-start-0'><ImLocation/></span>
             <input className='form-control shadow-none border-dark mx-1 lalala' value={getData('area')} onChange={Area} placeholder='Area city or town'/>
-            <i className='position-absolute cancelSet' onClick={handleCancel}><ImCancelCircle/></i>
-            {area && <h2 className='text-start mx-4' style={{ color: 'red', fontSize: 18, }}>{area}</h2>}
+            {show ? <i className='position-absolute cancelSet' onClick={handleCancel}><ImCancelCircle/></i> : ""}
+            {area && <h2 className='text-start mx-4' style={{color:'red', fontSize:18}}>{area}</h2>}  
           </div>
 
           <div className='col-3'>
             <button type="submit" className='btn4'>Search</button>
-            <button type="button" className="btn4">Clear</button>
+            {show ? <button type="button" className="btn4">Clear</button> : "" }
           </div>
         </form>
 
@@ -154,7 +157,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className=' mb-5'>
+        <div className='mb-5'>
           {
             search && search.map((name, index) => {
               return (

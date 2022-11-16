@@ -9,9 +9,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 
-const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
-const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/?user=130"
-const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/?user=130"
+// const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
+// const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/?user=130";
+// const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/?user=130";
 const Home = () => {
    const [search, setSearch] = useState("");
    const [save, setsave] = useState("");
@@ -22,7 +22,7 @@ const Home = () => {
          { 'Authorization': `token ${token}` }
    }
    useEffect(() => {
-      axios.get(URL, headers)
+      axios.get(`${process.env.REACT_APP_BASE_URL}/apply-job/?user=130`, headers)
          .then((res) => {
             setSearch(res.data.results);
             // console.log(search)
@@ -30,7 +30,7 @@ const Home = () => {
    }, [])
 
    useEffect(() => {
-      axios.get(URL2, headers)
+      axios.get(`${process.env.REACT_APP_BASE_URL}/bookmark-job/?user=130`, headers)
          .then((res) => {
             setsave(res.data.results);
          })

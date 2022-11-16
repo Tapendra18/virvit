@@ -13,6 +13,7 @@ import Privacy from "./component/Privacy"
 import ChangePassword from "./component/ChangePassword"
 import Login2 from "./component/login2";
 import Notification from "./component/Notification";
+import ForgetPassword from "./component/ForgetPassword";
 // import ProfileEdit from "./component/ProfileEdit"
 import ViewProfile from "./component/ViewProfile"
 import './App.css'
@@ -56,8 +57,8 @@ function App() {
         <Route path="/login2" element={<Login2/>} />
         <Route path="/viewprofile" element={<ViewProfile/>} />
         <Route path="/notification" element={<Notification/>} />
-
-
+        <Route path="/forgetpassword" element={<ForgetPassword/>} />
+  
         {/* <Route path="/profileEdit" element={<ProfileEdit/>}/> */}
       </Routes>
 
