@@ -1,46 +1,29 @@
 import { Route, Routes } from "react-router-dom"
-import Login from "./component/Login";
-import Register from "./component/Register";
-import Emp from "./component/Emp";
-import CandidateLogin from "./component/CandidateLogin"
-import Candidate from "./component/Candidate"
-import CandidateView from "./component/CandidateView"
-import Landing from "./component/Landing"
-import LandingAbout from "./component/LandingAbout"
-import Contact from "./component/Contact"
-import EditProfile from "./component/EditProfile"
-import Privacy from "./component/Privacy"
-import ChangePassword from "./component/ChangePassword"
-import Login2 from "./component/login2";
-import Notification from "./component/Notification";
-import ForgetPassword from "./component/ForgetPassword";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Emp from "./components/Emp";
+import CandidateLogin from "./components/CandidateLogin"
+import Candidate from "./components/Candidate"
+import CandidateView from "./components/CandidateView"
+import Landing from "./components/Landing"
+import LandingAbout from "./components/LandingAbout"
+import Contact from "./components/Contact"
+import EditProfile from "./components/EditProfile"
+import Privacy from "./components/Privacy"
+import ChangePassword from "./components/ChangePassword"
+import Login2 from "./components/login2";
+import Notification from "./components/Notification";
+import ForgetPassword from "./components/ForgetPassword";
 // import ProfileEdit from "./component/ProfileEdit"
-import ViewProfile from "./component/ViewProfile"
+import ViewProfile from "./components/ViewProfile"
 import './App.css'
+// import {useGetDataQuery} from './services/Post';
 
 function App() {
  
+
   return (
     <>
-
-      {/* <nav>
-        <ul className="d-flex justify-content-between">
-          <li><Link to="/search">Home</Link></li>
-          <li><Link to="/emp">Emp</Link></li>
-          <li> <Link to="/register">Register</Link> </li>
-          <li> <Link to="/login">Login</Link> </li>
-          <li> <Link to="/candidateview">CandidateView</Link> </li>
-          <li> <Link to="/candidatelogin">Candidatelogin</Link> </li>
-          <li> <Link to="/">Landing</Link> </li>
-          <li> <Link to="/about">LandingAbout</Link> </li>
-          <li> <Link to="/contact">Contact</Link> </li>
-          <li> <Link to="/editprofile">EditProfile</Link> </li>
-          <li> <Link to="/privacy">Privacy</Link> </li>
-
-        </ul>
-      </nav> */}
-
-
       <Routes>
         <Route path="/candidate" element={<Candidate />} />
         <Route path="/register" element={<Register />} />
@@ -58,14 +41,9 @@ function App() {
         <Route path="/viewprofile" element={<ViewProfile/>} />
         <Route path="/notification" element={<Notification/>} />
         <Route path="/forgetpassword" element={<ForgetPassword/>} />
-  
         {/* <Route path="/profileEdit" element={<ProfileEdit/>}/> */}
       </Routes>
-
     </>
-
-
-
   );
 }
 

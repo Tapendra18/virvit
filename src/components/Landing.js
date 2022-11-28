@@ -27,7 +27,7 @@ const responsive = {
     }
 };
 const Landing = () => {
-    const [show , setshow] = useState(false)
+    const [show, setshow] = useState(false)
     const [jobData, setjobData] = useState({});
     const [search, setSearch] = useState([]);
     const [job, setjob] = useState(false);
@@ -75,16 +75,16 @@ const Landing = () => {
                     <div className='row mx-5'>
                         <div className='col-12 d-flex mt-5 '>
                             <div className='w-25 mx-3'>
-                            <input className='form-control shadow-none border-dark mt-2 mx-3' value={getData('title')} onChange={seraching} placeholder='Job Title, Keyword or Company' />
-                            {job && <h2 className='text-start mx-4 mt-2' style={{ color: 'red', fontSize: 18, }}>{job}</h2>}
+                                <input className='form-control shadow-none border-dark mt-2 mx-3' value={getData('title')} onChange={seraching} placeholder='Job Title, Keyword or Company' />
+                                {job && <h2 className='text-start mx-4 mt-2' style={{ color: 'red', fontSize: 18, }}>{job}</h2>}
                             </div>
-                            
+
                             <div className='w-25 mx-3'>
-                                <input className='form-control shadow-none border-dark mt-2 mx-3' value={getData('area')} onChange={Area} placeholder='Area city or town'/>
+                                <input className='form-control shadow-none border-dark mt-2 mx-3' value={getData('area')} onChange={Area} placeholder='Area city or town' />
                                 {area && <h2 className='text-start mx-4 mt-2' style={{ color: 'red', fontSize: 18, }}>{area}</h2>}
                             </div>
                             <div>
-                            <button className='btn-3 mt-2 mx-5'>Search</button>
+                                <button className='btn-3 mt-2 mx-5'>Search</button>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@ const Landing = () => {
                     <span>LATEST JOB OPENING</span>
                 </div>
             </div>
-            { show ?  <div className='d-flex'>
+            {show ? <div className='d-flex'>
                 {search && search.map((name) => {
                     return (
                         <>
@@ -120,79 +120,79 @@ const Landing = () => {
                         </>)
                 })
                 }
-            </div>   : 
-            
-            <Carousel responsive={responsive}
-            infinite={true}
-            draggable={false}
-            swipeable={true}
-            showDots={true}
-            centerMode={true}
-            autoPlay={true}
-            autoPlaySpeed={4000}
-            keyBoardControl={true}
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            dotListClass="custom-dot-list-style"
-            itemClass='carousel-item-padding-40-px'
-            containerClass="carousel-container"
-             >
-            <slide className='d-flex border-remove' interval={4000}>
-                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                    <div className='mt-3 mx-4 mb-4'>
-                        <span className='mt-3'>back End Developer</span>
-                        <h5>East</h5>
-                        <h5>SGD- 7,000-8,000</h5>
-                        <h5>4-5 year exp</h5>
-                    </div>
+            </div> :
 
-                </form>
+                <Carousel responsive={responsive}
+                    infinite={true}
+                    draggable={false}
+                    swipeable={true}
+                    showDots={true}
+                    centerMode={true}
+                    autoPlay={true}
+                    autoPlaySpeed={4000}
+                    keyBoardControl={true}
+                    removeArrowOnDeviceType={["tablet", "mobile"]}
+                    dotListClass="custom-dot-list-style"
+                    itemClass='carousel-item-padding-40-px'
+                    containerClass="carousel-container"
+                >
+                    <slide className='d-flex border-remove' interval={4000}>
+                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
+                            <div className='mt-3 mx-4 mb-4'>
+                                <span className='mt-3'>back End Developer</span>
+                                <h5>East</h5>
+                                <h5>SGD- 7,000-8,000</h5>
+                                <h5>4-5 year exp</h5>
+                            </div>
 
-                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                    <div className='mt-3 mx-4 mb-4'>
-                        <span className='mt-3'>back End Developer</span>
-                        <h5>East</h5>
-                        <h5>SGD- 7,000-8,000</h5>
-                        <h5>4-5 year exp</h5>
-                    </div>
-                </form>
+                        </form>
 
-                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                    <div className='mt-3 mx-4 mb-4'>
-                        <span className='mt-3'>back End Developer</span>
-                        <h5>East</h5>
-                        <h5>SGD- 7,000-8,000</h5>
-                        <h5>4-5 year exp</h5>
-                    </div>
-                </form>
+                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
+                            <div className='mt-3 mx-4 mb-4'>
+                                <span className='mt-3'>back End Developer</span>
+                                <h5>East</h5>
+                                <h5>SGD- 7,000-8,000</h5>
+                                <h5>4-5 year exp</h5>
+                            </div>
+                        </form>
 
-                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                    <div className='mt-3 mx-4 mb-4'>
-                        <span className='mt-3'>back End Developer</span>
-                        <h5>East</h5>
-                        <h5>SGD- 7,000-8,000</h5>
-                        <h5>4-5 year exp</h5>
-                    </div>
-                </form>
+                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
+                            <div className='mt-3 mx-4 mb-4'>
+                                <span className='mt-3'>back End Developer</span>
+                                <h5>East</h5>
+                                <h5>SGD- 7,000-8,000</h5>
+                                <h5>4-5 year exp</h5>
+                            </div>
+                        </form>
 
-                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                    <div className='mt-3 mx-4 mb-4'>
-                        <span className='mt-3'>back End Developer</span>
-                        <h5>East</h5>
-                        <h5>SGD- 7,000-8,000</h5>
-                        <h5>4-5 year exp</h5>
-                    </div>
-                </form>
+                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
+                            <div className='mt-3 mx-4 mb-4'>
+                                <span className='mt-3'>back End Developer</span>
+                                <h5>East</h5>
+                                <h5>SGD- 7,000-8,000</h5>
+                                <h5>4-5 year exp</h5>
+                            </div>
+                        </form>
 
-                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                    <div className='mt-3 mx-4 mb-4'>
-                        <span className='mt-3'>back End Developer</span>
-                        <h5>East</h5>
-                        <h5>SGD- 7,000-8,000</h5>
-                        <h5>4-5 year exp</h5>
-                    </div>
-                </form>
-            </slide>      
-        </Carousel>
+                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
+                            <div className='mt-3 mx-4 mb-4'>
+                                <span className='mt-3'>back End Developer</span>
+                                <h5>East</h5>
+                                <h5>SGD- 7,000-8,000</h5>
+                                <h5>4-5 year exp</h5>
+                            </div>
+                        </form>
+
+                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
+                            <div className='mt-3 mx-4 mb-4'>
+                                <span className='mt-3'>back End Developer</span>
+                                <h5>East</h5>
+                                <h5>SGD- 7,000-8,000</h5>
+                                <h5>4-5 year exp</h5>
+                            </div>
+                        </form>
+                    </slide>
+                </Carousel>
 
             }
             <Footer />

@@ -4,7 +4,7 @@ import HeaderEdit from './HeaderEdit'
 import Privacy from "./Privacy"
 import axios from 'axios'
 import { HiOutlinePaperClip } from "react-icons/hi";
-import { FaUpload } from "react-icons/fa";
+import {  FaUpload } from "react-icons/fa";
 import { AiFillPlusCircle } from "react-icons/ai"
 import { ImUpload2 } from "react-icons/im"
 import { MdOutlineCancelPresentation } from "react-icons/md"
@@ -14,6 +14,7 @@ import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
+import Multiselect from 'multiselect-react-dropdown';
 
 // const baseUrl = "https://virvit.mydevpartner.website/vvapi/v1/user-profile-update/"
 
@@ -77,19 +78,19 @@ const Home = () => {
     const saved = (e) => {
         e.preventDefault();
         let formData = new FormData();
-        formData.append('first_name', userData.first_name)
-        formData.append('last_name', userData.last_name)
-        formData.append('email', userData.email)
-        formData.append('mobile', userData.mobile)
-        formData.append('designation', userData.designation)
-        formData.append('dob', userData.dob)
-        formData.append('gender', userData.gender)
-        formData.append('job_preference', userData.job_preference)
-        formData.append('salary', userData.salary)
-        formData.append('currency', userData.currency)
-        formData.append('experience', userData.experience)
-        formData.append('dial_code', '+91')
-        formData.append('about', userData.about)
+        formData.append('first_name', userData.first_name);
+        formData.append('last_name', userData.last_name);
+        formData.append('email', userData.email);
+        formData.append('mobile', userData.mobile);
+        formData.append('designation', userData.designation);
+        formData.append('dob', userData.dob);
+        formData.append('gender', userData.gender);
+        formData.append('job_preference', userData.job_preference);
+        formData.append('salary', userData.salary);
+        formData.append('currency', userData.currency);
+        formData.append('experience', userData.experience);
+        formData.append('dial_code', '+91');
+        formData.append('about', userData.about);
         formData.append('image', userData.image);
         console.log(userData, 'form dtatatatat');
         const headers = {
@@ -125,7 +126,7 @@ const Home = () => {
         setwork(newFormValues);
     }
 
-    const handlework = (e) => {
+    const handlework = () => {
         const exp = [...work, []]
         setwork(exp);
     }
@@ -147,6 +148,86 @@ const Home = () => {
             .then((response) => setcountry(response.data.results))
             .catch((error) => console.log(error))
     }, [])
+
+    useEffect(() => {
+        const fetchSkills = async () => {
+            const response = await fetch(
+                'https://virvit.mydevpartner.website/vvapi/v1/skill/'
+            );
+            const data = await response.json();
+            console.log(data.results);
+            setskill(data.results);
+        };
+
+        const fetchstate = async () => {
+            const response = await fetch(
+                'https://virvit.mydevpartner.website/vvapi/v1/state/'
+            );
+            const data = await response.json();
+            console.log(data.results);
+            setstate(data.results);
+        }
+
+        const fetchJobs = async ()=> {
+            const response = await fetch(
+                'https://virvit.mydevpartner.website/vvapi/v1/job-preference/'
+            );
+            const data = await response.json();
+            console.log(data.results);
+            setjob(data.results);
+        }
+
+        const fetchCountry = async ()=>{
+            const response = await fetch(
+                'https://virvit.mydevpartner.website/vvapi/v1/country/'
+            );
+            const data = await response.json();
+            console.log(data.results);
+            setcountry(data.results);
+        }
+
+        fetchJobs();
+        fetchSkills();
+        fetchstate();
+        fetchCountry();
+    }, [])
+
+    const changeSkills = () => {
+        let selectskill = skills.map(item => {
+            return item.id
+        })
+        console.log(selectskill, 'job iddd')
+        setskill(selectskill)
+        console.log(selectskill)
+    }
+
+    const changejob = () => {
+        let selectjob = job.map(item => {
+            return item.id
+        })
+        console.log(selectjob, 'job iddd')
+        setjob(selectjob)
+        console.log(selectjob)
+    }
+
+    const changeCountry = () => {
+        let selectcountry = country.map(item => {
+            return item.id
+        })
+        console.log(selectcountry, 'job iddd')
+        setjob(selectcountry)
+        console.log(selectcountry)
+    }
+
+    const changeState = () =>{
+        let selectstate = state.map(item => {
+            return item.id
+        })
+        console.log(selectstate ,"state jjjg");
+        setstate(selectstate);
+        console.log(selectstate);
+    }
+
     return (
         <>
             <HeaderEdit />
@@ -201,14 +282,24 @@ const Home = () => {
                                                             </div>
 
                                                             <div className='d-flex justify-content-between '>
-                                                                <select id='job_preference' onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
+                                                                {/* <select id='job_preference' onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
                                                                     {
                                                                         job.map((jobs) => (
                                                                             <option key={jobs.id} defaultValue={jobs.id}>
                                                                                 {jobs.name}
                                                                             </option>))
                                                                     }
-                                                                </select>
+                                                                </select> */}
+                                                                <Multiselect
+                                                                    options={job} // Options to display in the dropdown
+                                                                    selectedValues='' // Preselected value to persist in dropdown
+                                                                    onSelect={changejob} // Function will trigger on select event                                               
+                                                                    displayValue="skill"
+                                                                    id='id'
+                                                                    placeholder='key job'
+                                                                    showCheckbox
+                                                                    className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50'
+                                                                />
 
                                                                 <input id='salary' type="number" placeholder='salary' onChange={inputHandler} defaultValue={userData.salary} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100' />
 
@@ -231,7 +322,7 @@ const Home = () => {
                                                 </div>
                                                 <div className='col-3 mx-5 Edit-pho'>
                                                     {/* <img onClick={handleImage} src='./image/Employer_login.png' className='rounded-circle Edit-img' alt='image1'></img> */}
-                                                    < img src={`${userData.image}`} alt={userData.image} width="200px" height="200px" className="border rounded-circle" />
+                                                    <img src={`${userData.image}`} alt={userData.image} width="200px" height="200px" className="border rounded-circle" />
                                                     <div>
                                                         <input accept="image/png, image/gif, image/jpeg" id='imageFile' onChange={handleImage} type='file' />
                                                     </div>
@@ -275,25 +366,37 @@ const Home = () => {
                                                                             <div className='container'>
                                                                                 <div className='row '>
                                                                                     <div className='col-6'>
-                                                                                        <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
-                                                                                            {
-                                                                                                country.map((states) => (
-                                                                                                    <option key={states.id} value={states.id}>
-                                                                                                        {states.name}
-                                                                                                    </option>
-                                                                                                ))
-                                                                                            }
-                                                                                        </select>
+
+                                                                                        <Multiselect
+                                                                                            options={state} // Options to display in the dropdown
+                                                                                            selectedValues='' // Preselected value to persist in dropdown
+                                                                                            onSelect={changeState} // Function will trigger on select event                                               
+                                                                                            displayValue="skill"
+                                                                                            id='id'
+                                                                                            placeholder='key state'
+                                                                                            showCheckbox
+                                                                                            className='form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1'
+                                                                                        />
                                                                                     </div>
                                                                                     <div className='col-6'>
-                                                                                        <select onChange={inputHandler} type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
+                                                                                        {/* <select onChange={inputHandler} type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
                                                                                             {
                                                                                                 state.map((countrys) => (
                                                                                                     <option key={countrys.id} value={countrys.id}>
                                                                                                         {countrys.name}
                                                                                                     </option>))
                                                                                             }
-                                                                                        </select>
+                                                                                        </select> */}
+                                                                                        <Multiselect
+                                                                                            options={country} // Options to display in the dropdown
+                                                                                            selectedValues='' // Preselected value to persist in dropdown
+                                                                                            onSelect={changeCountry} // Function will trigger on select event                                               
+                                                                                            displayValue="skill"
+                                                                                            id='id'
+                                                                                            placeholder='key Country'
+                                                                                            showCheckbox
+                                                                                            className='form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1'
+                                                                                        />
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -380,8 +483,7 @@ const Home = () => {
                                             {/* country , skills resume Part>>>>>>>> */}
                                             <div className='d-flex mt-4'>
                                                 <div className='col-6 hahaha2'>
-                                                    <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
-
+                                                    {/* <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
                                                         {
                                                             state.map((countrys) => (
                                                                 <option key={countrys.id} value={countrys.id}>
@@ -389,26 +491,36 @@ const Home = () => {
                                                                 </option>))
                                                         }
 
-                                                    </select>
-                                                    <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3">
+                                                    </select> */}
+                                                    <Multiselect
+                                                        options={country} // Options to display in the dropdown
+                                                        selectedValues='' // Preselected value to persist in dropdown
+                                                        onSelect={changeCountry} // Function will trigger on select event                                               
+                                                        displayValue="skill"
+                                                        id='id'
+                                                        placeholder='key country'
+                                                        showCheckbox
+                                                        className='form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1'
+                                                    />
+                                                    {/* <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3">
                                                         {
                                                             skills.map((skill) => (
                                                                 <option type="checkbox" key={skill.id} value={skill.id}>
                                                                     <li type="checkbox">{skill.name}</li>
                                                                 </option>))
-                                                        }
+                                                        } */}
+                                                    {/* </select> */}
 
-                                                        {/* {skills.map((obj, index) => (
-                                                            <li key={index}>
-                                                                <checkbox
-                                                                    obj={obj}
-                                                                    onChange={(item) => {
-                                                                        userData(skills.map((d) => (d.order === item.order ? item : d)));
-                                                                    }}
-                                                                />
-                                                            </li>
-                                                        ))} */}
-                                                    </select>
+                                                    <Multiselect
+                                                        options={skills} // Options to display in the dropdown
+                                                        selectedValues='' // Preselected value to persist in dropdown
+                                                        onSelect={changeSkills} // Function will trigger on select event                                               
+                                                        displayValue="skill"
+                                                        id='id'
+                                                        placeholder='key Skills'
+                                                        showCheckbox
+                                                        className='form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1'
+                                                    />
                                                 </div>
 
                                                 <div className='col-6 position-relative upload-resumee'>

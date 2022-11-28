@@ -9,7 +9,7 @@ import axios from 'axios'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { HiOutlinePaperClip } from "react-icons/hi";
-
+import Multiselect from 'multiselect-react-dropdown';
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/new-user-signup/";
 
@@ -23,7 +23,7 @@ const Navbar = () => {
     const [passworderror, setpasswordError] = useState(false);
     const [Cpassworderror, setCpasswordError] = useState(false);
     const [Eerror, setEError] = useState(false);
-    const [skills, setskill] = useState([])
+    const [skill, setskill] = useState([])
     const [job, setjob] = useState([])
     const [ferror, setFerror] = useState(false);
     const [lerror, setlerror] = useState(false);
@@ -41,7 +41,8 @@ const Navbar = () => {
     const [Personerror, setPersonerror] = useState(false);
     const [Phoneerror, setPhoneerror] = useState(false)
     const [Registererror, setRegistererror] = useState(false)
-
+    const [resume, setResume] = useState([]);
+    const [skillList , setSkillList] = useState();
 
     const toggle = () => {
         setVisible(!isVisible);
@@ -54,42 +55,66 @@ const Navbar = () => {
     const onSignupSubmit = (event) => {
         event.preventDefault();
 
-        signupName['device_1'] = 1;
+        // signupName['device_1'] = 1;
         EmpsignupName['device_1'] = 1;
+        let formdata = new FormData();
+        formdata.append('first_name', signupName.first_name);
+        formdata.append('last_name', signupName.last_name);
+        formdata.append('email', signupName.email);
+        formdata.append('gender', signupName.gender);
+        formdata.append('dob', signupName.dob);
+        formdata.append('start_work', signupName.start_work);
+        formdata.append('skillList', JSON.stringify(skillList));
+        formdata.append('job_preference', signupName.job_preference);
+        formdata.append('password', signupName.password);
+        formdata.append('cpassword', signupName.cpassword);
+        formdata.append('device_id', '1');
+        formdata.append('role', 'Candidate');
+        formdata.append('dial_code', '+91');
+        formdata.append('country_code','+91');
+        formdata.append('mobile', signupName.mobile);
+        formdata.append('resume', resume);
         if (getSignUpData('first_name').length === 0) {
             setFerror("enter first Name")
         } if (getSignUpData('last_name').length === 0) {
             setlerror("enter last Name")
         } if (getSignUpData('email').length === 0) {
             setEmailerror("enter email")
-        } if (getSignUpData('Gender').length === 0) {
+        } if (getSignUpData('gender').length === 0) {
             setGendererror("enter gender")
         } if (getSignUpData('Dob').length === 0) {
             setDOBerror("enter DOB")
         } if (getSignUpData('mobile').length === 0) {
             setMobileerror("enter Mobile Number")
-        } if (getSignUpData('skill').length === 0) {
+        }
+        if (getSignUpData('skill').length === 0) {
             setSkillerror("Enter skill ")
-        } if (getSignUpData('job_Preference').length === 0) {
+        } 
+        if (getSignUpData('job_preference').length === 0) {
             setJoberror("enter job")
-        } if (getSignUpData('start_Work').length === 0) {
+        } if (getSignUpData('start_work').length === 0) {
             setWorkerror("enter Work ")
         } if (getSignUpData('resume').length === 0) {
             setResumeerror("enter resume")
         } if (getSignUpData('password').length === 0) {
             setpasserror("enter password")
-        } if (getSignUpData('cPassword').length === 0) {
+        } if (getSignUpData('cpassword').length === 0) {
             setCerror("enter Confirm password")
-        }
-        else {
+        } if (getSignUpData('password') !== getSignUpData('cpassword')){
+            // console.log('ggggggg');
+        } else {
             axios
-                .post(baseURL, signupName)
+                .post(baseURL, formdata)
                 .then(data => console.log(data.data))
                 .catch(error => console.log(error))
-            console.log('SignUpData', signupName)
+            console.log('form data....', formdata);
         }
-        // Submit here
     };
+
+    const Resumehandle = (e) => {
+        setResume(e.target.files[0]);
+        console.log(e.target.files[0]);
+    }
 
     const getSignUpData = (key) => {
         return signupName.hasOwnProperty(key) ? signupName[key] : '';
@@ -151,7 +176,6 @@ const Navbar = () => {
         if (!passwordValidator(e.target.value)) {
             setpasswordError("password is not strong")
         } else setpasswordError(false)
-
         setSignUpData('password', e.target.value)
     }
 
@@ -163,7 +187,7 @@ const Navbar = () => {
             setCpasswordError("password is not strong")
         } else setCpasswordError(false)
 
-        setSignUpData('cPassword', e.target.value)
+        setSignUpData('cpassword', e.target.value)
     }
     // Emp validation>>>>>>
 
@@ -177,20 +201,40 @@ const Navbar = () => {
 
         } else setEError(false)
         setEmpSignUpData('Email_id', e.target.value)
-
         // setSignUpData('First_name', e.target.value)
     }
 
-    useEffect(function () {
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/skill/")
-            .then((response) => setskill(response.data.results))
-            .catch((error) => console.log(error))
+    useEffect(() => {
+        const fetchSkills = async () => {
+            const response = await fetch(
+                'https://virvit.mydevpartner.website/vvapi/v1/skill/'
+            );
+            const data = await response.json();
+            console.log(data.results);
+            setskill(data.results);
+        };
 
-        axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
-            .then((response) => setjob(response.data.results))
-            .catch((error) => console.log(error))
+        const fetchJobs = async () => {
+            const response = await fetch(
+                'https://virvit.mydevpartner.website/vvapi/v1/job-preference/'
+            );
+            const data = await response.json();
+            console.log(data.results);
+            setjob(data.results);
+        }
+        fetchSkills();
+        fetchJobs();
+
     }, [])
 
+    const changeSkills = () => {
+        let selectIds = skill.map(item => {
+            return item.id
+        })
+        console.log(selectIds, "skill iddd");
+        setSkillList(selectIds);
+        console.log(selectIds);
+    }
 
     return (
         <>
@@ -205,7 +249,7 @@ const Navbar = () => {
                     <div className="container-fluid ">
                         <div className="row">
                             <div className="col-6">
-                                <form onSubmit={onSignupSubmit} >
+                                <form onSubmit={onSignupSubmit}>
                                     <div className='mx-5'>
 
                                         <input type="text" value={getSignUpData('first_name')} onChange={(e) => setSignUpData('first_name', e.target.value)} placeholder='First Name' className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 mt-4' />
@@ -221,16 +265,16 @@ const Navbar = () => {
 
                                         <div className='row mt-1'>
                                             <div className='col-5'>
-                                                <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example' value={getSignUpData('Gender')} onChange={(e) => setSignUpData('Gender', e.target.value)}>
+                                                <select className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example' value={getSignUpData('gender')} onChange={(e) => setSignUpData('gender', e.target.value)}>
                                                     <option selected>Gender</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                                 {Gendererror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Gendererror}</h2>}
                                             </div>
 
                                             <div className='col-7'>
-                                                <input value={getSignUpData('Dob')} onChange={(e) => setSignUpData('Dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' placeholder='year of birth' minDate={new Date()} format="yyyy-MM-DD" />
+                                                <input value={getSignUpData('dob')} onChange={(e) => setSignUpData('dob', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-50 mx-n2' type='date' placeholder='year of birth' minDate={new Date()} format="yyyy-MM-DD" />
                                                 {DOBerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{DOBerror}</h2>}
                                             </div>
                                         </div>
@@ -238,18 +282,23 @@ const Navbar = () => {
                                         <input type="tel" value={getSignUpData('mobile')} onChange={(e) => setSignUpData('mobile', e.target.value)} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='Phone number' />
                                         {Mobileerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Mobileerror}</h2>}
 
-                                        <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('skill')} onChange={(e) => setSignUpData('skill', e.target.value)} >
-                                            <option >skills</option>
-                                            {
-                                                skills.map((skill) => (
-                                                    <option key={skill.id} value={skill.id}>
-                                                        {skill.name}
-                                                    </option>))
-                                            }
-                                        </select>
+                                        {/* <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('skill')} onChange={(e) => setSignUpData('skill', e.target.value)} > */}
+                                        <div>
+                                            <Multiselect
+                                                options={skill}
+                                                selectedValues={setskill}
+                                                onSelect={changeSkills}
+                                                displayValue="name"
+                                                id='id'
+                                                placeholder='key Skills'
+                                                showCheckbox
+                                                className='mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-75'
+                                            />
+                                        </div>
+
                                         {skillerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{skillerror}</h2>}
 
-                                        <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('job_Preference')} onChange={(e) => setSignUpData('job_Preference', e.target.value)} >
+                                        <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('job_preference')} onChange={(e) => setSignUpData('job_preference', e.target.value)} >
                                             <option selected>Job Preference</option>
                                             {
                                                 job.map((jobs) => (
@@ -260,20 +309,16 @@ const Navbar = () => {
                                         </select>
                                         {joberror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{joberror}</h2>}
 
-                                        <select className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('start_Work')} onChange={(e) => setSignUpData('start_Work', e.target.value)}>
-                                            <option selected>Start Work</option>
-                                            <option value="immediately">immediately</option>
-                                            <option value="15 Days">15 Days</option>
-                                            <option value="30 Days">30 Days</option>
-                                            <option value="Other">Other</option>
-                                        </select>
+                                        <input type="date" className='form-control mt-3 shadow-none  border-start-0 border-end-0 border-top-0 w-75' aria-label='default select example' value={getSignUpData('start_work')} onChange={(e) => setSignUpData('start_work', e.target.value)}>
+                                           
+                                        </input>
                                         {Workerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Workerror}</h2>}
-                                   
+
                                         <div className='position-relative upload-resumee4'>
-                                            <input type="file" id='resume-vedio' accept="application/pdf,application/msword" style={{ display: 'none' }} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={(e) => setSignUpData('resume', e.target.value)} />
-                                            <label className='position-absolute label-resume1 form-control w-75 d-flex justify-content-between' for="resume-vedio">upload resume 
-                                            <HiOutlinePaperClip />
-                                             </label>
+                                            <input type="file" id='resume-vedio' accept="application/pdf,application/msword" style={{ display: 'none' }} className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75' placeholder='resume' value={getSignUpData('resume')} onChange={Resumehandle} />
+                                            <label className='position-absolute label-resume1 form-control w-75 d-flex justify-content-between' for="resume-vedio">upload resume
+                                                <HiOutlinePaperClip />
+                                            </label>
                                             {Resumeerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Resumeerror}</h2>}
                                         </div>
 
@@ -283,7 +328,7 @@ const Navbar = () => {
                                             {passworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{passworderror}</h2>}
                                             {passerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{passerror}</h2>}
 
-                                            <input type={!ConfirmVisible ? "password" : "text"} Name="password2" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cPassword')} onChange={ChandlePassword} />
+                                            <input type={!ConfirmVisible ? "password" : "text"} Name="password2" className='form-control mt-3 shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-75 ' placeholder='Confirm Password' value={getSignUpData('cpassword')} onChange={ChandlePassword} />
                                             <span className='position-absolute icon-Posi-2' onClick={toggleConfirm}>{ConfirmVisible ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
                                             {Cpassworderror && <h2 className='text-start' style={{ color: 'red', fontSize: 15, }}>{Cpassworderror}</h2>}
                                             {Cerror && <h2 className='text-start' style={{ color: 'red', fontSize: 12, }}>{Cerror}</h2>}

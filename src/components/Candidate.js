@@ -15,7 +15,7 @@ import axios from 'axios'
 
 const Home = () => {
   let local = JSON.parse(window.localStorage.getItem('loginUser'))
-
+  
   // let local2=window.localStorage.getItem("search key", JSON.stringify))
   const [data, setdata] = useState({})
   const [jobData, setjobData] = useState({});
@@ -62,7 +62,7 @@ const Home = () => {
   const Onsearch = (e) => {
     e.preventDefault()
     console.log('Search Data', jobData);
-    if (getData('title').length === 0 && (getData('area').length === 0)) {
+    if (getData('title').length === 0 && (getData('area').length === 0)){
       setjob("the job title skill is required")
       setArea("the Area, city or town is required")
     }
