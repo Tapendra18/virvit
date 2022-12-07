@@ -212,7 +212,7 @@ const Login = () => {
                             </div>
                             {/* Image >>>>>> */}
                             <div className="col-6 mt-5">
-                                <img className='w-100 mt-5' src='./image/hiring-process2.png' alt='Candidate' />
+                                <img className='w-100 mt-5' src='./image/hiring-process2.png' alt='Candidate'/>
                             </div>
                         </div>
                     </div>

@@ -311,6 +311,7 @@ button.btn {
 div h6.search-test {
     color: #0b2cec;
     font-size: 21px;
+    cursor: pointer;
 }
 
 div h6.search-test2 {
@@ -565,4 +566,9 @@ div.notifClass{
    /* margin: 5px; */
    margin-bottom: 8px;
    margin-left: 60px;
+}
+
+div.job__Details_Border{
+    width: 1340px;
+    margin-left: 15px;
 }

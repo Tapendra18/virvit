@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import HeaderEdit from './HeaderEdit'
-import Footer from './Footer'
+import React, { useState, useEffect } from 'react';
+import HeaderEdit from './HeaderEdit';
+import Footer from './Footer';
 import { FaSearch } from "react-icons/fa";
 import { ImLocation } from "react-icons/im";
 import { BsBookmarkFill } from "react-icons/bs";
 import { BsShieldFill } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
-import {ImCancelCircle} from "react-icons/im"
-import axios from 'axios'
+import {ImCancelCircle} from "react-icons/im";
+import axios from 'axios';
 
 // const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/";
 // const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/";
 // const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/";
 
 const Home = () => {
-  let local = JSON.parse(window.localStorage.getItem('loginUser'))
+  let local = JSON.parse(window.localStorage.getItem('loginUser'));
   
   // let local2=window.localStorage.getItem("search key", JSON.stringify))
-  const [data, setdata] = useState({})
+  const [data, setdata] = useState({});
   const [jobData, setjobData] = useState({});
   const [search, setSearch] = useState([]);
   const [job, setjob] = useState(false);
@@ -25,12 +25,12 @@ const Home = () => {
   const [Apply, setApply] = useState({
     user: local.id,
     job: null
-  })
+  });
   const [save , setsave] = useState({
     user : local.id,
     job : null
-  }) 
-  const [show , setShow] = useState("")
+  });
+  const [show , setShow] = useState("");
   const [type , setType] = useState("");
 
   const token = local.token;
@@ -50,12 +50,12 @@ const Home = () => {
   };
 
   const seraching = (e) => {
-    setData('title', e.target.value)
+    setData('title', e.target.value);
     // console.log(data3)
   }
 
   const Area = (e) => {
-    setData('area', e.target.value)
+    setData('area', e.target.value);
     // console.log(data3)
   }
 
@@ -63,8 +63,8 @@ const Home = () => {
     e.preventDefault()
     console.log('Search Data', jobData);
     if (getData('title').length === 0 && (getData('area').length === 0)){
-      setjob("the job title skill is required")
-      setArea("the Area, city or town is required")
+      setjob("the job title skill is required");
+      setArea("the Area, city or town is required");
     }
     else {
       axios.post(`${process.env.REACT_APP_BASE_URL}/job-filter/`, jobData)

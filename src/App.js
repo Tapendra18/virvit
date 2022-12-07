@@ -15,13 +15,13 @@ import Login2 from "./components/login2";
 import Notification from "./components/Notification";
 import ForgetPassword from "./components/ForgetPassword";
 // import ProfileEdit from "./component/ProfileEdit"
-import ViewProfile from "./components/ViewProfile"
+import ViewProfile from "./components/ViewProfile";
+import JobDetails from "./components/JobDetails";
 import './App.css'
 // import {useGetDataQuery} from './services/Post';
 
 function App() {
  
-
   return (
     <>
       <Routes>
@@ -41,6 +41,7 @@ function App() {
         <Route path="/viewprofile" element={<ViewProfile/>} />
         <Route path="/notification" element={<Notification/>} />
         <Route path="/forgetpassword" element={<ForgetPassword/>} />
+        <Route path="/job-details" element={<JobDetails/>}/>
         {/* <Route path="/profileEdit" element={<ProfileEdit/>}/> */}
       </Routes>
     </>
