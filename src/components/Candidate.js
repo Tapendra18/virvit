@@ -8,6 +8,8 @@ import { BsShieldFill } from "react-icons/bs";
 import { FaBell } from "react-icons/fa";
 import {ImCancelCircle} from "react-icons/im";
 import axios from 'axios';
+// import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 // const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/";
 // const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/";
@@ -15,8 +17,8 @@ import axios from 'axios';
 
 const Home = () => {
   let local = JSON.parse(window.localStorage.getItem('loginUser'));
-  
   // let local2=window.localStorage.getItem("search key", JSON.stringify))
+  // const navigate = useNavigate();
   const [data, setdata] = useState({});
   const [jobData, setjobData] = useState({});
   const [search, setSearch] = useState([]);
@@ -70,6 +72,7 @@ const Home = () => {
       axios.post(`${process.env.REACT_APP_BASE_URL}/job-filter/`, jobData)
         .then((res) => {
           setSearch(res.data);
+          console.log(res.data)
           window.localStorage.setItem("search key", JSON.stringify(res.data));
           setShow(prev => !prev)
         })
@@ -108,6 +111,14 @@ const Home = () => {
       setType(prev => !prev)
     }
   }
+
+  // const clickHandler =() =>{
+  //   axios.get(URL)
+  //    .then((res)=>{
+  //     console.log(res);
+  //    })
+  //   navigate('/job-details');
+  // }
 
   return (
     <>
@@ -157,15 +168,15 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='mb-5'>
+        <div className='mb-3 row'>
           {
             search && search.map((name, index) => {
               return (
                 <>
-                  <div key={index} className='border border-primary w-50 rounded-4 mt-5 mx-2'>
+                  <div key={index} className='border border-primary w-50 rounded-4 mt-5 mx-2 col-6'>
                     <div className='d-flex justify-content-between align-items-center'>
                       <div>
-                        <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
+                     <Link to={`/candidate/jobdetails/${name.id}`}> <a className='mt-4 mx-4 search-test'  >{name.organisation_detail.name}</a></Link> 
                         <h6 className='mx-4 search-test2'>
                           {name.title}
                         </h6>
@@ -179,7 +190,9 @@ const Home = () => {
                             <button type="button" className='btn4'>applied</button> :
                             <button type="button" onClick={() => btnapply(name.id)} className='btn4'>apply</button>
                         }
-                        {name.is_status?
+
+                        {
+                        name.is_status?
                         <button className='btn4'>Saved</button> :
                         <button className='btn4' onClick={()=>btnsave(name.id)}>Save</button> 
                         }

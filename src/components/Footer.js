@@ -14,10 +14,10 @@ const Footer = () => {
             </div>
 
             <div className=' col-6 d-flex justify-content-end mb-2'>
-              <a href='/'> <img className='social-image mx-2' src='./social-icon/facebook.png' alt='telegram' /></a>
-              <a href='/' className=''><img className='social-image mx-2' src='./social-icon/youtube.png' alt='youtube' /></a>
-              <a href='/'><img className='social-image mx-2' src='./social-icon/instagram.png' alt='instagram' /></a>
-              <a href='/' className=''><img className='social-image mx-2' src='./social-icon/linkedin.png' alt='linkedin' /></a>
+              <a href='/'> <img className='social-image mx-2' src='/social-icon/facebook.png' alt='telegram' /></a>
+              <a href='/' className=''><img className='social-image mx-2' src='/social-icon/youtube.png' alt='youtube' /></a>
+              <a href='/'><img className='social-image mx-2' src='/social-icon/instagram.png' alt='instagram' /></a>
+              <a href='/' className=''><img className='social-image mx-2' src='/social-icon/linkedin.png' alt='linkedin' /></a>
             </div>
           </div>
         </div>

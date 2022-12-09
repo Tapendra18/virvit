@@ -21,11 +21,11 @@ import './App.css'
 // import {useGetDataQuery} from './services/Post';
 
 function App() {
- 
+
   return (
     <>
       <Routes>
-        <Route path="/candidate" element={<Candidate />} />
+        <Route path="/candidate" element={<Candidate />}/>
         <Route path="/register" element={<Register />} />
         <Route path="/emp" element={<Emp />} />
         <Route path="/login" element={<Login />} />
@@ -41,7 +41,7 @@ function App() {
         <Route path="/viewprofile" element={<ViewProfile/>} />
         <Route path="/notification" element={<Notification/>} />
         <Route path="/forgetpassword" element={<ForgetPassword/>} />
-        <Route path="/job-details" element={<JobDetails/>}/>
+        <Route path="/candidate/jobdetails/:id" element={<JobDetails/>}/>
         {/* <Route path="/profileEdit" element={<ProfileEdit/>}/> */}
       </Routes>
     </>

@@ -308,10 +308,15 @@ button.btn {
     font-size: 13px;
 }
 
-div h6.search-test {
+div a.search-test {
     color: #0b2cec;
     font-size: 21px;
     cursor: pointer;
+    text-decoration: none;
+}
+
+div h6.search-test:hover{
+    color: #5065e0;
 }
 
 div h6.search-test2 {

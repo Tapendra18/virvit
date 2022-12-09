@@ -8,10 +8,10 @@ import axios from "axios"
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-
 // const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
 // const URL = "https://virvit.mydevpartner.website/vvapi/v1/apply-job/?user=130";
 // const URL2 = "https://virvit.mydevpartner.website/vvapi/v1/bookmark-job/?user=130";
+
 const Home = () => {
    const [search, setSearch] = useState("");
    const [save, setsave] = useState("");

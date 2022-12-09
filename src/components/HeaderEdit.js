@@ -33,7 +33,7 @@ const HeaderEdit = () => {
     <>
       <div className="row Header">
         <div className="col-5">
-          <img src='./image/virvit_logo.png' alt='virvit' style={{ width: 90, marginLeft: 20 }} />
+          <img src='/image/virvit_logo.png' alt='virvit' style={{ width: 90, marginLeft: 20 }} />
           <span className="header mx-3"><a href='/candidate' className='text-decoration-none fs-4 fw-bolder'>Building Your Dreams</a></span>
         </div>
 
