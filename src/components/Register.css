@@ -574,6 +574,6 @@ div.notifClass{
 }
 
 div.job__Details_Border{
-    width: 1340px;
-    margin-left: 15px;
+    width: 1330px;
+    /* margin-left: 15px; */
 }

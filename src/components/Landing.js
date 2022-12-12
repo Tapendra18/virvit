@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import HeaderLanding from './HeaderLanding'
 import Footer from './Footer'
 import { Carousel } from 'react-bootstrap-v5'
 // import { Form } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios';
+
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
+const URL = "https://virvit.mydevpartner.website/vvapi/v1/jobs/";
 
 const responsive = {
     superLargeDesktop: {
@@ -32,6 +34,7 @@ const Landing = () => {
     const [search, setSearch] = useState([]);
     const [job, setjob] = useState(false);
     const [area, setArea] = useState(false);
+    const [value, setvalue] = useState('')
 
     const getData = (key) => {
         return jobData.hasOwnProperty(key) ? jobData[key] : '';
@@ -67,6 +70,19 @@ const Landing = () => {
                 })
         }
     }
+
+    const carousel = () => {
+        axios.get(URL)
+            .then((res) => {
+                const result = res.data.results;
+                setvalue(result);
+                console.log(result, "carasoul....");
+            })
+    }
+
+    useEffect(() => {
+        carousel();
+    }, []);
     return (
         <>
             <HeaderLanding />
@@ -136,64 +152,21 @@ const Landing = () => {
                     itemClass='carousel-item-padding-40-px'
                     containerClass="carousel-container"
                 >
-                    <slide className='d-flex border-remove' interval={4000}>
-                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                            <div className='mt-3 mx-4 mb-4'>
-                                <span className='mt-3'>back End Developer</span>
-                                <h5>East</h5>
-                                <h5>SGD- 7,000-8,000</h5>
-                                <h5>4-5 year exp</h5>
-                            </div>
-
-                        </form>
-
-                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                            <div className='mt-3 mx-4 mb-4'>
-                                <span className='mt-3'>back End Developer</span>
-                                <h5>East</h5>
-                                <h5>SGD- 7,000-8,000</h5>
-                                <h5>4-5 year exp</h5>
-                            </div>
-                        </form>
-
-                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                            <div className='mt-3 mx-4 mb-4'>
-                                <span className='mt-3'>back End Developer</span>
-                                <h5>East</h5>
-                                <h5>SGD- 7,000-8,000</h5>
-                                <h5>4-5 year exp</h5>
-                            </div>
-                        </form>
-
-                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                            <div className='mt-3 mx-4 mb-4'>
-                                <span className='mt-3'>back End Developer</span>
-                                <h5>East</h5>
-                                <h5>SGD- 7,000-8,000</h5>
-                                <h5>4-5 year exp</h5>
-                            </div>
-                        </form>
-
-                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                            <div className='mt-3 mx-4 mb-4'>
-                                <span className='mt-3'>back End Developer</span>
-                                <h5>East</h5>
-                                <h5>SGD- 7,000-8,000</h5>
-                                <h5>4-5 year exp</h5>
-                            </div>
-                        </form>
-
-                        <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                            <div className='mt-3 mx-4 mb-4'>
-                                <span className='mt-3'>back End Developer</span>
-                                <h5>East</h5>
-                                <h5>SGD- 7,000-8,000</h5>
-                                <h5>4-5 year exp</h5>
-                            </div>
-                        </form>
-                    </slide>
+                    {
+                        value && value.map((item, key) => (
+                            <slide className='d-flex border-remove' interval={4000}>
+                                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
+                                    <div className='mt-3 mx-4 mb-4'>
+                                        <span className='mt-3'> {item.title}</span>
+                                        <h5>East</h5>
+                                        <h5>SGD {item.min_salary} - {item.max_salary}</h5>
+                                        <h5>{item.experiance_from} - {item.experiance_to} year exp</h5>
+                                    </div>
+                                </form>
+                            </slide>
+                        ))
+                    }
                 </Carousel>
-
             }
             <Footer />
         </>
