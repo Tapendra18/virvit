@@ -327,14 +327,6 @@ const Home = () => {
                                                             </div>
 
                                                             <div className='d-flex justify-content-between '>
-                                                                {/* <select id='job_preference' onChange={inputHandler} className='form-control mt-3 shadow-none border-start-0 border-end-0 border-top-0 w-50' aria-label='default select example'>
-                                                                    {
-                                                                        job.map((jobs) => (
-                                                                            <option key={jobs.id} defaultValue={jobs.id}>
-                                                                                {jobs.name}
-                                                                            </option>))
-                                                                    }
-                                                                </select> */}
                                                                 <Multiselect
                                                                     options={job} // Options to display in the dropdown
                                                                     selectedValues='' // Preselected value to persist in dropdown
@@ -424,14 +416,6 @@ const Home = () => {
                                                                                         />
                                                                                     </div>
                                                                                     <div className='col-6'>
-                                                                                        {/* <select onChange={inputHandler} type="text" id="form1Example2" placeholder='State' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1">
-                                                                                            {
-                                                                                                state.map((countrys) => (
-                                                                                                    <option key={countrys.id} value={countrys.id}>
-                                                                                                        {countrys.name}
-                                                                                                    </option>))
-                                                                                            }
-                                                                                        </select> */}
                                                                                         <Multiselect
                                                                                             options={country} // Options to display in the dropdown
                                                                                             selectedValues='' // Preselected value to persist in dropdown
@@ -528,15 +512,6 @@ const Home = () => {
                                             {/* country , skills resume Part>>>>>>>> */}
                                             <div className='d-flex mt-4'>
                                                 <div className='col-6 hahaha2'>
-                                                    {/* <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Country' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3" >
-                                                        {
-                                                            state.map((countrys) => (
-                                                                <option key={countrys.id} value={countrys.id}>
-                                                                    {countrys.name}
-                                                                </option>))
-                                                        }
-
-                                                    </select> */}
                                                     <Multiselect
                                                         options={country} // Options to display in the dropdown
                                                         selectedValues='' // Preselected value to persist in dropdown
@@ -547,15 +522,6 @@ const Home = () => {
                                                         showCheckbox
                                                         className='form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1'
                                                     />
-                                                    {/* <select onChange={inputHandler} type="text" id="form1Example2" placeholder='Skills' className="form-control shadow-none borber border-2 border-start-0 border-end-0 border-top-0 w-100 mt-1 mb-3">
-                                                        {
-                                                            skills.map((skill) => (
-                                                                <option type="checkbox" key={skill.id} value={skill.id}>
-                                                                    <li type="checkbox">{skill.name}</li>
-                                                                </option>))
-                                                        } */}
-                                                    {/* </select> */}
-
                                                     <Multiselect
                                                         options={skills} // Options to display in the dropdown
                                                         selectedValues='' // Preselected value to persist in dropdown

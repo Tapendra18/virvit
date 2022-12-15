@@ -7,29 +7,9 @@ import axios from 'axios';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
 const URL = "https://virvit.mydevpartner.website/vvapi/v1/jobs/";
 
-const responsive = {
-    superLargeDesktop: {
-        // the naming can be any, depends on you.
-        breakpoint: { max: 4000, min: 3000 },
-        items: 5
-    },
-    desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 3
-    },
-    tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2
-    },
-    mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1
-    }
-};
 const Landing = () => {
     const [show, setshow] = useState(false)
     const [jobData, setjobData] = useState({});
@@ -142,12 +122,10 @@ const Landing = () => {
                 <Carousel interval={1000}
                     showArrows={true}
                     showStatus={true}
-                    axis={'horizontal'}
                     autoPlay={true}
                     showIndicators={true}
                     showThumbs={false}
                     swipeable={true}
-                    // selectedItem={2}
                     swipeScrollTolerance={5}
                     useKeyboardArrows={true}
                     animationHandler={true}
