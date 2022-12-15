@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import HeaderLanding from './HeaderLanding'
 import Footer from './Footer'
-import { Carousel } from 'react-bootstrap-v5'
+// import { Carousel } from 'react-bootstrap-v5'
 // import { Form } from 'react-router-dom'
 import axios from 'axios';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 
 const baseURL = "https://virvit.mydevpartner.website/vvapi/v1/job-filter/";
@@ -119,7 +121,7 @@ const Landing = () => {
                             <div className='border border-primary w-50 rounded-4 mt-5 mx-2'>
                                 <div className='d-flex justify-content-between align-items-center'>
                                     <div>
-                                        <h6 className='mt-4 mx-4 search-test'>webtechnology</h6>
+                                        <h6 className='mt-4 mx-4 search-test'>{name.organisation_detail.name}</h6>
                                         <h6 className='mx-4 search-test2'>
                                             {name.title}
                                         </h6>
@@ -137,35 +139,35 @@ const Landing = () => {
                 })
                 }
             </div> :
-
-                <Carousel responsive={responsive}
-                    infinite={true}
-                    draggable={false}
-                    swipeable={true}
-                    showDots={true}
-                    centerMode={true}
+                <Carousel interval={1000}
+                    showArrows={true}
+                    showStatus={true}
+                    axis={'horizontal'}
                     autoPlay={true}
-                    autoPlaySpeed={4000}
-                    keyBoardControl={true}
-                    removeArrowOnDeviceType={["tablet", "mobile"]}
-                    dotListClass="custom-dot-list-style"
-                    itemClass='carousel-item-padding-40-px'
-                    containerClass="carousel-container"
+                    showIndicators={true}
+                    showThumbs={false}
+                    swipeable={true}
+                    // selectedItem={2}
+                    swipeScrollTolerance={5}
+                    useKeyboardArrows={true}
+                    animationHandler={true}
                 >
-                    {
-                        value && value.map((item, key) => (
-                            <slide className='d-flex border-remove' interval={4000}>
-                                <form className='border border-primary rounded-4 border-2 mt-3 w-25 h-100 mx-2 Form-slider'>
-                                    <div className='mt-3 mx-4 mb-4'>
-                                        <span className='mt-3'> {item.title}</span>
-                                        <h5>East</h5>
-                                        <h5>SGD {item.min_salary} - {item.max_salary}</h5>
-                                        <h5>{item.experiance_from} - {item.experiance_to} year exp</h5>
-                                    </div>
-                                </form>
-                            </slide>
-                        ))
-                    }
+                    <div className='d-flex justify-content-evenly align-items-center'>
+                        {
+                            value && value.map((item) => (
+                                <div className='border-remove'>
+                                    <form className='col-2 border border-primary rounded-4 border-2 mt-3 h-100 mx-2 Form-slider w-100 '>
+                                        <div className='col-10 mt-3 mx-4 mb-4 w-100 form-slider-2'>
+                                            <span className='mt-3'> {item.title}</span>
+                                            <h5>{item.title}</h5>
+                                            <h5>SGD {item.min_salary} - {item.max_salary}</h5>
+                                            <h5>{item.experiance_from} - {item.experiance_to} year exp</h5>
+                                        </div>
+                                    </form>
+                                </div>
+                            ))
+                        }
+                    </div>
                 </Carousel>
             }
             <Footer />

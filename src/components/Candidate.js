@@ -112,14 +112,6 @@ const Home = () => {
     }
   }
 
-  // const clickHandler =() =>{
-  //   axios.get(URL)
-  //    .then((res)=>{
-  //     console.log(res);
-  //    })
-  //   navigate('/job-details');
-  // }
-
   return (
     <>
       <HeaderEdit />
@@ -168,15 +160,15 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='mb-3 row'>
+        <div className='d-flex mb-3 row'>
           {
             search && search.map((name, index) => {
               return (
                 <>
-                  <div key={index} className='border border-primary w-50 rounded-4 mt-5 mx-2 col-6'>
+                  <div key={index} className=' border border-primary w-50 rounded-4 mt-5 mx-2 col-6'>
                     <div className='d-flex justify-content-between align-items-center'>
                       <div>
-                     <Link to={`/candidate/jobdetails/${name.id}`}> <a className='mt-4 mx-4 search-test'  >{name.organisation_detail.name}</a></Link> 
+                     <Link to={`/candidate/jobdetails/${name.id}`}> <a className='mt-4 mx-4 search-test'>{name.organisation_detail.name}</a></Link> 
                         <h6 className='mx-4 search-test2'>
                           {name.title}
                         </h6>

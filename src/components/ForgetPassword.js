@@ -3,7 +3,6 @@ import HeaderEdit from './HeaderEdit'
 import Footer from './Footer'
 import axios from "axios"
 
-// const URL = "https://virvit.mydevpartner.website/vvapi/v1/forgot-password/"
 const ForgetPassword = () => {
   const [jobData, setjobData] = useState({});
   // const [error, setError] = useState({});
@@ -20,9 +19,7 @@ const ForgetPassword = () => {
           console.log("success");
         })
     }
-
   }
-
 
   const getData = (key) => {
     return jobData.hasOwnProperty(key) ? jobData[key] : '';
@@ -54,4 +51,4 @@ const ForgetPassword = () => {
   )
 }
 
-export default ForgetPassword
+export default ForgetPassword ;

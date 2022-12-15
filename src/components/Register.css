@@ -422,10 +422,18 @@ div.Slider-div {
     width: 70%;
 }
 
-form.Form-slider:hover {
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+form.Form-slider{
+    width: 250px !important;
 }
 
+form.Form-slider:hover {
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    
+}
+
+/* .form-slider-2{
+    width: 300px !important;
+} */
 
 div div input h2.ErrorValidation {
     transition: all .8s ease-in-out;

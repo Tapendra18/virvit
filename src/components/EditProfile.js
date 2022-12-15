@@ -4,7 +4,7 @@ import HeaderEdit from './HeaderEdit'
 import Privacy from "./Privacy"
 import axios from 'axios'
 import { HiOutlinePaperClip } from "react-icons/hi";
-import {  FaUpload } from "react-icons/fa";
+import { FaUpload } from "react-icons/fa";
 import { AiFillPlusCircle } from "react-icons/ai"
 import { ImUpload2 } from "react-icons/im"
 import { MdOutlineCancelPresentation } from "react-icons/md"
@@ -27,6 +27,9 @@ const Home = () => {
     const [state, setstate] = useState([]);
     const [val, setval] = useState([]);
     const [work, setwork] = useState([]);
+    const [source, setSource] = useState();
+    const [respdf, setRespdf] = useState();
+    const [testimonial, setTestimonial] = useState();
     const token = data.token;
     // const [userImage, setUserImage] = useState([]);
 
@@ -55,9 +58,36 @@ const Home = () => {
     const handleImage = (e) => {
         e.persist();
         console.log(e.target.files);
-        setUserData({ image: URL.createObjectURL(e.target.files[0]) })
+        setUserData({ image: URL.createObjectURL(e.target.files[0]) });
+    }
+
+    const handleResume = (e) => {
+        const file = e.target.files[0];
+        console.log(file.name);
+        const url = URL.createObjectURL(file);
+        // setRespdf(url);
+        setRespdf(file.name);
+        console.log(url);
+    }
+
+    const handleVedioResume = (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+        const url = URL.createObjectURL(file);
+        // setSource(url);
+        setSource(file.name)
+    }
+
+    const handleTestimonial = (e) => {
+        const file = e.target.files[0];
+        console.log(file);
+        const url = URL.createObjectURL(file);
+        setTestimonial(file.name);
 
     }
+
+
+
 
     const inputHandler = (evt) => {
         console.log(evt);
@@ -92,6 +122,7 @@ const Home = () => {
         formData.append('dial_code', '+91');
         formData.append('about', userData.about);
         formData.append('image', userData.image);
+        formData.append('resume', userData.resume)
         console.log(userData, 'form dtatatatat');
         const headers = {
             headers:
@@ -131,6 +162,20 @@ const Home = () => {
         setwork(exp);
     }
 
+    const onButtonCLick = () => {
+        fetch('SamplePDF.pdf').then(response => {
+            response.blob().then(blob => {
+                // Creating new object of PDF file
+                const fileURL = window.URL.createObjectURL(blob);
+                // Setting various property values
+                let alink = document.createElement('a');
+                alink.href = fileURL;
+                alink.download = 'SamplePDF.pdf';
+                alink.click();
+            })
+        })
+    }
+
     useEffect(function () {
         axios.get("https://virvit.mydevpartner.website/vvapi/v1/job-preference/")
             .then((response) => setjob(response.data.results))
@@ -168,7 +213,7 @@ const Home = () => {
             setstate(data.results);
         }
 
-        const fetchJobs = async ()=> {
+        const fetchJobs = async () => {
             const response = await fetch(
                 'https://virvit.mydevpartner.website/vvapi/v1/job-preference/'
             );
@@ -177,7 +222,7 @@ const Home = () => {
             setjob(data.results);
         }
 
-        const fetchCountry = async ()=>{
+        const fetchCountry = async () => {
             const response = await fetch(
                 'https://virvit.mydevpartner.website/vvapi/v1/country/'
             );
@@ -219,11 +264,11 @@ const Home = () => {
         console.log(selectcountry)
     }
 
-    const changeState = () =>{
+    const changeState = () => {
         let selectstate = state.map(item => {
             return item.id
         })
-        console.log(selectstate ,"state jjjg");
+        console.log(selectstate, "state jjjg");
         setstate(selectstate);
         console.log(selectstate);
     }
@@ -524,27 +569,30 @@ const Home = () => {
                                                 </div>
 
                                                 <div className='col-6 position-relative upload-resumee'>
-                                                    <input onChange={inputHandler} id='resume-upload' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 hahaha position-relative' />
+                                                    <input onChange={inputHandler && handleResume} id='resume-upload' accept='.pdf' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 hahaha position-relative' />
                                                     <label for="resume-upload" className='label-resume position-absolute'>Upload resume Here
                                                         <HiOutlinePaperClip />
-                                                        <label className='resume-upload2'>download</label>
                                                     </label>
+                                                    {<div className='mt-4 '>{respdf}</div> || ""}
+                                                    <label className='resume-upload2' onClick={onButtonCLick}>download</label>
                                                 </div>
                                             </div>
                                             {/* Resume Part>>>> */}
                                             <div className='d-flex '>
                                                 <div className='col-6 position-relative upload-resumee1'>
-                                                    <input onChange={inputHandler} id='resume-vedio' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
-                                                    <label for="resume-vedio" className='label-resume position-absolute'>Vedio Resume
+                                                    <input onChange={inputHandler && handleVedioResume} accept=".mov,.mp4" id='resume-vedio' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
+                                                    {!source && <label for="resume-vedio" className='label-resume position-absolute'>Vedio Resume
                                                         <FaUpload />
-                                                    </label>
+                                                    </label>}
+                                                    {source || ""}
                                                 </div>
 
                                                 <div className='col-6 position-relative upload-resumee2'>
-                                                    <input onChange={inputHandler} id='resume-testimonial' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
-                                                    <label for="resume-testimonial" className='label-resume position-absolute'>Vedio Testimonial
+                                                    <input onChange={inputHandler && handleTestimonial} id='resume-testimonial' type="file" style={{ display: 'none' }} className='form-control mt-4 w-75 h-75 mx-5 position-relative' />
+                                                    {!testimonial && <label for="resume-testimonial" className='label-resume position-absolute'>Vedio Testimonial
                                                         <FaUpload />
-                                                    </label>
+                                                    </label>}
+                                                    {testimonial || ""}
                                                 </div>
                                             </div>
 
